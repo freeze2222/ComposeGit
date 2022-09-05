@@ -81,7 +81,7 @@ fun OnBoardScreen() {
                     Text(text = "Start Experience")
                 }
             } else {
-                Button(onClick = {pagerstate.scrollToPage(pagerstate.currentPage+1)}) {
+                Button(onClick = { /*TODO*/}) {
                     Text(text = "Next")
                 }
             }
