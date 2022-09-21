@@ -122,7 +122,7 @@ fun CustomButton(
             .height(64.dp)
             .width(327.dp),
         colors = ButtonDefaults.buttonColors(backgroundColor = color),
-        shape = RoundedCornerShape(25.dp),
+        shape = RoundedCornerShape(15.dp),
         border = BorderStroke(1.dp, borderColor)
     ) {
         if (painterRes != null) {

@@ -65,10 +65,10 @@ fun LoginScreen() {
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(25.dp))
             Row(
                 modifier = Modifier
-                    .padding(20.dp)
+                    .padding(end = 44.dp)
                     .align(Alignment.End)
             ) {
                 ClickableText(
@@ -78,7 +78,7 @@ fun LoginScreen() {
                     }, style = TextStyle.Default.copy(color = Color.Yellow)
                 )
             }
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(25.dp))
             CustomButton(
                 text = "Login Now",
                 painterRes = null,
@@ -95,18 +95,21 @@ fun LoginScreen() {
                 color = Color.Transparent,
                 textColor = Color.White,
                 borderColor = BorderGrey
-                )
+            )
+            Spacer(modifier = Modifier.height(40.dp))
             Row(
                 modifier = Modifier
-                    .padding(20.dp)
-                    .align(Alignment.End)
+                    .align(Alignment.CenterHorizontally)
             ) {
                 Text(text = "Don't have an account? ", color = LightGrey)
                 ClickableText(
                     text = AnnotatedString("Create one"),
                     onClick = {
                         /*TODO*/
-                    }, style = TextStyle.Default.copy(color = Color.Yellow)
+                    },
+                    style = TextStyle.Default.copy(
+                    color = Color.Yellow, fontWeight = FontWeight.Bold
+                    )
                 )
             }
         }
