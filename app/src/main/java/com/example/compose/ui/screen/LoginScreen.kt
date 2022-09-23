@@ -52,9 +52,9 @@ fun LoginScreen() {
                 fontWeight = FontWeight.SemiBold
             )
             Spacer(modifier = Modifier.height(50.dp))
-            EditText(hint = "Email Address") {}
+            EditText(hint = "Email Address", false) {}
             Spacer(modifier = Modifier.height(24.dp))
-            EditText(hint = "Password") {
+            EditText(hint = "Password", true) {
                 IconButton(onClick = { /*TODO*/ }) {
                     Icon(
                         painter = painterResource(id = R.drawable.eye),

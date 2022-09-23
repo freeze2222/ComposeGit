@@ -9,10 +9,13 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,11 +41,11 @@ fun RegisterScreen() {
                     .height(29.dp)
             )
             Spacer(modifier = Modifier.height(50.dp))
-            EditText(hint = "Username") {}
+            EditText(hint = "Username", false) {}
             Spacer(modifier = Modifier.height(24.dp))
-            EditText(hint = "Email Address") {}
+            EditText(hint = "Email Address", false) {}
             Spacer(modifier = Modifier.height(24.dp))
-            EditText(hint = "Password") {
+            EditText(hint = "Password", true) {
                 IconButton(onClick = { /*TODO*/ }) {
                     Icon(
                         painter = painterResource(id = R.drawable.eye),
@@ -73,7 +76,7 @@ fun RegisterScreenPreview() {
 }
 
 @Composable
-fun EditText(hint: String, trailingIcon: @Composable () -> Unit) {
+fun EditText(hint: String,isPassword: Boolean, trailingIcon: @Composable () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -81,19 +84,24 @@ fun EditText(hint: String, trailingIcon: @Composable () -> Unit) {
         var text by remember {
             mutableStateOf("")
         }
-        TextField(
-            value = "",
+        var focusState by remember { mutableStateOf(false) }
+        OutlinedTextField(
+            value = text,
             onValueChange = {
                 text = it
             },
-            colors = TextFieldDefaults.textFieldColors(
+            colors = TextFieldDefaults.outlinedTextFieldColors(
                 backgroundColor = Grey,
-                textColor = Color.White
+                textColor = Color.White,
+                focusedLabelColor = Color.Transparent,
+                focusedBorderColor = Yellow,
+                unfocusedBorderColor = Color.Transparent,
+
             ),
             shape = RoundedCornerShape(15.dp),
-            label = {
+            placeholder = {
                 Text(
-                    text = hint,
+                    text = if (focusState) "" else hint,
                     color = LightGrey,
                     fontSize = 18.sp,
                     fontStyle = FontStyle.Normal
@@ -101,8 +109,12 @@ fun EditText(hint: String, trailingIcon: @Composable () -> Unit) {
             },
             modifier = Modifier
                 .height(56.dp)
-                .width(327.dp),
-            trailingIcon = trailingIcon
+                .width(327.dp)
+                .onFocusChanged { focus ->
+                focusState = focus.isFocused
+            },
+            trailingIcon = trailingIcon,
+            visualTransformation = if (isPassword) PasswordVisualTransformation() else  VisualTransformation.None
         )
     }
 }
