@@ -15,6 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.focus.FocusOrder
+import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.AnnotatedString
@@ -115,7 +117,9 @@ fun NumberField() {
         singleLine = true,
         value = state.value,
         onValueChange = {
-            val value = { if (it.length > 1 || it.any { !it.isDigit() }) state.value else it }
+            val value = fun(): String {
+                return if (it.length > 1 || it.any { !it.isDigit() }) it[1].toString() else it
+            }
             state.value = value()
             if (state.value.isNotEmpty()) {
                 moveFocus()
