@@ -13,7 +13,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.compose.R
-import com.example.compose.ui.theme.Grey
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.theme.Yellow
@@ -36,9 +35,11 @@ fun ForgotScreen() {
             Spacer(modifier = Modifier.height(15.dp))
             Text(
                 textAlign = TextAlign.Center,
-                text = "Enter email address associated with your account and we’ll send an email with instructions to reset your password",
+                text = "Enter email address associated with your account \nand we’ll send an email with instructions to reset\n your password",
                 color = LightGrey,
-                modifier = Modifier.height(63.dp).width(315.dp)
+                modifier = Modifier
+                    .height(63.dp)
+                    .width(315.dp)
             )
             Spacer(modifier = Modifier.height(50.dp))
             EditText(hint = "Email", false) {}

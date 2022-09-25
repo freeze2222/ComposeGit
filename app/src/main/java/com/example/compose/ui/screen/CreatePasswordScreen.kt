@@ -12,6 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.compose.R
+import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.theme.Yellow
 
@@ -39,7 +40,8 @@ fun CreatePasswordScreen() {
                     contentDescription = "Show password",
                     modifier = Modifier
                         .height(12.dp)
-                        .width(32.dp)
+                        .width(32.dp),
+                    tint = LightGrey
                 )
             }
             Spacer(modifier = Modifier.height(104.dp))

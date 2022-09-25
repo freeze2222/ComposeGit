@@ -42,14 +42,12 @@ fun LoginScreen() {
             )
             Spacer(modifier = Modifier.height(15.dp))
             Text(
-                text = "Welcome back to PlayZone! Enter your email address and your password to enjoy the latest features of PlayZone",
+                text = "Welcome back to PlayZone! Enter your email \naddress and your password to enjoy the latest \nfeatures of PlayZone",
                 modifier = Modifier
                     .height(63.dp)
                     .width(315.dp),
                 color = Color.Gray,
                 textAlign = TextAlign.Center,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.SemiBold
             )
             Spacer(modifier = Modifier.height(50.dp))
             EditText(hint = "Email Address", false) {}
