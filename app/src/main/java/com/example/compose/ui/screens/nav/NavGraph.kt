@@ -1,11 +1,13 @@
 @file:Suppress("OPT_IN_IS_NOT_ENABLED")
 
-package com.example.compose.ui.screens
+package com.example.compose.ui.screens.nav
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.compose.ui.screens.authScreens.ForgotScreen
+import com.example.compose.ui.screens.authScreens.LoginScreen
 import com.example.compose.ui.screens.authScreens.OnBoardScreen
 import com.example.compose.ui.screens.authScreens.RegisterScreen
 import com.example.compose.ui.screens.nav.Screen
@@ -20,6 +22,12 @@ fun SetupNavGraph(navController: NavHostController) {
         }
         composable(route = Screen.Register.route){
             RegisterScreen()
+        }
+        composable(route = Screen.Login.route){
+            LoginScreen(navController)
+        }
+        composable(route = Screen.Forgot.route){
+            ForgotScreen()
         }
     }
 }

@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
@@ -18,14 +19,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.compose.R
+import com.example.compose.ui.screens.nav.Screen
 import com.example.compose.ui.theme.BorderGrey
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.theme.Yellow
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController:NavController) {
     Surface(color = Violet, modifier = Modifier.fillMaxSize()) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -44,7 +47,7 @@ fun LoginScreen() {
                 text = "Welcome back to PlayZone! Enter your email \naddress and your password to enjoy the latest \nfeatures of PlayZone",
                 modifier = Modifier
                     .height(63.dp)
-                    .width(315.dp),
+                    .width(335.dp),
                 color = Color.Gray,
                 textAlign = TextAlign.Center,
             )
@@ -71,7 +74,11 @@ fun LoginScreen() {
                 ClickableText(
                     text = AnnotatedString("Forgot Password"),
                     onClick = {
-                        /*TODO*/
+                        navController.navigate(Screen.Forgot.route){
+                            popUpTo(Screen.Register.route){
+                                inclusive=true
+                            }
+                        }
                     }, style = TextStyle.Default.copy(color = Color.Yellow)
                 )
             }
@@ -102,7 +109,11 @@ fun LoginScreen() {
                 ClickableText(
                     text = AnnotatedString("Create one"),
                     onClick = {
-                        /*TODO*/
+                        navController.navigate(Screen.Register.route){
+                            popUpTo(Screen.Register.route){
+                                inclusive=true
+                            }
+                        }
                     },
                     style = TextStyle.Default.copy(
                     color = Color.Yellow, fontWeight = FontWeight.Bold
@@ -116,5 +127,5 @@ fun LoginScreen() {
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
+    LoginScreen(navController = NavController(LocalContext.current))
 }

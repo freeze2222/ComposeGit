@@ -102,8 +102,8 @@ fun OnBoardScreen(navController: NavController) {
             if (pagerstate.currentPage == 2) {
                 Button(
                     onClick = {
-                        navController.navigate(Screen.Register.route){
-                            popUpTo(Screen.Register.route){
+                        navController.navigate(Screen.Login.route){
+                            popUpTo(Screen.Login.route){
                                 inclusive=true
                             }
                         }
