@@ -1,8 +1,7 @@
-package com.example.compose.ui.screen
+package com.example.compose.ui.screens.authScreens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*

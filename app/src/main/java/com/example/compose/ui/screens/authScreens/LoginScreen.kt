@@ -1,4 +1,4 @@
-package com.example.compose.ui.screen
+package com.example.compose.ui.screens.authScreens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -18,7 +18,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.compose.R
 import com.example.compose.ui.theme.BorderGrey
 import com.example.compose.ui.theme.LightGrey

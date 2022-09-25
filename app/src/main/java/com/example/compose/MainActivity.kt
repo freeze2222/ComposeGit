@@ -8,7 +8,7 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.compose.ui.screen.SetupNavGraph
+import com.example.compose.ui.screens.SetupNavGraph
 import com.example.compose.ui.theme.ComposeTheme
 import com.example.compose.ui.theme.Violet
 import com.google.accompanist.pager.ExperimentalPagerApi

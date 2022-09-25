@@ -1,11 +1,14 @@
 @file:Suppress("OPT_IN_IS_NOT_ENABLED")
 
-package com.example.compose.ui.screen
+package com.example.compose.ui.screens
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.compose.ui.screens.authScreens.OnBoardScreen
+import com.example.compose.ui.screens.authScreens.RegisterScreen
+import com.example.compose.ui.screens.nav.Screen
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 @OptIn(ExperimentalPagerApi::class)
