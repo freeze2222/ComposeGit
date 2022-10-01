@@ -1,13 +1,12 @@
 package com.example.compose.ui.screens.authScreens
 
+import android.widget.ImageButton
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -17,6 +16,7 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -26,9 +26,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.compose.ui.data.descriptionData
+import com.example.compose.ui.data.imageData
+import com.example.compose.ui.data.regularFont
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.theme.Yellow
+import com.example.compose.views.*
 
 lateinit var focusManager: FocusManager
 fun moveFocus() {
@@ -55,13 +59,7 @@ fun SmsCodeVerificationScreen() {
                 color = Color.White
             )
             Spacer(modifier = Modifier.height(15.dp))
-            Text(
-                text = "Type the verification code \nwe’ve sent you",
-                color = Color.White,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.SemiBold,
-                textAlign = TextAlign.Center
-            )
+            TextZone(text = descriptionData[2], color = Color.White, fontFamily = regularFont, size = 16.sp)
             Spacer(modifier = Modifier.height(58.dp))
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically) {
                 NumberField()
@@ -90,42 +88,4 @@ fun SmsCodeVerificationScreen() {
 @Composable
 fun SmsCodeVerificationScreenPreview() {
     SmsCodeVerificationScreen()
-}
-
-@Composable
-fun NumberField() {
-    val state = rememberSaveable { mutableStateOf("") }
-    val modifier = Modifier
-        .padding(5.dp)
-        .width(67.dp)
-        .height(70.dp)
-        .wrapContentHeight(Alignment.CenterVertically)
-    OutlinedTextField(
-        modifier = modifier,
-        textStyle = TextStyle.Default.copy(fontWeight = FontWeight.SemiBold, fontSize = 32.sp, textAlign = TextAlign.Center),
-        colors = if (state.value.isEmpty()) TextFieldDefaults.outlinedTextFieldColors(
-            textColor = Color.Yellow,
-            backgroundColor = LightGrey
-        ) else TextFieldDefaults.outlinedTextFieldColors(
-            textColor = Color.Yellow,
-            backgroundColor = LightGrey,
-            unfocusedBorderColor = Yellow
-        ),
-        shape = RoundedCornerShape(12.dp),
-        singleLine = true,
-        value = state.value,
-        onValueChange = {
-            val value = fun(): String {
-                return if (it.length > 1 || it.any { !it.isDigit() }) it[1].toString() else it
-            }
-            state.value = value()
-            if (state.value.isNotEmpty()) {
-                moveFocus()
-            }
-        },
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Number,
-            imeAction = ImeAction.Next
-        ),
-    )
 }

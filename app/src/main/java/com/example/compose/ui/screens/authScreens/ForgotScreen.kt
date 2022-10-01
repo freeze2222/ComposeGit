@@ -1,21 +1,26 @@
 package com.example.compose.ui.screens.authScreens
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.compose.R
+import androidx.compose.ui.unit.sp
+import com.example.compose.ui.data.descriptionData
+import com.example.compose.ui.data.regularFont
+import com.example.compose.ui.data.titleData
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.theme.Yellow
+import com.example.compose.views.CustomButton
+import com.example.compose.views.EditText
+import com.example.compose.views.TextZone
 
 @Composable
 fun ForgotScreen() {
@@ -25,22 +30,9 @@ fun ForgotScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(80.dp))
-            Image(
-                painter = painterResource(id = R.drawable.forgot_password),
-                contentDescription = null,
-                modifier = Modifier
-                    .height(29.dp)
-                    .width(189.dp)
-            )
+            TextZone(text = titleData[2])
             Spacer(modifier = Modifier.height(15.dp))
-            Text(
-                textAlign = TextAlign.Center,
-                text = "Enter email address associated with your account \nand we’ll send an email with instructions to reset\n your password",
-                color = LightGrey,
-                modifier = Modifier
-                    .height(63.dp)
-                    .width(315.dp)
-            )
+            TextZone(text = descriptionData[1], fontFamily = regularFont, size = 16.sp, color = LightGrey)
             Spacer(modifier = Modifier.height(50.dp))
             EditText(hint = "Email", false) {}
             Spacer(modifier = Modifier.height(106.dp))

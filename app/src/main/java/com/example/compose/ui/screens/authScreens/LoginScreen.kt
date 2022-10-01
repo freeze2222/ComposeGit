@@ -19,13 +19,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.compose.R
+import com.example.compose.ui.data.descriptionData
+import com.example.compose.ui.data.imageData
+import com.example.compose.ui.data.regularFont
+import com.example.compose.ui.data.titleData
 import com.example.compose.ui.screens.nav.Screen
 import com.example.compose.ui.theme.BorderGrey
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.theme.Yellow
+import com.example.compose.views.*
 
 @Composable
 fun LoginScreen(navController:NavController) {
@@ -35,29 +41,16 @@ fun LoginScreen(navController:NavController) {
             modifier = Modifier.fillMaxSize()
         ) {
             Spacer(modifier = Modifier.height(80.dp))
-            Image(
-                painter = painterResource(id = R.drawable.login_text),
-                contentDescription = null,
-                modifier = Modifier
-                    .width(119.dp)
-                    .height(29.dp)
-            )
+            TextZone(text = titleData[1])
             Spacer(modifier = Modifier.height(15.dp))
-            Text(
-                text = "Welcome back to PlayZone! Enter your email \naddress and your password to enjoy the latest \nfeatures of PlayZone",
-                modifier = Modifier
-                    .height(63.dp)
-                    .width(335.dp),
-                color = Color.Gray,
-                textAlign = TextAlign.Center,
-            )
+            TextZone(text = descriptionData[0], fontFamily = regularFont, size = 16.sp, color = LightGrey)
             Spacer(modifier = Modifier.height(50.dp))
             EditText(hint = "Email Address", false) {}
             Spacer(modifier = Modifier.height(24.dp))
             EditText(hint = "Password", true) {
                 IconButton(onClick = { /*TODO*/ }) {
                     Icon(
-                        painter = painterResource(id = R.drawable.eye),
+                        painter = painterResource(imageData[0]),
                         contentDescription = "Show password",
                         modifier = Modifier
                             .height(12.dp)
@@ -94,7 +87,7 @@ fun LoginScreen(navController:NavController) {
             Spacer(modifier = Modifier.height(24.dp))
             CustomButton(
                 text = "Sign in with Google",
-                painterRes = painterResource(id = R.drawable.google_icon),
+                painterRes = painterResource(id = imageData[4]),
                 onClick = {/*TODO*/ },
                 color = Color.Transparent,
                 textColor = Color.White,

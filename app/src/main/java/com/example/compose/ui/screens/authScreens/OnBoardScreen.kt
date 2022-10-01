@@ -10,14 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.compose.R
+import com.example.compose.ui.data.imageData
 import com.example.compose.ui.screens.nav.Screen
 import com.example.compose.ui.theme.Yellow
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -25,22 +24,22 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 
-data class PagerModel(
+data class OnBoardScreen(
     val image: Int,
     val title: String,
 )
 
 val OnBoardItem = listOf(
-    PagerModel(
-        R.drawable.img1,
+    OnBoardScreen(
+        imageData[1],
         "Lasted Feature in Streaming  Your Favourite Channel"
     ),
-    PagerModel(
-        R.drawable.img2,
+    OnBoardScreen(
+        imageData[2],
         "Feel The Beat as You are involved in the game"
     ),
-    PagerModel(
-        R.drawable.img3,
+    OnBoardScreen(
+        imageData[3],
         "Share Your Awesome Experience with family & Friends"
     )
 )
@@ -48,7 +47,6 @@ val OnBoardItem = listOf(
 @ExperimentalPagerApi
 @Composable
 fun OnBoardScreen(navController: NavController) {
-    val context = LocalContext.current
     val pagerstate = rememberPagerState(
         pageCount = OnBoardItem.size,
         initialOffscreenLimit = 3,
@@ -59,7 +57,7 @@ fun OnBoardScreen(navController: NavController) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Spacer(modifier = Modifier.height(55.dp))
             Image(
-                painter = painterResource(id = R.drawable.text_plz),
+                painter = painterResource(id = imageData[11]),
                 contentDescription = null,
                 modifier = Modifier
                     .height(40.dp)
@@ -102,9 +100,9 @@ fun OnBoardScreen(navController: NavController) {
             if (pagerstate.currentPage == 2) {
                 Button(
                     onClick = {
-                        navController.navigate(Screen.Login.route){
-                            popUpTo(Screen.Login.route){
-                                inclusive=true
+                        navController.navigate(Screen.Login.route) {
+                            popUpTo(Screen.Login.route) {
+                                inclusive = true
                             }
                         }
                     },
