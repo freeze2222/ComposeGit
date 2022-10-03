@@ -1,4 +1,4 @@
-package com.example.compose.ui.screens.authScreens
+package com.example.compose.ui.screens.oneTimeScreens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -16,8 +16,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.compose.ui.data.imageData
-import com.example.compose.ui.screens.nav.Screen
+import com.example.compose.model.data.descriptionData
+import com.example.compose.model.data.imageData
+import com.example.compose.model.nav_model.Screen
 import com.example.compose.ui.theme.Yellow
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -32,15 +33,15 @@ data class OnBoardScreen(
 val OnBoardItem = listOf(
     OnBoardScreen(
         imageData[1],
-        "Lasted Feature in Streaming  Your Favourite Channel"
+        descriptionData[8]
     ),
     OnBoardScreen(
         imageData[2],
-        "Feel The Beat as You are involved in the game"
+        descriptionData[9]
     ),
     OnBoardScreen(
         imageData[3],
-        "Share Your Awesome Experience with family & Friends"
+        descriptionData[10]
     )
 )
 

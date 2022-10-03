@@ -1,4 +1,4 @@
-package com.example.compose.views
+package com.example.compose.ui.views
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.height
@@ -22,10 +22,10 @@ import com.example.compose.R
 fun CustomButton(
     text: String,
     onClick: () -> Unit,
-    painterRes: Painter?,
-    color: Color,
-    textColor: Color,
-    borderColor: Color
+    painterRes: Painter? = null,
+    color: Color = Color.Yellow,
+    textColor: Color = Color.Black,
+    borderColor: Color = Color.Transparent
 ) {
     Button(
         onClick = onClick,
@@ -38,7 +38,7 @@ fun CustomButton(
     ) {
         if (painterRes != null) {
             Icon(
-                painter = painterResource(id = R.drawable.google_icon),
+                painter = painterRes,
                 contentDescription = null,
                 modifier = Modifier
                     .padding(end = 20.dp)

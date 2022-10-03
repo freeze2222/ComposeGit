@@ -1,38 +1,26 @@
 package com.example.compose.ui.screens.authScreens
 
-import android.widget.ImageButton
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.compose.ui.data.descriptionData
-import com.example.compose.ui.data.imageData
-import com.example.compose.ui.data.regularFont
-import com.example.compose.ui.theme.LightGrey
+import com.example.compose.model.data.descriptionData
+import com.example.compose.model.data.regularFont
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.theme.Yellow
-import com.example.compose.views.*
+import com.example.compose.ui.views.*
 
 lateinit var focusManager: FocusManager
 fun moveFocus() {

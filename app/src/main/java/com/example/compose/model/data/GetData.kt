@@ -1,4 +1,4 @@
-package com.example.compose.ui.data
+package com.example.compose.model.data
 
 import com.example.compose.R
 
@@ -7,7 +7,9 @@ val titleData = listOf(
     "Login Now",
     "Forgot Password",
     "Create New Password",
-    "Erlink Halah"
+    "Erlink Halah",
+    "My Profile",
+    "Settings"
 )
 val descriptionData = listOf(
     "Welcome back to PlayZone! Enter your email \naddress and your password to enjoy the latest \nfeatures of PlayZone",
@@ -16,7 +18,12 @@ val descriptionData = listOf(
     "erlinkland@gmail.com",
     "ID: 1234567",
     "Full name",
-    "Email adress"
+    "Email address",
+    "Password",
+    "Lasted Feature in Streaming  Your Favourite Channel",
+    "Feel The Beat as You are involved in the game",
+    "Share Your Awesome Experience with family & Friends",
+    "General"
 )
 val imageData = listOf(
     R.drawable.eye,
@@ -30,6 +37,7 @@ val imageData = listOf(
     R.drawable.logic,
     R.drawable.settings,
     R.drawable.profile_photo,
-    R.drawable.text_plz
+    R.drawable.text_plz,
+    R.drawable.back_button
 )
 

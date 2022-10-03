@@ -1,4 +1,4 @@
-package com.example.compose.ui.data
+package com.example.compose.model.data
 
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily

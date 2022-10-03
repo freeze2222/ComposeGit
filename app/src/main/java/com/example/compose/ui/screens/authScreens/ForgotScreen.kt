@@ -8,19 +8,17 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.compose.ui.data.descriptionData
-import com.example.compose.ui.data.regularFont
-import com.example.compose.ui.data.titleData
+import com.example.compose.model.data.descriptionData
+import com.example.compose.model.data.regularFont
+import com.example.compose.model.data.titleData
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
-import com.example.compose.ui.theme.Yellow
-import com.example.compose.views.CustomButton
-import com.example.compose.views.EditText
-import com.example.compose.views.TextZone
+import com.example.compose.ui.views.CustomButton
+import com.example.compose.ui.views.EditText
+import com.example.compose.ui.views.TextZone
 
 @Composable
 fun ForgotScreen() {
@@ -38,11 +36,7 @@ fun ForgotScreen() {
             Spacer(modifier = Modifier.height(106.dp))
             CustomButton(
                 text = "Send Link",
-                onClick = { /*TODO*/ },
-                painterRes = null,
-                color = Yellow,
-                textColor = Color.Black,
-                borderColor = Color.Transparent
+                onClick = { /*TODO*/ }
             )
         }
     }

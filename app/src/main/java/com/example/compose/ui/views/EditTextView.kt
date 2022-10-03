@@ -1,4 +1,4 @@
-package com.example.compose.views
+package com.example.compose.ui.views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

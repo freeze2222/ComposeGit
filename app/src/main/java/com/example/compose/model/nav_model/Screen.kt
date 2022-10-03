@@ -1,4 +1,4 @@
-package com.example.compose.ui.screens.nav
+package com.example.compose.model.nav_model
 
 sealed class Screen(val route: String){
     object OnBoardingScreen: Screen(route = "OnBoardingScreen")

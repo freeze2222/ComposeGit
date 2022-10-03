@@ -12,12 +12,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.compose.R
-import com.example.compose.ui.data.titleData
+import com.example.compose.model.data.titleData
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.theme.Yellow
-import com.example.compose.views.CustomButton
-import com.example.compose.views.EditText
-import com.example.compose.views.TextZone
+import com.example.compose.ui.views.CustomButton
+import com.example.compose.ui.views.EditText
+import com.example.compose.ui.views.TextZone
 
 @Composable
 fun RegisterScreen() {

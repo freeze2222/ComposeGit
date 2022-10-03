@@ -1,8 +1,10 @@
-package com.example.compose.ui.screens.authScreens
+package com.example.compose.ui.screens.appScreens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,14 +16,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.compose.ui.data.descriptionData
-import com.example.compose.ui.data.imageData
-import com.example.compose.ui.data.regularFont
-import com.example.compose.ui.data.titleData
+import com.example.compose.model.data.*
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
-import com.example.compose.views.EditText
-import com.example.compose.views.TextZone
+import com.example.compose.ui.views.CustomButton
+import com.example.compose.ui.views.EditText
+import com.example.compose.ui.views.TextZone
 
 
 @Composable
@@ -31,11 +31,11 @@ fun ProfileScreen() {
             modifier = Modifier
                 .padding(start = 22.dp, end = 22.dp)
                 .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Spacer(modifier = Modifier.height(70.dp))
+
+            ) {
+            Spacer(modifier = Modifier.height(20.dp))
             Row(modifier = Modifier.height(50.dp), verticalAlignment = Alignment.CenterVertically) {
-                TextZone(text = "My Profile")
+                TextZone(text = titleData[5])
                 Spacer(modifier = Modifier.width(145.dp))
                 Image(
                     painter = painterResource(id = imageData[9]),
@@ -46,7 +46,7 @@ fun ProfileScreen() {
                 )
 
             }
-            Spacer(modifier = Modifier.height(60.dp))
+            Spacer(modifier = Modifier.height(30.dp))
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -85,9 +85,10 @@ fun ProfileScreen() {
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(48.dp))
             TextZone(
                 text = descriptionData[5],
-                fontFamily = regularFont,
+                fontFamily = boldFont,
                 size = 16.sp,
                 color = LightGrey,
                 textAlign = TextAlign.Start
@@ -97,15 +98,39 @@ fun ProfileScreen() {
             Spacer(modifier = Modifier.height(24.dp))
             TextZone(
                 text = descriptionData[6],
-                fontFamily = regularFont,
+                fontFamily = boldFont,
                 size = 16.sp,
                 color = LightGrey,
                 textAlign = TextAlign.Start
             )
             Spacer(modifier = Modifier.height(16.dp))
-            EditText(hint = "email", isPassword = false) {
-                
+            EditText(hint = "Email", isPassword = false) {}
+            Spacer(modifier = Modifier.height(24.dp))
+            TextZone(
+                text = descriptionData[7],
+                fontFamily = boldFont,
+                size = 16.sp,
+                color = LightGrey,
+                textAlign = TextAlign.Start
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            EditText(hint = "Password", isPassword = true) {
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        painter = painterResource(id = imageData[0]),
+                        contentDescription = "Show password",
+                        modifier = Modifier
+                            .height(12.dp)
+                            .width(32.dp),
+                        tint = LightGrey
+                    )
+                }
             }
+            Spacer(modifier = Modifier.height(87.dp))
+            CustomButton(
+                text = "Save Changes",
+                onClick = { /*TODO*/ }
+            )
         }
     }
 }

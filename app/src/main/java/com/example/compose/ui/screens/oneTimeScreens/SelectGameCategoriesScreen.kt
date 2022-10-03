@@ -1,4 +1,4 @@
-package com.example.compose.ui.screens.authScreens
+package com.example.compose.ui.screens.oneTimeScreens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -13,14 +13,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.compose.ui.data.boldFont
-import com.example.compose.ui.data.imageData
-import com.example.compose.ui.data.regularFont
+import com.example.compose.model.data.boldFont
+import com.example.compose.model.data.imageData
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.theme.Yellow
-import com.example.compose.views.CustomButton
-import com.example.compose.views.TextZone
+import com.example.compose.ui.views.CustomButton
+import com.example.compose.ui.views.TextZone
 
 @Composable
 fun SelectGameCategoriesScreen() {
@@ -42,11 +41,11 @@ fun SelectGameCategoriesScreen() {
                 horizontalArrangement = Arrangement.Center
             ) {
                 IconButton(onClick = { /*TODO*/ }) {
-                    Icon(id = imageData[5], height = 135.dp, width = 100.dp)
+                    Img(id = imageData[5], height = 135.dp, width = 100.dp)
                 }
                 Spacer(modifier = Modifier.width(50.dp))
                 IconButton(onClick = { /*TODO*/ }) {
-                    Icon(id = imageData[6], height = 135.dp, width = 100.dp)
+                    Img(id = imageData[6], height = 135.dp, width = 100.dp)
                 }
 
             }
@@ -59,11 +58,11 @@ fun SelectGameCategoriesScreen() {
                 horizontalArrangement = Arrangement.Center
             ) {
                 IconButton(onClick = { /*TODO*/ }) {
-                    Icon(id = imageData[7], height = 135.dp, width = 100.dp)
+                    Img(id = imageData[7], height = 135.dp, width = 100.dp)
                 }
                 Spacer(modifier = Modifier.width(50.dp))
                 IconButton(onClick = { /*TODO*/ }) {
-                    Icon(id = imageData[8], height = 135.dp, width = 100.dp)
+                    Img(id = imageData[8], height = 135.dp, width = 100.dp)
                 }
             }
             Spacer(modifier = Modifier.height(80.dp))
@@ -86,7 +85,7 @@ fun SelectGameCategoriesScreenPreview() {
 }
 
 @Composable
-fun Icon(id: Int, height: Dp, width: Dp) {
+fun Img(id: Int, height: Dp, width: Dp) {
     Image(
         painter = painterResource(id = id),
         contentDescription = null,
