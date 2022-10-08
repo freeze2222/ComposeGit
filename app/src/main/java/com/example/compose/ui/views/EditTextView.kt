@@ -23,7 +23,7 @@ import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Yellow
 
 @Composable
-fun EditText(hint: String,isPassword: Boolean, trailingIcon: @Composable () -> Unit) {
+fun EditText(hint: String, isPassword: Boolean, trailingIcon: @Composable () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -61,7 +61,7 @@ fun EditText(hint: String,isPassword: Boolean, trailingIcon: @Composable () -> U
                     focusState = focus.isFocused
                 },
             trailingIcon = trailingIcon,
-            visualTransformation = if (isPassword) PasswordVisualTransformation() else  VisualTransformation.None
+            visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None
         )
     }
 }

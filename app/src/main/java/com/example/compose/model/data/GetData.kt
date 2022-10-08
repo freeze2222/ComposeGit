@@ -23,7 +23,12 @@ val descriptionData = listOf(
     "Lasted Feature in Streaming  Your Favourite Channel",
     "Feel The Beat as You are involved in the game",
     "Share Your Awesome Experience with family & Friends",
-    "General"
+    "General",
+    "Notifications",
+    "Close Friends",
+    "Sounds",
+    "Privacy",
+    "Health"
 )
 val imageData = listOf(
     R.drawable.eye,
@@ -38,6 +43,12 @@ val imageData = listOf(
     R.drawable.settings,
     R.drawable.profile_photo,
     R.drawable.text_plz,
-    R.drawable.back_button
+    R.drawable.back_button,
+    R.drawable.notifications,
+    R.drawable.friends,
+    R.drawable.sound,
+    R.drawable.privacy,
+    R.drawable.health,
+    R.drawable.arrow
 )
 
