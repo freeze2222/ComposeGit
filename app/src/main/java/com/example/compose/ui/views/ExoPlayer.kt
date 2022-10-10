@@ -37,9 +37,9 @@ fun CustomExoPlayer() {
                     mContext,
                     Util.getUserAgent(mContext, mContext.packageName)
                 )
-                val source = ProgressiveMediaSource.Factory(dataSourceFactory)
-                    .createMediaSource(Uri.parse(mVideoUrl))
-                prepare(source)
+                //val source = ProgressiveMediaSource.Factory(dataSourceFactory)
+                //    .createMediaSource(Uri.parse(mVideoUrl))
+                //prepare(source)
             }
         }
 
