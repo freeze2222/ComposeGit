@@ -28,20 +28,9 @@ fun CreatePasswordScreen() {
             Spacer(modifier = Modifier.height(80.dp))
             TextZone(text = titleData[3])
             Spacer(modifier = Modifier.height(50.dp))
-            EditText(hint = "Old Password", isPassword = true) {}
+            EditText(hint = "Old Password", isPassword = true)
             Spacer(modifier = Modifier.height(24.dp))
-            EditText(hint = "Confirm New Password", isPassword = true) {
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(
-                        painter = painterResource(id = imageData[0]),
-                        contentDescription = "Show password",
-                        modifier = Modifier
-                            .height(12.dp)
-                            .width(32.dp),
-                        tint = LightGrey
-                    )
-                }
-            }
+            EditText(hint = "Confirm New Password", isPassword = true)
             Spacer(modifier = Modifier.height(104.dp))
             CustomButton(
                 text = "Send Link",

@@ -8,7 +8,7 @@ val titleData = listOf(
     "Forgot Password",
     "Create New Password",
     "Erlink Halah",
-    "My Profile",
+    "My Profile", //5
     "Settings"
 )
 val descriptionData = listOf(
@@ -17,18 +17,19 @@ val descriptionData = listOf(
     "Type the verification code \nwe’ve sent you",
     "erlinkland@gmail.com",
     "ID: 1234567",
-    "Full name",
+    "Full name", //5
     "Email address",
     "Password",
     "Lasted Feature in Streaming  Your Favourite Channel",
     "Feel The Beat as You are involved in the game",
-    "Share Your Awesome Experience with family & Friends",
+    "Share Your Awesome Experience with family & Friends", //10
     "General",
     "Notifications",
     "Close Friends",
     "Sounds",
-    "Privacy",
-    "Health"
+    "Privacy", //15
+    "Health",
+    "Morning"
 )
 val imageData = listOf(
     R.drawable.eye,
@@ -36,19 +37,21 @@ val imageData = listOf(
     R.drawable.img2,
     R.drawable.img3,
     R.drawable.google_icon,
-    R.drawable.dice,
+    R.drawable.dice, //5
     R.drawable.sword,
     R.drawable.sports,
     R.drawable.logic,
     R.drawable.settings,
-    R.drawable.profile_photo,
+    R.drawable.profile_photo, //10
     R.drawable.text_plz,
     R.drawable.back_button,
     R.drawable.notifications,
     R.drawable.friends,
-    R.drawable.sound,
+    R.drawable.sound, //15
     R.drawable.privacy,
     R.drawable.health,
-    R.drawable.arrow
+    R.drawable.arrow,
+    R.drawable.profile_photo_mini,
+    R.drawable.notifications_button //20
 )
 

@@ -40,19 +40,9 @@ fun LoginScreen(navController:NavController) {
             Spacer(modifier = Modifier.height(15.dp))
             TextZone(text = descriptionData[0], fontFamily = regularFont, size = 16.sp, color = LightGrey)
             Spacer(modifier = Modifier.height(50.dp))
-            EditText(hint = "Email Address", false) {}
+            EditText(hint = "Email Address", false)
             Spacer(modifier = Modifier.height(24.dp))
-            EditText(hint = "Password", true) {
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(
-                        painter = painterResource(imageData[0]),
-                        contentDescription = "Show password",
-                        modifier = Modifier
-                            .height(12.dp)
-                            .width(32.dp)
-                    )
-                }
-            }
+            EditText(hint = "Password", true)
             Spacer(modifier = Modifier.height(25.dp))
             Row(
                 modifier = Modifier

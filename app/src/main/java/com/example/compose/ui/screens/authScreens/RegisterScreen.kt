@@ -29,21 +29,11 @@ fun RegisterScreen() {
             Spacer(modifier = Modifier.height(80.dp))
             TextZone(text = titleData[0])
             Spacer(modifier = Modifier.height(50.dp))
-            EditText(hint = "Username", false) {}
+            EditText(hint = "Username", false)
             Spacer(modifier = Modifier.height(24.dp))
-            EditText(hint = "Email Address", false) {}
+            EditText(hint = "Email Address", false)
             Spacer(modifier = Modifier.height(24.dp))
-            EditText(hint = "Password", true) {
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.eye),
-                        contentDescription = "Show password",
-                        modifier = Modifier
-                            .height(12.dp)
-                            .width(32.dp)
-                    )
-                }
-            }
+            EditText(hint = "Password", true)
             Spacer(modifier = Modifier.height(32.dp))
             CustomButton(
                 text = "Create Account",

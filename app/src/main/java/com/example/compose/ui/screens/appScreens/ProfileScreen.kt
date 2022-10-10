@@ -94,7 +94,7 @@ fun ProfileScreen() {
                 textAlign = TextAlign.Start
             )
             Spacer(modifier = Modifier.height(16.dp))
-            EditText(hint = "Name", isPassword = false) {}
+            EditText(hint = "Name", isPassword = false)
             Spacer(modifier = Modifier.height(24.dp))
             TextZone(
                 text = descriptionData[6],
@@ -104,7 +104,7 @@ fun ProfileScreen() {
                 textAlign = TextAlign.Start
             )
             Spacer(modifier = Modifier.height(16.dp))
-            EditText(hint = "Email", isPassword = false) {}
+            EditText(hint = "Email", isPassword = false)
             Spacer(modifier = Modifier.height(24.dp))
             TextZone(
                 text = descriptionData[7],
@@ -114,18 +114,7 @@ fun ProfileScreen() {
                 textAlign = TextAlign.Start
             )
             Spacer(modifier = Modifier.height(16.dp))
-            EditText(hint = "Password", isPassword = true) {
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(
-                        painter = painterResource(id = imageData[0]),
-                        contentDescription = "Show password",
-                        modifier = Modifier
-                            .height(12.dp)
-                            .width(32.dp),
-                        tint = LightGrey
-                    )
-                }
-            }
+            EditText(hint = "Password", isPassword = true)
             Spacer(modifier = Modifier.height(87.dp))
             CustomButton(
                 text = "Save Changes",

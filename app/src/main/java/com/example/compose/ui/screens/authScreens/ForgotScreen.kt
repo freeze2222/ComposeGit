@@ -32,7 +32,7 @@ fun ForgotScreen() {
             Spacer(modifier = Modifier.height(15.dp))
             TextZone(text = descriptionData[1], fontFamily = regularFont, size = 16.sp, color = LightGrey)
             Spacer(modifier = Modifier.height(50.dp))
-            EditText(hint = "Email", false) {}
+            EditText(hint = "Email", false)
             Spacer(modifier = Modifier.height(106.dp))
             CustomButton(
                 text = "Send Link",
