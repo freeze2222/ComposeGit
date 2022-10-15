@@ -29,7 +29,11 @@ val descriptionData = listOf(
     "Sounds",
     "Privacy", //15
     "Health",
-    "Morning"
+    "Morning",
+    "Streamed",
+    "Popularity",
+    "Popular Event", // 20
+    "Show all"
 )
 val imageData = listOf(
     R.drawable.eye,
