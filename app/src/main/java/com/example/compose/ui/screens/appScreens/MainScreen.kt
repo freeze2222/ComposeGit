@@ -30,6 +30,7 @@ import com.example.compose.ui.theme.Grey
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.GameCategoryItem
+import com.example.compose.ui.views.LazyEventCard
 import com.example.compose.ui.views.TextZone
 import com.example.compose.ui.views.VideoPlayer
 
@@ -106,7 +107,7 @@ fun MainScreen() {
                     TextZone(text = "TODO", size = 12.sp)
                 }
                 Spacer(modifier = Modifier.width(16.dp))
-                VideoPlayer("TODO")
+                VideoPlayer("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
             }
             Spacer(modifier = Modifier.height(28.dp))
             Row(
@@ -141,7 +142,7 @@ fun MainScreen() {
                 )
             }
             Spacer(modifier = Modifier.height(20.dp))
-
+            //LazyRow(content = LazyEventCard())
         }
     }
 }

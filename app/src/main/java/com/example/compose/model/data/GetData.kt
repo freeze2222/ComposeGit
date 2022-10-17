@@ -56,6 +56,7 @@ val imageData = listOf(
     R.drawable.health,
     R.drawable.arrow,
     R.drawable.profile_photo_mini,
-    R.drawable.notifications_button //20
+    R.drawable.notifications_button, //20
+    R.drawable.calendar_icon
 )
 

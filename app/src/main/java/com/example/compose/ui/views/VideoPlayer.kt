@@ -24,7 +24,7 @@ fun VideoPlayer(videoUrl: String) {
                     .setUri(Uri.parse(videoUrl))
                     .build()
                 setMediaItem(mediaItem)
-                playWhenReady = false
+                playWhenReady = true
                 prepare()
             }
     }
