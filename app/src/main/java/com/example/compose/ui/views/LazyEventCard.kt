@@ -4,15 +4,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.LightGray
-import androidx.compose.ui.graphics.painter.BrushPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,11 +22,11 @@ import com.example.compose.ui.theme.Grey
 fun LazyEventCard(data: EventModel) {
     Column(
         modifier = Modifier
+            .padding(start = 10.dp, end = 10.dp)
             .clip(RoundedCornerShape(14.dp))
             .background(Grey)
             .padding(all = 5.dp)
             .width(215.dp)
-
 
     ) {
         Box(

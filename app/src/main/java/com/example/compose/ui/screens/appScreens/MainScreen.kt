@@ -4,12 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,6 +23,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.compose.model.EventModel
 import com.example.compose.model.data.descriptionData
 import com.example.compose.model.data.imageData
 import com.example.compose.model.data.regularFont
@@ -142,7 +144,22 @@ fun MainScreen() {
                 )
             }
             Spacer(modifier = Modifier.height(20.dp))
-            //LazyRow(content = LazyEventCard())
+            val data = EventModel(
+                "test",
+                "test",
+                "test",
+                painterResource(id = imageData[3]),
+                painterResource(id = imageData[4])
+            )
+            var list by remember {
+                mutableStateOf(mutableListOf(data,data))
+            }
+
+            LazyRow {
+                items(items = list) { item ->
+                    LazyEventCard(data = item)
+                }
+            }
         }
     }
 }

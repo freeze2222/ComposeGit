@@ -1,6 +1,7 @@
 package com.example.compose.ui.views
 
 import android.net.Uri
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect

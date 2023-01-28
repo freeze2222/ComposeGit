@@ -65,13 +65,8 @@ fun LoginScreen(navController:NavController) {
                 text = "Login Now",
                 onClick = {/*TODO*/}
             )
-            Spacer(modifier = Modifier.height(24.dp))
-            CustomButton(
-                text = "Sign in with Google",
-                painterRes = painterResource(id = imageData[4]),
-                onClick = {/*TODO*/ },
-            )
-            Spacer(modifier = Modifier.height(40.dp))
+
+            Spacer(modifier = Modifier.height(150.dp))
             Row(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
