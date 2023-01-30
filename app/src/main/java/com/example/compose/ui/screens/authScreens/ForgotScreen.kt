@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.compose.model.data.ValueModel
 import com.example.compose.model.data.descriptionData
 import com.example.compose.model.data.regularFont
 import com.example.compose.model.data.titleData
@@ -22,6 +23,7 @@ import com.example.compose.ui.views.TextZone
 
 @Composable
 fun ForgotScreen() {
+    val email = ValueModel()
     Surface(modifier = Modifier.fillMaxSize(), color = Violet) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -32,7 +34,7 @@ fun ForgotScreen() {
             Spacer(modifier = Modifier.height(15.dp))
             TextZone(text = descriptionData[1], fontFamily = regularFont, size = 16.sp, color = LightGrey)
             Spacer(modifier = Modifier.height(50.dp))
-            EditText(hint = "Email", false)
+            EditText(hint = "Email", false, email)
             Spacer(modifier = Modifier.height(106.dp))
             CustomButton(
                 text = "Send Link",

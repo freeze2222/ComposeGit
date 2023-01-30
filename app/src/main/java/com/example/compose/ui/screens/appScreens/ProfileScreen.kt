@@ -26,6 +26,9 @@ import com.example.compose.ui.views.TextZone
 
 @Composable
 fun ProfileScreen() {
+    val nameModel = ValueModel()
+    val emailModel = ValueModel()
+    val passwordModel = ValueModel()
     Surface(modifier = Modifier.fillMaxSize(), color = Violet) {
         Column(
             modifier = Modifier
@@ -94,7 +97,7 @@ fun ProfileScreen() {
                 textAlign = TextAlign.Start
             )
             Spacer(modifier = Modifier.height(16.dp))
-            EditText(hint = "Name", isPassword = false)
+            EditText(hint = "Name", isPassword = false,nameModel)
             Spacer(modifier = Modifier.height(24.dp))
             TextZone(
                 text = descriptionData[6],
@@ -104,7 +107,7 @@ fun ProfileScreen() {
                 textAlign = TextAlign.Start
             )
             Spacer(modifier = Modifier.height(16.dp))
-            EditText(hint = "Email", isPassword = false)
+            EditText(hint = "Email", isPassword = false,emailModel)
             Spacer(modifier = Modifier.height(24.dp))
             TextZone(
                 text = descriptionData[7],
@@ -114,7 +117,7 @@ fun ProfileScreen() {
                 textAlign = TextAlign.Start
             )
             Spacer(modifier = Modifier.height(16.dp))
-            EditText(hint = "Password", isPassword = true)
+            EditText(hint = "Password", isPassword = true,passwordModel)
             Spacer(modifier = Modifier.height(87.dp))
             CustomButton(
                 text = "Save Changes",
@@ -122,10 +125,4 @@ fun ProfileScreen() {
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun ProfileScreenPreview() {
-    ProfileScreen()
 }

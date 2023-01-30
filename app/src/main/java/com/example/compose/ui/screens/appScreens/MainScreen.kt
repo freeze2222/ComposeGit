@@ -31,6 +31,7 @@ import com.example.compose.model.data.titleData
 import com.example.compose.ui.theme.Grey
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
+import com.example.compose.ui.theme.Yellow
 import com.example.compose.ui.views.GameCategoryItem
 import com.example.compose.ui.views.LazyEventCard
 import com.example.compose.ui.views.TextZone
@@ -118,11 +119,11 @@ fun MainScreen() {
                     .height(86.dp)
             ) {
                 GameCategoryItem(itemId = 5)
-                Spacer(modifier = Modifier.width(30.dp))
+                Spacer(modifier = Modifier.width(18.dp))
                 GameCategoryItem(itemId = 6)
-                Spacer(modifier = Modifier.width(30.dp))
+                Spacer(modifier = Modifier.width(18.dp))
                 GameCategoryItem(itemId = 7)
-                Spacer(modifier = Modifier.width(30.dp))
+                Spacer(modifier = Modifier.width(18.dp))
                 GameCategoryItem(itemId = 8)
             }
             Spacer(modifier = Modifier.height(28.dp))
@@ -137,9 +138,9 @@ fun MainScreen() {
                     text = AnnotatedString(descriptionData[21]),
                     onClick = {/*TODO*/ },
                     style = TextStyle(
-                        color = Color.White,
+                        color = Yellow,
                         fontFamily = regularFont,
-                        fontSize = 12.sp
+                        fontSize = 10.sp
                     )
                 )
             }

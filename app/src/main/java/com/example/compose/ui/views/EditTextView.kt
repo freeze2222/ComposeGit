@@ -17,13 +17,14 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.compose.model.data.ValueModel
 import com.example.compose.model.data.imageData
 import com.example.compose.ui.theme.Grey
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Yellow
 
 @Composable
-fun EditText(hint: String, isPassword: Boolean) {
+fun EditText(hint: String, isPassword: Boolean, valueModel: ValueModel) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -31,6 +32,7 @@ fun EditText(hint: String, isPassword: Boolean) {
         var text by remember {
             mutableStateOf("")
         }
+        valueModel.value = text
         var focusState by remember { mutableStateOf(false) }
         var visualTransformation by remember { mutableStateOf(if (isPassword) PasswordVisualTransformation() else VisualTransformation.None) }
 
