@@ -17,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -29,8 +30,8 @@ fun BottomNavigationBar(navController: NavController, bottomBarState: MutableSta
     val currentRoute = navBackStackEntry?.destination?.route
     val items = listOf(
         Screen.Main,
-        //Screen.Contacts,
-        //Screen.Main
+        Screen.Search,
+        Screen.Watch
     )
     AnimatedVisibility(
         visible = bottomBarState.value,
@@ -49,7 +50,7 @@ fun BottomNavigationBar(navController: NavController, bottomBarState: MutableSta
                     BottomNavigationItem(
                         icon = {
                             Icon(
-                                item.icon!!,
+                                painterResource(item.icon!!),
                                 contentDescription = item.title!!,
                                 modifier = Modifier
                                     .padding(bottom = 5.dp, top = 10.dp)

@@ -15,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.compose.model.data.ValueModel
@@ -24,7 +25,7 @@ import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Yellow
 
 @Composable
-fun EditText(hint: String, isPassword: Boolean, valueModel: ValueModel) {
+fun EditText(hint: String, isPassword: Boolean, valueModel: ValueModel, width:Dp = 327.dp) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -59,7 +60,7 @@ fun EditText(hint: String, isPassword: Boolean, valueModel: ValueModel) {
             },
             modifier = Modifier
                 .height(56.dp)
-                .width(327.dp)
+                .width(width)
                 .onFocusChanged { focus ->
                     focusState = focus.isFocused
                 },

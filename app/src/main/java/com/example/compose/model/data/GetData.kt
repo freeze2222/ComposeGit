@@ -1,8 +1,8 @@
 package com.example.compose.model.data
 
 import com.example.compose.R
-import com.google.firebase.database.FirebaseDatabase
 
+const val twitch_api_key = ""
 val titleData = listOf(
     "Create an Account",
     "Login Now",

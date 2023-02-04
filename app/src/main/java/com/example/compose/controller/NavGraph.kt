@@ -10,6 +10,7 @@ import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.nav_model.Screen
 import com.example.compose.repository.getStartDestination
 import com.example.compose.ui.screens.appScreens.MainScreen
+import com.example.compose.ui.screens.appScreens.WatchScreen
 import com.example.compose.ui.screens.authScreens.ForgotScreen
 import com.example.compose.ui.screens.authScreens.LoginScreen
 import com.example.compose.ui.screens.authScreens.RegisterScreen
@@ -24,19 +25,25 @@ fun SetupNavGraph(
 ) {
     NavHost(navController = navController!!, startDestination = getStartDestination(true)) {
         composable(route = Screen.OnBoardingScreen.route) {
-            OnBoardScreen(navController!!)
+            OnBoardScreen(navController)
         }
         composable(route = Screen.Register.route) {
-            RegisterScreen(viewModel, navController!!)
+            RegisterScreen(viewModel, navController)
         }
         composable(route = Screen.Login.route) {
-            LoginScreen(navController!!, viewModel)
+            LoginScreen(navController, viewModel)
         }
         composable(route = Screen.Forgot.route) {
             ForgotScreen()
         }
         composable(route = Screen.Main.route) {
             MainScreen()
+        }
+        composable(route = Screen.Search.route) {
+            WatchScreen(navController, viewModel)
+        }
+        composable(route = Screen.Watch.route) {
+            //TODO
         }
     }
 }
