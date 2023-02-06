@@ -6,5 +6,6 @@ import com.google.firebase.auth.FirebaseUser
 
 class MainViewModel : ViewModel() {
     lateinit var currentUser: FirebaseUser
+    var currentStreamId: String = "123456"
     lateinit var navController : NavHostController
 }

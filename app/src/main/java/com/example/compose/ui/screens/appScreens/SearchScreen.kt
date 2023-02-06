@@ -77,13 +77,20 @@ fun WatchScreen(navController: NavHostController, viewModel: MainViewModel) {
                     ),
                     modifier = Modifier.weight(1f),
                 )
-                val data = StreamModel(null, painterResource(id = R.drawable.preview_test), "10k", "Test", null)
+                val data = StreamModel(
+                    null,
+                    painterResource(id = R.drawable.preview_test),
+                    "10k",
+                    "Test",
+                    null,
+                    "Play with friends"
+                )
                 var list by remember {
                     mutableStateOf(mutableListOf(data, data))
                 }
-                LazyColumn (modifier = Modifier.fillMaxSize()){
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
                     items(items = list) { item ->
-                        LazyStreamCard(data = item)
+                        LazyStreamCard(data = item, viewModel)
                     }
                 }
             }

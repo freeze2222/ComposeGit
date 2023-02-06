@@ -34,7 +34,8 @@ val descriptionData = listOf(
     "Streamed",
     "Popularity",
     "Popular Event", // 20
-    "Show all"
+    "Show all",
+    "Live Now"
 )
 val imageData = listOf(
     R.drawable.eye,
@@ -58,6 +59,8 @@ val imageData = listOf(
     R.drawable.arrow,
     R.drawable.profile_photo_mini,
     R.drawable.notifications_button, //20
-    R.drawable.calendar_icon
+    R.drawable.calendar_icon,
+    R.drawable.eye_opened,
+    R.drawable.no_avatar
 )
 

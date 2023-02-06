@@ -19,7 +19,6 @@ import com.example.compose.controller.SetupNavGraph
 import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.nav_model.Screen
 import com.example.compose.ui.theme.ComposeTheme
-import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.BottomNavigationBar
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -45,6 +44,9 @@ class MainActivity : ComponentActivity() {
                     when (navBackStackEntry?.destination?.route) {
                         Screen.Main.route -> {
                             bottomBarState.value = true
+                        }
+                        Screen.Video.route -> {
+                            bottomBarState.value = false
                         }
                         Screen.OnBoardingScreen.route -> {
                             bottomBarState.value = false
