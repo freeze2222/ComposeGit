@@ -23,11 +23,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.compose.model.EventModel
-import com.example.compose.model.data.descriptionData
-import com.example.compose.model.data.imageData
-import com.example.compose.model.data.regularFont
-import com.example.compose.model.data.titleData
+import com.example.compose.model.cards_model.EventModel
+import com.example.compose.model.data.*
 import com.example.compose.ui.theme.Grey
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
@@ -38,7 +35,7 @@ import com.example.compose.ui.views.TextZone
 import com.example.compose.ui.views.VideoPlayer
 
 @Composable
-fun MainScreen() {
+fun MainScreen(viewModel: MainViewModel) {
     Surface(modifier = Modifier.fillMaxSize(), color = Violet) {
         Column(
             modifier = Modifier
@@ -163,10 +160,4 @@ fun MainScreen() {
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun MainScreenPreview() {
-    MainScreen()
 }

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "986205761701",
+    "firebase_url": "https://playzone-c762e-default-rtdb.firebaseio.com",
+    "project_id": "playzone-c762e",
+    "storage_bucket": "playzone-c762e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986205761701:android:04556a20f30e6541289d4c",
+        "android_client_info": {
+          "package_name": "com.example.compose"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "986205761701-m7f73tcp524jqra81vbmn29g6h0qq3vv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.compose",
+            "certificate_hash": "8112b1df5e0c03301bd02b44c1dc94936bcee5b9"
+          }
+        },
+        {
+          "client_id": "986205761701-9bno7i1enu98fdkev9dfdj05gnb9ji02.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxyaZ7b8cVch-gZaz1aAF00rEqEnxxjrE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "986205761701-9bno7i1enu98fdkev9dfdj05gnb9ji02.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

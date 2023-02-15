@@ -18,13 +18,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.compose.model.StreamModel
+import coil.compose.rememberAsyncImagePainter
+import com.example.compose.model.api_model.Stream
 import com.example.compose.model.data.*
 import com.example.compose.repository.watch
 import com.example.compose.ui.theme.LightGrey
 
 @Composable
-fun LazyStreamCard(data: StreamModel, viewModel: MainViewModel) {
+fun LazyStreamCard(data: Stream, viewModel: MainViewModel) {
     Surface(
         modifier = Modifier
             .padding(top = 10.dp)
@@ -37,7 +38,7 @@ fun LazyStreamCard(data: StreamModel, viewModel: MainViewModel) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .paint(data.preview!!, contentScale = ContentScale.FillWidth)
+                .paint(rememberAsyncImagePainter(data.thumbnail_url), contentScale = ContentScale.FillWidth)
         ) {
             Row(
                 modifier = Modifier
@@ -69,7 +70,7 @@ fun LazyStreamCard(data: StreamModel, viewModel: MainViewModel) {
                         contentDescription = null,
                         modifier = Modifier.size(12.dp)
                     )
-                    TextZone(text = data.viewers, size = 14.sp)
+                    TextZone(text = data.viewerCount.toString(), size = 14.sp)
                 }
             }
             Row(
@@ -79,7 +80,7 @@ fun LazyStreamCard(data: StreamModel, viewModel: MainViewModel) {
                     .fillMaxWidth(), verticalAlignment = Alignment.Bottom
             ) {
                 Image(
-                    painter = data.channel_image ?: painterResource(id = imageData[23]),
+                    painter = painterResource(id = imageData[23]),
                     contentDescription = null,
                     modifier = Modifier
                         .size(32.dp)
@@ -91,7 +92,7 @@ fun LazyStreamCard(data: StreamModel, viewModel: MainViewModel) {
                 Column {
                     TextZone(text = data.title, fontFamily = boldFont, size = 14.sp)
                     Spacer(modifier = Modifier.height(5.dp))
-                    TextZone(text = data.channel_name, fontFamily = monoFont, size = 10.sp)
+                    TextZone(text = data.user_name, fontFamily = monoFont, size = 10.sp)
                 }
             }
         }

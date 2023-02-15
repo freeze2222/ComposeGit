@@ -1,4 +1,4 @@
-package com.example.compose.model
+package com.example.compose.model.cards_model
 
 import androidx.compose.ui.graphics.painter.Painter
 

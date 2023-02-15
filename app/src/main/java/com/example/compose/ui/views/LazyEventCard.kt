@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.compose.R
-import com.example.compose.model.EventModel
+import com.example.compose.model.cards_model.EventModel
 import com.example.compose.model.data.imageData
 import com.example.compose.ui.theme.ComposeTheme
 import com.example.compose.ui.theme.Grey

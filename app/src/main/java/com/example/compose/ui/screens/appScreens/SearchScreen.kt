@@ -17,7 +17,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.compose.R
-import com.example.compose.model.StreamModel
+import com.example.compose.model.api_model.Stream
+import com.example.compose.model.cards_model.StreamModel
 import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.data.ValueModel
 import com.example.compose.model.data.regularFont
@@ -89,8 +90,8 @@ fun WatchScreen(navController: NavHostController, viewModel: MainViewModel) {
                     mutableStateOf(mutableListOf(data, data))
                 }
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
-                    items(items = list) { item ->
-                        LazyStreamCard(data = item, viewModel)
+                    items(items = viewModel.streamList) { item ->
+                        LazyStreamCard(data = item as Stream, viewModel)
                     }
                 }
             }

@@ -1,6 +1,7 @@
 package com.example.compose
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
@@ -12,20 +13,27 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.compose.controller.SetupNavGraph
+import com.example.compose.model.api_model.Token
 import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.nav_model.Screen
+import com.example.compose.retrofit.RetrofitClient
 import com.example.compose.ui.theme.ComposeTheme
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.BottomNavigationBar
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.*
+import retrofit2.Response
+import kotlin.coroutines.coroutineContext
 
 @ExperimentalPagerApi
 class MainActivity : ComponentActivity() {
+    private val viewModel = MainViewModel()
     lateinit var navController: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +44,6 @@ class MainActivity : ComponentActivity() {
                     color = Violet
                 ) {
                     FirebaseDatabase.getInstance().setPersistenceEnabled(true)
-                    val viewModel = MainViewModel()
                     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
                     val navController = rememberNavController()
                     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -51,16 +58,21 @@ class MainActivity : ComponentActivity() {
                         Screen.OnBoardingScreen.route -> {
                             bottomBarState.value = false
                         }
-                        Screen.Login.route ->{
+                        Screen.Login.route -> {
                             bottomBarState.value = false
                         }
-                        Screen.Main.route ->{
+                        Screen.Main.route -> {
                             bottomBarState.value = true
                         }
                     }
                     Scaffold(
                         topBar = {},
-                        bottomBar = { BottomNavigationBar(navController, bottomBarState = bottomBarState) },
+                        bottomBar = {
+                            BottomNavigationBar(
+                                navController,
+                                bottomBarState = bottomBarState
+                            )
+                        },
                         content = { padding ->
                             Box(modifier = Modifier.padding(padding)) {
                                 SetupNavGraph(

@@ -38,13 +38,16 @@ fun SetupNavGraph(
             ForgotScreen()
         }
         composable(route = Screen.Main.route) {
-            MainScreen()
+            MainScreen(viewModel)
         }
         composable(route = Screen.Search.route) {
             WatchScreen(navController, viewModel)
         }
         composable(route = Screen.Video.route) {
             VideoScreen(viewModel)
+        }
+        composable(route = Screen.Watch.route){
+            //TODO
         }
     }
 }
