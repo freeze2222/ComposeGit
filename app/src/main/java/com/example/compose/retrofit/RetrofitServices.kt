@@ -22,3 +22,7 @@ interface RetrofitServices {
         @Query("grant_type") type: String = grant_type
     ): Call<Token>
 }
+
+fun search(query:String){
+    val client = RetrofitClient.getClient("")
+}

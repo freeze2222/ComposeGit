@@ -46,7 +46,7 @@ fun WatchScreen(navController: NavHostController, viewModel: MainViewModel) {
             ) {
                 EditText(hint = "Search Streams", isPassword = false, valueModel = query, 250.dp)
                 ClickableText(
-                    text = AnnotatedString("Cancel"),
+                    text = AnnotatedString("Search"),
                     onClick = {},
                     style = TextStyle.Default.copy(
                         color = LightGrey,
@@ -78,17 +78,6 @@ fun WatchScreen(navController: NavHostController, viewModel: MainViewModel) {
                     ),
                     modifier = Modifier.weight(1f),
                 )
-                val data = StreamModel(
-                    null,
-                    painterResource(id = R.drawable.preview_test),
-                    "10k",
-                    "Test",
-                    null,
-                    "Play with friends"
-                )
-                var list by remember {
-                    mutableStateOf(mutableListOf(data, data))
-                }
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
                     items(items = viewModel.streamList) { item ->
                         LazyStreamCard(data = item as Stream, viewModel)

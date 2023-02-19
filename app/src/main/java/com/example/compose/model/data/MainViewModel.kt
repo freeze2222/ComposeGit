@@ -35,7 +35,7 @@ class MainViewModel() : ViewModel() {
             val json = gson.toJson(raw.body())
             streamList = gson.fromJson(json,StreamList::class.java).data
             streamList.forEach {
-                (it as Stream).thumbnail_url = it.thumbnail_url.replace("{width}x{height}","1024x1080")
+                (it as Stream).thumbnail_url = it.thumbnail_url.replace("{width}x{height}","1920x1080")
             }
         }
 
