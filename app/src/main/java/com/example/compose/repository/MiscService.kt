@@ -4,9 +4,6 @@ import com.example.compose.model.api_model.Stream
 import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.nav_model.Screen
 import com.google.firebase.auth.FirebaseAuth
-import com.google.gson.GsonBuilder
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 fun getStartDestination(isFrame: Boolean): String {
@@ -14,18 +11,6 @@ fun getStartDestination(isFrame: Boolean): String {
 }
 
 fun watch(data: Stream, viewModel: MainViewModel) {
-    //viewModel.currentStreamId = data.streamId?:"123456"
+    viewModel.currentStreamId = data.user_name
     viewModel.navController.navigate(Screen.Watch.route)
-}
-
-fun getRTMPUrl(currentStreamId: String): String{
-
-    val retrofit = Retrofit.Builder().baseUrl("https://your.api.url/v2/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build();
-    val gson = GsonBuilder()
-        .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-        .create()
-    //TODO
-    return ""
 }

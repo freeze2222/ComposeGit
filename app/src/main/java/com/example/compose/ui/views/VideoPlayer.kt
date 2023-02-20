@@ -1,7 +1,6 @@
 package com.example.compose.ui.views
 
 import android.net.Uri
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -22,7 +21,7 @@ fun VideoPlayer(videoUrl: String) {
         ExoPlayer.Builder(mContext)
             .build().apply {
                 val mediaItem = MediaItem.Builder()
-                    .setUri(Uri.parse(videoUrl))
+                    .setUri(Uri.parse(videoUrl.lowercase()))
                     .build()
                 setMediaItem(mediaItem)
                 playWhenReady = true
