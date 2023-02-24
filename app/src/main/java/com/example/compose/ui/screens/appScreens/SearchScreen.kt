@@ -9,16 +9,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.compose.R
 import com.example.compose.model.api_model.Stream
-import com.example.compose.model.cards_model.StreamModel
 import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.data.ValueModel
 import com.example.compose.model.data.regularFont
@@ -29,7 +26,7 @@ import com.example.compose.ui.views.LazyStreamCard
 import com.example.compose.ui.views.TextZone
 
 @Composable
-fun WatchScreen(navController: NavHostController, viewModel: MainViewModel) {
+fun SearchScreen(navController: NavHostController, viewModel: MainViewModel) {
     val query = ValueModel()
     Surface(
         color = Violet,

@@ -11,6 +11,6 @@ fun getStartDestination(isFrame: Boolean): String {
 }
 
 fun watch(data: Stream, viewModel: MainViewModel) {
-    viewModel.currentStreamId = data.user_name
+    viewModel.currentStreamerName = data.user_name
     viewModel.navController.navigate(Screen.Watch.route)
 }

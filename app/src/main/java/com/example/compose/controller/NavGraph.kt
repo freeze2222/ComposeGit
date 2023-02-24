@@ -10,7 +10,8 @@ import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.nav_model.Screen
 import com.example.compose.repository.getStartDestination
 import com.example.compose.ui.screens.appScreens.MainScreen
-import com.example.compose.ui.screens.appScreens.VideoScreen
+import com.example.compose.ui.screens.appScreens.LiveListScreen
+import com.example.compose.ui.screens.appScreens.SearchScreen
 import com.example.compose.ui.screens.appScreens.WatchScreen
 import com.example.compose.ui.screens.authScreens.ForgotScreen
 import com.example.compose.ui.screens.authScreens.LoginScreen
@@ -41,13 +42,13 @@ fun SetupNavGraph(
             MainScreen(viewModel)
         }
         composable(route = Screen.Search.route) {
-            WatchScreen(navController, viewModel)
+            SearchScreen(navController, viewModel)
         }
         composable(route = Screen.Video.route) {
-            VideoScreen(viewModel)
+            LiveListScreen(viewModel)
         }
         composable(route = Screen.Watch.route){
-            //TODO
+            WatchScreen(viewModel)
         }
     }
 }

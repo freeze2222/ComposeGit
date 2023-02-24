@@ -16,7 +16,7 @@ import kotlin.coroutines.CoroutineContext
 
 class MainViewModel() : ViewModel() {
     lateinit var currentUser: FirebaseUser
-    var currentStreamId: String = "lec"
+    var currentStreamerName: String = "lec"
     lateinit var navController: NavHostController
     lateinit var accessToken: String
     lateinit var streamList:MutableList<*>
