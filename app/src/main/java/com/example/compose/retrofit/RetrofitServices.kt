@@ -5,17 +5,8 @@ import com.example.compose.model.api_model.Token
 import com.example.compose.model.api_model.client_id
 import com.example.compose.model.api_model.client_secret
 import com.example.compose.model.api_model.grant_type
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Query
-import retrofit2.http.QueryMap
-import retrofit2.http.QueryName
-import kotlin.coroutines.CoroutineContext
+import retrofit2.http.*
 
 interface RetrofitServices {
     @Deprecated("Currently hasn't got any functions")
@@ -49,5 +40,10 @@ interface RetrofitServices {
         @Query("game_id") game_id1: String,
         @Query("game_id") game_id2: String,
         @Query("game_id") game_id3: String,
+    ): Call<Any>
+
+    @GET("/i/{id}")
+    fun getM3U8(
+        @Path("id") id: String
     ): Call<Any>
 }

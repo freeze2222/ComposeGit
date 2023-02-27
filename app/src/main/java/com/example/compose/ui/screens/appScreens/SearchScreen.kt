@@ -5,7 +5,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.Surface
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -15,8 +15,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.compose.model.api_model.Stream
-import com.example.compose.model.api_model.Video
 import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.data.ValueModel
 import com.example.compose.model.data.regularFont
@@ -78,7 +76,7 @@ fun SearchScreen(navController: NavHostController, viewModel: MainViewModel) {
                 )
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
                     items(items = viewModel.videoList) { item ->
-                        LazyVideoCard(data = item as Video, viewModel)
+                        LazyVideoCard(data = item, viewModel)
                     }
                 }
             }

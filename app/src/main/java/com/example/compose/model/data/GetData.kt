@@ -2,7 +2,7 @@ package com.example.compose.model.data
 
 import com.example.compose.R
 
-const val twitch_api_key = ""
+const val APIServerAddress = "http://31.134.130.211:8484"
 val titleData = listOf(
     "Create an Account",
     "Login Now",

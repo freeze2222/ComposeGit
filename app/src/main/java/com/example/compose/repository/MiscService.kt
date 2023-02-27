@@ -1,6 +1,5 @@
 package com.example.compose.repository
 
-import com.example.compose.model.api_model.Stream
 import com.example.compose.model.api_model.Video
 import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.nav_model.Screen
@@ -12,6 +11,7 @@ fun getStartDestination(isFrame: Boolean): String {
 }
 
 fun watch(data: Video, viewModel: MainViewModel) {
-    viewModel.videoLink = data.url
+    viewModel.getM3U8Link(data.id)
     viewModel.navController.navigate(Screen.Watch.route)
+
 }

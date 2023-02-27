@@ -1,6 +1,5 @@
 package com.example.compose.ui.views
 
-import android.net.Uri
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,13 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.source.MediaSource
-import com.google.android.exoplayer2.source.hls.DefaultHlsDataSourceFactory
-import com.google.android.exoplayer2.source.hls.HlsDataSourceFactory
-import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.ui.StyledPlayerView
-import com.google.android.exoplayer2.upstream.DataSource
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -31,17 +24,19 @@ fun VideoPlayer(videoUrl: String) {
         ExoPlayer.Builder(mContext)
             .build().apply {
                 val mediaItem = MediaItem.Builder()
-                    .setUri("https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8")
+                    .setUri(videoUrl)
                     .build()
                 setMediaItem(mediaItem)
                 playWhenReady = true
                 prepare()
             }
     }
+
     DisposableEffect(
         AndroidView(factory = { context ->
             StyledPlayerView(context).apply {
                 player = mExoPlayer
+                setShowBuffering(StyledPlayerView.SHOW_BUFFERING_ALWAYS)
             }
         }, modifier = Modifier.clip(RoundedCornerShape(16.dp)))
     ) {

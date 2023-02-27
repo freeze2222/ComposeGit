@@ -2,6 +2,7 @@
 
 package com.example.compose.controller
 
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -9,8 +10,8 @@ import androidx.navigation.compose.composable
 import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.nav_model.Screen
 import com.example.compose.repository.getStartDestination
-import com.example.compose.ui.screens.appScreens.MainScreen
 import com.example.compose.ui.screens.appScreens.LiveListScreen
+import com.example.compose.ui.screens.appScreens.MainScreen
 import com.example.compose.ui.screens.appScreens.SearchScreen
 import com.example.compose.ui.screens.appScreens.WatchScreen
 import com.example.compose.ui.screens.authScreens.ForgotScreen
@@ -19,6 +20,7 @@ import com.example.compose.ui.screens.authScreens.RegisterScreen
 import com.example.compose.ui.screens.oneTimeScreens.OnBoardScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
 
+@RequiresApi(33)
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun SetupNavGraph(

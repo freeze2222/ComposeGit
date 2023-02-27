@@ -18,7 +18,7 @@ fun WatchScreen(viewModel: MainViewModel) {
         modifier = Modifier.fillMaxSize(),
         color = Violet
     ) {
-        Log.e("Debug",viewModel.videoLink)
+        Log.e("DebugVideo",viewModel.videoLink)
         VideoPlayer(videoUrl = viewModel.videoLink)
     }
 }
