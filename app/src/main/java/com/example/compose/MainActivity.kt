@@ -1,7 +1,6 @@
 package com.example.compose
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
@@ -13,23 +12,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.compose.controller.SetupNavGraph
-import com.example.compose.model.api_model.Token
 import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.nav_model.Screen
-import com.example.compose.retrofit.RetrofitClient
 import com.example.compose.ui.theme.ComposeTheme
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.BottomNavigationBar
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.coroutines.*
-import retrofit2.Response
-import kotlin.coroutines.coroutineContext
 
 @ExperimentalPagerApi
 class MainActivity : ComponentActivity() {

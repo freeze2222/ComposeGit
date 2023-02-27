@@ -1,5 +1,6 @@
 package com.example.compose.model.api_model
 
+@Deprecated("Currently hasn't got any functions")
 data class Stream(
     val id: String,
     val user_id:String,

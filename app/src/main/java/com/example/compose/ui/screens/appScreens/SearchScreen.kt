@@ -16,13 +16,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.compose.model.api_model.Stream
+import com.example.compose.model.api_model.Video
 import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.data.ValueModel
 import com.example.compose.model.data.regularFont
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.EditText
-import com.example.compose.ui.views.LazyStreamCard
+import com.example.compose.ui.views.LazyVideoCard
 import com.example.compose.ui.views.TextZone
 
 @Composable
@@ -76,8 +77,8 @@ fun SearchScreen(navController: NavHostController, viewModel: MainViewModel) {
                     modifier = Modifier.weight(1f),
                 )
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
-                    items(items = viewModel.streamList) { item ->
-                        LazyStreamCard(data = item as Stream, viewModel)
+                    items(items = viewModel.videoList) { item ->
+                        LazyVideoCard(data = item as Video, viewModel)
                     }
                 }
             }

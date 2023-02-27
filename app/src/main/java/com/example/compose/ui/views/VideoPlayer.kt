@@ -1,6 +1,8 @@
 package com.example.compose.ui.views
 
 import android.net.Uri
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -12,8 +14,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.source.MediaSource
+import com.google.android.exoplayer2.source.hls.DefaultHlsDataSourceFactory
+import com.google.android.exoplayer2.source.hls.HlsDataSourceFactory
+import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.ui.StyledPlayerView
+import com.google.android.exoplayer2.upstream.DataSource
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 
+
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun VideoPlayer(videoUrl: String) {
     val mContext = LocalContext.current
@@ -21,7 +31,7 @@ fun VideoPlayer(videoUrl: String) {
         ExoPlayer.Builder(mContext)
             .build().apply {
                 val mediaItem = MediaItem.Builder()
-                    .setUri(Uri.parse(videoUrl.lowercase()))
+                    .setUri("https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8")
                     .build()
                 setMediaItem(mediaItem)
                 playWhenReady = true

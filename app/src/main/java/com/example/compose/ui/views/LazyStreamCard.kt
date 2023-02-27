@@ -19,13 +19,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.example.compose.model.api_model.Stream
+import com.example.compose.model.api_model.Video
 import com.example.compose.model.data.*
 import com.example.compose.repository.watch
 import com.example.compose.ui.theme.LightGrey
 
 @Composable
-fun LazyStreamCard(data: Stream, viewModel: MainViewModel) {
+fun LazyVideoCard(data: Video, viewModel: MainViewModel) {
     Surface(
         modifier = Modifier
             .padding(top = 10.dp)
@@ -70,7 +70,7 @@ fun LazyStreamCard(data: Stream, viewModel: MainViewModel) {
                         contentDescription = null,
                         modifier = Modifier.size(12.dp)
                     )
-                    TextZone(text = data.viewerCount.toString(), size = 14.sp)
+                    TextZone(text = data.view_count.toString(), size = 14.sp)
                 }
             }
             Row(

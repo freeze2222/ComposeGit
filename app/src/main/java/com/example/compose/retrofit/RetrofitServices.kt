@@ -1,5 +1,6 @@
 package com.example.compose.retrofit
 
+import androidx.compose.ui.text.intl.Locale
 import com.example.compose.model.api_model.Token
 import com.example.compose.model.api_model.client_id
 import com.example.compose.model.api_model.client_secret
@@ -12,18 +13,16 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Query
+import retrofit2.http.QueryMap
+import retrofit2.http.QueryName
 import kotlin.coroutines.CoroutineContext
 
 interface RetrofitServices {
+    @Deprecated("Currently hasn't got any functions")
     @GET("/helix/streams") //api.twitch.tv
     fun getStreamList(
         @Header("Authorization") auth: String,
         @Header("Client-Id") id: String = client_id
-    ): Call<Any>
-
-    @GET("/tools/streamapi.py")
-    fun getStream(
-        @Query("url") user_id: String
     ): Call<Any>
 
     @POST("/oauth2/token") //id.twitch.tv
@@ -32,15 +31,23 @@ interface RetrofitServices {
         @Query("client_secret") secret: String = client_secret,
         @Query("grant_type") type: String = grant_type
     ): Call<Token>
-}
 
-fun search(currentStreamId: String,context: CoroutineContext) {
-    CoroutineScope(context).launch(Dispatchers.IO) {
-        val rawStream =
-            RetrofitClient
-                .getClient("https://pwn.sh")
-                .getStream("https://twitch.tv/$currentStreamId")
-                .execute()
-    }
+    @GET("/helix/search/categories")
+    fun getCategoriesList(
+        @Header("Authorization") auth: String,
+        @Header("Client-Id") id: String = client_id,
+        @Query("query") query: String
+    ): Call<Any>
 
+    @GET("/helix/videos")
+    fun getVideos(
+        @Header("Authorization") auth: String,
+        @Header("Client-Id") id: String = client_id,
+        @Query("first") first: Int = 100,
+        @Query("language") language: String = Locale.current.language,
+        @Query("sort") sort: String = "trending",
+        @Query("game_id") game_id1: String,
+        @Query("game_id") game_id2: String,
+        @Query("game_id") game_id3: String,
+    ): Call<Any>
 }

@@ -21,7 +21,7 @@ val descriptionData = listOf(
     "Full name", //5
     "Email address",
     "Password",
-    "Lasted Feature in Streaming  Your Favourite Channel",
+    "Lasted Feature in Streaming  Your Favourite Category",
     "Feel The Beat as You are involved in the game",
     "Share Your Awesome Experience with family & Friends", //10
     "General",
