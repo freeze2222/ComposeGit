@@ -9,17 +9,20 @@ import com.example.compose.model.api_model.Category
 import com.example.compose.model.api_model.Video
 import com.example.compose.model.api_model.VideoList
 import com.example.compose.retrofit.RetrofitClient
+import com.google.firebase.auth.FirebaseUser
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainViewModel : ViewModel() {
-    var isM3U8Ready = false
+    lateinit var user: FirebaseUser
+    private var isM3U8Ready = false
     var videoLink: String = ""
     lateinit var navController: NavHostController
     lateinit var accessToken: String
     lateinit var categoriesList: MutableList<Category>
-    var videoList: MutableList<Video> = mutableListOf(Video())
+    var videoList = mutableListOf<Video>()
     private var tokenScope = viewModelScope.launch(Dispatchers.IO) {
         val raw =
             RetrofitClient.getClient("https://id.twitch.tv").getToken().execute()
@@ -29,6 +32,7 @@ class MainViewModel : ViewModel() {
     private var query = mutableListOf<String>()
 
     init {
+        Log.e("Debug", "Init")
         updateAll("Minecraft")
     }
 
@@ -47,7 +51,6 @@ class MainViewModel : ViewModel() {
                 .execute()
         val gson = Gson()
         val json = gson.toJson(raw.body())
-        Log.e("Debug", json.toString())
         categoriesList = gson.fromJson(json, CategoriesList::class.java).data
         var i = 0
         while (i <= 2) {
@@ -68,21 +71,24 @@ class MainViewModel : ViewModel() {
                 .execute()
         val gson = Gson()
         val json = gson.toJson(raw.body())
-        Log.e("Debug", raw.raw().headers.toString())
         videoList = gson.fromJson(json, VideoList::class.java).data
         videoList.forEach {
             it.thumbnail_url = it.thumbnail_url.replace("%{width}x%{height}", "1920x1080")
         }
     }
+
     fun getM3U8Link(id: String) {
         isM3U8Ready = false
-       viewModelScope.launch (Dispatchers.IO) {
-            val raw =
-                RetrofitClient.getClient(APIServerAddress)
-                    .getM3U8(id)
-                    .execute()
-            this@MainViewModel.videoLink = raw.body().toString()
-           isM3U8Ready = true
+        runBlocking {
+            viewModelScope.launch(Dispatchers.IO) {
+                val raw =
+                    RetrofitClient.getClient(APIServerAddress)
+                        .getM3U8(id)
+                        .execute()
+                this@MainViewModel.videoLink = raw.body().toString()
+                Log.e("Debug",videoLink)
+                isM3U8Ready = true
+            }.join()
         }
     }
 }

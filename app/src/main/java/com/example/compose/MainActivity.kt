@@ -25,6 +25,7 @@ import com.example.compose.ui.views.BottomNavigationBar
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.firebase.database.FirebaseDatabase
 
+
 @ExperimentalPagerApi
 class MainActivity : ComponentActivity() {
     private val SELECTED_ITEM_POSITION = "ItemPosition"
@@ -88,5 +89,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
 }
 

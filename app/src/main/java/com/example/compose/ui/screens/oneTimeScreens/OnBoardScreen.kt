@@ -102,7 +102,7 @@ fun OnBoardScreen(navController: NavController) {
                 Button(
                     onClick = {
                         navController.navigate(Screen.Login.route) {
-                            popUpTo(Screen.Login.route) {
+                            popUpTo(Screen.OnBoardingScreen.route) {
                                 inclusive = true
                             }
                         }

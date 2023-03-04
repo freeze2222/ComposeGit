@@ -44,7 +44,7 @@ fun SetupNavGraph(
             MainScreen(viewModel)
         }
         composable(route = Screen.Search.route) {
-            SearchScreen(navController, viewModel)
+            SearchScreen(viewModel)
         }
         composable(route = Screen.Video.route) {
             LiveListScreen(viewModel)

@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.compose.model.data.MainViewModel
@@ -26,6 +27,7 @@ fun RegisterScreen(viewModel: MainViewModel, navController: NavHostController) {
     val usernameModel = ValueModel()
     val emailModel = ValueModel()
     val passwordModel = ValueModel()
+    val context = LocalContext.current
     Surface(modifier = Modifier.fillMaxSize(), color = Violet) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -46,10 +48,10 @@ fun RegisterScreen(viewModel: MainViewModel, navController: NavHostController) {
                 onClick = {
                     createAccount(
                         viewModel,
-                        navController,
                         usernameModel.value,
                         emailModel.value,
-                        passwordModel.value
+                        passwordModel.value,
+                        context
                     )
                 },
                 color = Yellow,

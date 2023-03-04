@@ -12,14 +12,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.compose.model.data.*
 import com.example.compose.model.nav_model.Screen
 import com.example.compose.repository.login
-import com.example.compose.retrofit.RetrofitClient
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.CustomButton
@@ -30,6 +28,7 @@ import com.example.compose.ui.views.TextZone
 fun LoginScreen(navController: NavController, viewModel: MainViewModel) {
     val emailModel = ValueModel()
     val passwordModel = ValueModel()
+    val context = LocalContext.current
     Surface(color = Violet, modifier = Modifier.fillMaxSize()) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -68,7 +67,14 @@ fun LoginScreen(navController: NavController, viewModel: MainViewModel) {
             Spacer(modifier = Modifier.height(25.dp))
             CustomButton(
                 text = "Login Now",
-                onClick = { login(viewModel, emailModel.value, passwordModel.value) }
+                onClick = {
+                    login(
+                        viewModel,
+                        emailModel.value,
+                        passwordModel.value,
+                        context
+                    )
+                }
             )
 
             Spacer(modifier = Modifier.height(150.dp))
@@ -80,11 +86,7 @@ fun LoginScreen(navController: NavController, viewModel: MainViewModel) {
                 ClickableText(
                     text = AnnotatedString("Create one"),
                     onClick = {
-                        navController.navigate(Screen.Register.route) {
-                            popUpTo(Screen.Register.route) {
-                                inclusive = true
-                            }
-                        }
+                        navController.navigate(Screen.Register.route)
                     },
                     style = TextStyle.Default.copy(
                         color = Color.Yellow, fontWeight = FontWeight.Bold
@@ -93,4 +95,5 @@ fun LoginScreen(navController: NavController, viewModel: MainViewModel) {
             }
         }
     }
+
 }

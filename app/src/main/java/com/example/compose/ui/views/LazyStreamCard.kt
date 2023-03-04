@@ -32,13 +32,18 @@ fun LazyVideoCard(data: Video, viewModel: MainViewModel) {
             .height(190.dp)
             .width(327.dp)
             .clip(RoundedCornerShape(15.dp))
-            .clickable { watch(data, viewModel) }
+            .clickable {
+                watch(data, viewModel)
+            }
     )
     {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .paint(rememberAsyncImagePainter(data.thumbnail_url), contentScale = ContentScale.FillWidth)
+                .paint(
+                    rememberAsyncImagePainter(data.thumbnail_url),
+                    contentScale = ContentScale.FillWidth
+                )
         ) {
             Row(
                 modifier = Modifier

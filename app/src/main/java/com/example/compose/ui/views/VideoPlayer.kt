@@ -1,6 +1,7 @@
 package com.example.compose.ui.views
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -23,6 +24,7 @@ fun VideoPlayer(videoUrl: String) {
     val mExoPlayer = remember(mContext) {
         ExoPlayer.Builder(mContext)
             .build().apply {
+                Log.e("Debug", videoUrl)
                 val mediaItem = MediaItem.Builder()
                     .setUri(videoUrl)
                     .build()
