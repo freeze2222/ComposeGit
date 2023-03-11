@@ -2,6 +2,7 @@
 
 package com.example.compose.controller
 
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -27,6 +28,9 @@ fun SetupNavGraph(
     navController: NavHostController? = null,
     viewModel: MainViewModel,
 ) {
+    // val navController = rememberNavController()
+    // viewModel.navController = navController
+
     NavHost(navController = navController!!, startDestination = getStartDestination(true)) {
         composable(route = Screen.OnBoardingScreen.route) {
             OnBoardScreen(navController)
@@ -49,8 +53,11 @@ fun SetupNavGraph(
         composable(route = Screen.Video.route) {
             LiveListScreen(viewModel)
         }
-        composable(route = Screen.Watch.route){
-            WatchScreen(viewModel)
+        composable(
+            route = Screen.Watch.route
+        ) {
+            Log.e("DEBUGNAVGRAPH", viewModel.videoLink)
+            WatchScreen(viewModel)//, _.arguments?.getString("videoLink"))
         }
     }
 }

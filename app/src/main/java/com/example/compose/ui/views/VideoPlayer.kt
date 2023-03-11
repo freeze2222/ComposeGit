@@ -20,11 +20,11 @@ import com.google.android.exoplayer2.ui.StyledPlayerView
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun VideoPlayer(videoUrl: String) {
+    Log.e("DebugURL", videoUrl)
     val mContext = LocalContext.current
     val mExoPlayer = remember(mContext) {
         ExoPlayer.Builder(mContext)
             .build().apply {
-                Log.e("Debug", videoUrl)
                 val mediaItem = MediaItem.Builder()
                     .setUri(videoUrl)
                     .build()

@@ -2,10 +2,14 @@ package com.example.compose.repository
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import com.example.compose.model.api_model.Video
 import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.nav_model.Screen
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 fun getStartDestination(isFrame: Boolean): String {
@@ -14,9 +18,17 @@ fun getStartDestination(isFrame: Boolean): String {
 
 fun watch(data: Video, viewModel: MainViewModel) {
     viewModel.getM3U8Link(data.id)
-        viewModel.navController.navigate(Screen.Watch.route) {
-            popUpTo(Screen.Search.route)
+    viewModel.currentVideo = data
+    Log.e("DEBUG", viewModel.videoLink)
+
+    viewModel.videoScope.invokeOnCompletion {
+        CoroutineScope(Dispatchers.Main).launch {
+            viewModel.navController.navigate(route = Screen.Watch.route) {
+                Log.e("DEBUG_CONTRL", viewModel.videoLink)
+                popUpTo(Screen.Search.route)
+            }
         }
+    }
 }
 
 fun changeOrientation(

@@ -21,8 +21,12 @@ fun WatchScreen(viewModel: MainViewModel) {
         modifier = Modifier.fillMaxSize(),
         color = Violet
     ) {
-        changeOrientation(context = LocalContext.current, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
-        Log.e("Debug",viewModel.videoLink)
+        changeOrientation(
+            context = LocalContext.current,
+            ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        )
+
+        Log.e("DEBUGFINAL",viewModel.videoLink)
         VideoPlayer(videoUrl = viewModel.videoLink)
     }
 }

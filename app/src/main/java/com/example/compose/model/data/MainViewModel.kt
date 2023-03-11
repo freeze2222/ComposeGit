@@ -12,17 +12,19 @@ import com.example.compose.retrofit.RetrofitClient
 import com.google.firebase.auth.FirebaseUser
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class MainViewModel : ViewModel() {
+    var currentVideo: Video = Video()
     lateinit var user: FirebaseUser
-    private var isM3U8Ready = false
     var videoLink: String = ""
     lateinit var navController: NavHostController
     lateinit var accessToken: String
     lateinit var categoriesList: MutableList<Category>
+    lateinit var videoScope: Job
     var videoList = mutableListOf<Video>()
+
     private var tokenScope = viewModelScope.launch(Dispatchers.IO) {
         val raw =
             RetrofitClient.getClient("https://id.twitch.tv").getToken().execute()
@@ -36,7 +38,7 @@ class MainViewModel : ViewModel() {
         updateAll("Minecraft")
     }
 
-    internal fun updateAll(query: String) {
+    private fun updateAll(query: String) {
         viewModelScope.launch(Dispatchers.IO) {
             tokenScope.join()
             updateCategories(query)
@@ -78,17 +80,13 @@ class MainViewModel : ViewModel() {
     }
 
     fun getM3U8Link(id: String) {
-        isM3U8Ready = false
-        runBlocking {
-            viewModelScope.launch(Dispatchers.IO) {
-                val raw =
-                    RetrofitClient.getClient(APIServerAddress)
-                        .getM3U8(id)
-                        .execute()
-                this@MainViewModel.videoLink = raw.body().toString()
-                Log.e("Debug",videoLink)
-                isM3U8Ready = true
-            }.join()
+        videoScope = viewModelScope.launch(Dispatchers.IO) {
+            val raw =
+                RetrofitClient.getClient(APIServerAddress)
+                    .getM3U8(id)
+                    .execute()
+            videoLink = raw.body().toString()
         }
+        videoScope.start()
     }
 }

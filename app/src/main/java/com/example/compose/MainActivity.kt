@@ -13,7 +13,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.compose.controller.SetupNavGraph
@@ -28,25 +27,23 @@ import com.google.firebase.database.FirebaseDatabase
 
 @ExperimentalPagerApi
 class MainActivity : ComponentActivity() {
-    private val SELECTED_ITEM_POSITION = "ItemPosition"
-    private var mPosition = 0
     private val viewModel = MainViewModel()
-    lateinit var navController: NavHostController
 
     @RequiresApi(33)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+            val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
+            val navController = rememberNavController()
+            val navBackStackEntry by navController.currentBackStackEntryAsState()
+
             ComposeTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = Violet
                 ) {
-                    FirebaseDatabase.getInstance().setPersistenceEnabled(true)
-                    val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
-                    val navController = rememberNavController()
-                    val navBackStackEntry by navController.currentBackStackEntryAsState()
-
                     when (navBackStackEntry?.destination?.route) {
                         Screen.Main.route -> {
                             bottomBarState.value = true
