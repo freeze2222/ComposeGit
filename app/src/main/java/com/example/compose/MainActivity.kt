@@ -60,7 +60,7 @@ class MainActivity : ComponentActivity() {
                         Screen.Main.route -> {
                             bottomBarState.value = true
                         }
-                        Screen.Watch.route -> {
+                        Screen.WatchHolder.route -> {
                             bottomBarState.value = false
                         }
                     }

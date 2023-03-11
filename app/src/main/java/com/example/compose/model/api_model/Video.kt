@@ -17,3 +17,4 @@ data class Video(
     val type:String = "",
     val duration:String = "", //ISO 8601 duration format
 )
+

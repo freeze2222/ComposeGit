@@ -2,19 +2,18 @@
 
 package com.example.compose.controller
 
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import com.example.compose.model.api_model.VideoList
 import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.nav_model.Screen
 import com.example.compose.repository.getStartDestination
-import com.example.compose.ui.screens.appScreens.LiveListScreen
-import com.example.compose.ui.screens.appScreens.MainScreen
-import com.example.compose.ui.screens.appScreens.SearchScreen
-import com.example.compose.ui.screens.appScreens.WatchScreen
+import com.example.compose.ui.screens.appScreens.*
 import com.example.compose.ui.screens.authScreens.ForgotScreen
 import com.example.compose.ui.screens.authScreens.LoginScreen
 import com.example.compose.ui.screens.authScreens.RegisterScreen
@@ -53,11 +52,28 @@ fun SetupNavGraph(
         composable(route = Screen.Video.route) {
             LiveListScreen(viewModel)
         }
+        composable(route = Screen.WatchHolder.route) {
+            WatchHandler(viewModel)
+        }
+
         composable(
-            route = Screen.Watch.route
-        ) {
-            Log.e("DEBUGNAVGRAPH", viewModel.videoLink)
-            WatchScreen(viewModel)//, _.arguments?.getString("videoLink"))
+            route = "${Screen.Watch.route}/{link}/{list}",
+            arguments = listOf(
+                navArgument("link") {
+                    type = NavType.StringType
+                    defaultValue = "Null"
+                },
+                navArgument("list") {
+                    type = NavType.SerializableType(VideoList::class.java)
+                    defaultValue = "Null"
+                }
+            )
+        ) { backStackEntry ->
+            WatchScreen(
+                backStackEntry.arguments?.getString("link") ?: "Null",
+                backStackEntry.arguments?.getSerializable("list"),
+                viewModel
+            )
         }
     }
 }

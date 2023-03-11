@@ -23,7 +23,7 @@ fun watch(data: Video, viewModel: MainViewModel) {
 
     viewModel.videoScope.invokeOnCompletion {
         CoroutineScope(Dispatchers.Main).launch {
-            viewModel.navController.navigate(route = Screen.Watch.route) {
+            viewModel.navController.navigate(route = Screen.WatchHolder.route) {
                 Log.e("DEBUG_CONTRL", viewModel.videoLink)
                 popUpTo(Screen.Search.route)
             }

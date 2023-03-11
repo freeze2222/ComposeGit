@@ -31,7 +31,7 @@ fun BottomNavigationBar(navController: NavController, bottomBarState: MutableSta
     val items = listOf(
         Screen.Main,
         Screen.Search,
-        Screen.Watch
+        Screen.WatchHolder
     )
     AnimatedVisibility(
         visible = bottomBarState.value,
