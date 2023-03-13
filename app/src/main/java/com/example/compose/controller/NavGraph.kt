@@ -64,14 +64,13 @@ fun SetupNavGraph(
                     defaultValue = "Null"
                 },
                 navArgument("list") {
-                    type = NavType.StringType
-                    defaultValue = "Null"
+                    type = NavType.SerializableType(VideoList::class.java)
                 }
             )
         ) { backStackEntry ->
             WatchScreen(
                 backStackEntry.arguments?.getString("link") ?: "Null",
-                backStackEntry.arguments?.getString("list")?: "Null",
+                backStackEntry.arguments?.getSerializable("list",VideoList::class.java),
                 viewModel
             )
         }

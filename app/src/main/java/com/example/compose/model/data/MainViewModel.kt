@@ -38,7 +38,7 @@ class MainViewModel : ViewModel() {
         updateAll("Minecraft")
     }
 
-    private fun updateAll(query: String) {
+    fun updateAll(query: String) {
         viewModelScope.launch(Dispatchers.IO) {
             tokenScope.join()
             updateCategories(query)
