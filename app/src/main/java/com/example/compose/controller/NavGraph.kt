@@ -57,21 +57,21 @@ fun SetupNavGraph(
         }
 
         composable(
-            route = "${Screen.Watch.route}/{link}/{list}",
+            route = "${Screen.Watch.route}?link={link}&list={list}",
             arguments = listOf(
                 navArgument("link") {
                     type = NavType.StringType
                     defaultValue = "Null"
                 },
                 navArgument("list") {
-                    type = NavType.SerializableType(VideoList::class.java)
+                    type = NavType.StringType
                     defaultValue = "Null"
                 }
             )
         ) { backStackEntry ->
             WatchScreen(
                 backStackEntry.arguments?.getString("link") ?: "Null",
-                backStackEntry.arguments?.getSerializable("list"),
+                backStackEntry.arguments?.getString("list")?: "Null",
                 viewModel
             )
         }

@@ -11,11 +11,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import com.example.compose.model.api_model.Video
 import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.nav_model.Screen
 import com.example.compose.repository.changeOrientation
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.VideoPlayer
+import com.google.gson.Gson
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
@@ -35,8 +37,14 @@ fun WatchHandler(viewModel: MainViewModel) {
             if (viewModel.videoLink.isNotBlank()){
                 link.value = viewModel.videoLink
                 VideoPlayer(videoUrl = link.value)
-                Log.e("DEBUG", viewModel.videoList.toString())
-                viewModel.navController.navigate("${Screen.Watch.route}/${viewModel.videoLink}/${viewModel.videoList}")
+                val list = mutableListOf<Video>()
+                viewModel.videoList.forEach {
+                    Log.e("FOREACH",it.toString())
+                    list.add(it)
+                }
+                val videoList = Gson().toJson(list)
+                Log.e("list",videoList)
+                viewModel.navController.navigate("${Screen.Watch.route}?link=${viewModel.videoLink}&list=${videoList}")
             }
         }
 

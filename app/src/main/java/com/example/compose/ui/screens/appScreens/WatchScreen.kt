@@ -1,6 +1,7 @@
 package com.example.compose.ui.screens.appScreens
 
 import android.content.pm.ActivityInfo
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
@@ -12,11 +13,11 @@ import com.example.compose.model.data.MainViewModel
 import com.example.compose.repository.changeOrientation
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.VideoPlayer
-import java.io.Serializable
+import com.google.gson.Gson
 
 @RequiresApi(33)
 @Composable
-fun WatchScreen(videoUrl: String, viewModel1: Serializable?, viewModel: MainViewModel) {
+fun WatchScreen(videoUrl: String, viewModel1: String, viewModel: MainViewModel) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = Violet
@@ -25,7 +26,9 @@ fun WatchScreen(videoUrl: String, viewModel1: Serializable?, viewModel: MainView
             context = LocalContext.current,
             ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         )
-        viewModel.videoList = (viewModel1 as VideoList).data.toMutableList()
+        val videoList = Gson().fromJson(viewModel1,Array<VideoList>::class.java)
+        viewModel.videoList =videoList[0].data.toMutableList()
+        Log.e("Lister", videoList[0].data.toMutableList().toString())
         VideoPlayer(videoUrl = videoUrl)
     }
 }
