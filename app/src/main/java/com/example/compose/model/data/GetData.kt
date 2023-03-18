@@ -26,7 +26,7 @@ val descriptionData = listOf(
     "Share Your Awesome Experience with family & Friends", //10
     "General",
     "Notifications",
-    "Close Friends",
+    "Account",
     "Sounds",
     "Privacy", //15
     "Health",

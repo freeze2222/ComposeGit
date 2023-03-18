@@ -1,8 +1,10 @@
 package com.example.compose.ui.views
 
-import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.Switch
+import androidx.compose.material.SwitchDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,15 +17,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.compose.model.data.imageData
 import com.example.compose.ui.theme.Grey
-import com.example.compose.ui.theme.LightGrey
-import com.example.compose.ui.theme.Yellow
 
 @Composable
 fun SettingsItem(
     text: String,
-    painter: Painter,
+    painter: Painter?,
     isSwitch: Boolean = false,
-    isBordered: Boolean = true
+    isBordered: Boolean = true,
+    onClick: () -> Unit = {}
 ) {
     var switched by remember {
         mutableStateOf(true)
@@ -43,20 +44,22 @@ fun SettingsItem(
                     Offset(size.width, y),
                     strokeWidth
                 )
-            }
-    else Modifier.fillMaxWidth().height(75.dp),
+            }.clickable {onClick()}
+    else Modifier.fillMaxWidth().height(75.dp).clickable {onClick()},
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ) {
         Spacer(modifier = Modifier.width(24.dp))
-        Icon(
-            painter = painter,
-            contentDescription = null,
-            modifier = Modifier
-                .width(24.dp)
-                .height(24.dp),
-            tint = Color.Unspecified
-        )
+        painter?.let {
+            Icon(
+                painter = it,
+                contentDescription = null,
+                modifier = Modifier
+                    .width(24.dp)
+                    .height(24.dp),
+                tint = Color.Unspecified
+            )
+        }
         Spacer(modifier = Modifier.width(20.dp))
         TextZone(text = text, size = 16.sp)
         Spacer(modifier = Modifier.weight(1f))
@@ -70,7 +73,6 @@ fun SettingsItem(
                 onCheckedChange = { switched = it })
             Spacer(modifier = Modifier.width(24.dp))
         } else {
-            IconButton(onClick = { /*TODO*/ }) {
                 Icon(
                     painter = painterResource(id = imageData[18]),
                     contentDescription = null,
@@ -79,7 +81,6 @@ fun SettingsItem(
                         .width(24.dp),
                     tint = Color.Unspecified
                 )
-            }
         }
     }
 }

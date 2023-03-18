@@ -3,6 +3,7 @@ package com.example.compose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,7 +28,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 @ExperimentalPagerApi
 class MainActivity : ComponentActivity() {
-    private val viewModel = MainViewModel()
+    private val viewModel : MainViewModel by viewModels()
 
     @RequiresApi(33)
     override fun onCreate(savedInstanceState: Bundle?) {

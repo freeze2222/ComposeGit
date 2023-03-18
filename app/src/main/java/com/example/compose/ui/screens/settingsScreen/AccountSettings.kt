@@ -1,4 +1,4 @@
-package com.example.compose.ui.screens.appScreens
+package com.example.compose.ui.screens.settingsScreen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.IconButton
@@ -6,8 +6,6 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.compose.model.data.*
@@ -18,7 +16,7 @@ import com.example.compose.ui.views.SettingsItem
 import com.example.compose.ui.views.TextZone
 
 @Composable
-fun SettingsScreen() {
+fun AccountSettings() {
     Surface(modifier = Modifier.fillMaxSize(), color = Violet) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -51,17 +49,7 @@ fun SettingsScreen() {
                 color = LightGrey,
             )
             Spacer(modifier = Modifier.height(25.dp))
-            SettingsItem(text = descriptionData[12], painter = painterResource(id = imageData[13]), isSwitch = true)
-            SettingsItem(text = descriptionData[13], painter = painterResource(id = imageData[14]))
-            SettingsItem(text = descriptionData[14], painter = painterResource(id = imageData[15]))
-            SettingsItem(text = descriptionData[15], painter = painterResource(id = imageData[16]))
-            SettingsItem(text = descriptionData[16], painter = painterResource(id = imageData[17]), isBordered = false)
+            SettingsItem(text = "Log out", painter = null) //TODO
         }
     }
-}
-
-@Preview
-@Composable
-fun SettingsScreenPreview() {
-    SettingsScreen()
 }

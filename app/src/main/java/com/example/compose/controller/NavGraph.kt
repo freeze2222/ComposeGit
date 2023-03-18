@@ -9,7 +9,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.compose.model.api_model.VideoList
 import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.nav_model.Screen
 import com.example.compose.repository.getStartDestination
@@ -56,21 +55,21 @@ fun SetupNavGraph(
             WatchHandler(viewModel)
         }
 
+        composable(route = Screen.Settings.route){
+            SettingsScreen()
+        }
+
         composable(
-            route = "${Screen.Watch.route}?link={link}&list={list}",
+            route = "${Screen.Watch.route}?link={link}",
             arguments = listOf(
                 navArgument("link") {
                     type = NavType.StringType
                     defaultValue = "Null"
-                },
-                navArgument("list") {
-                    type = NavType.SerializableType(VideoList::class.java)
                 }
             )
         ) { backStackEntry ->
             WatchScreen(
                 backStackEntry.arguments?.getString("link") ?: "Null",
-                backStackEntry.arguments?.getSerializable("list",VideoList::class.java),
                 viewModel
             )
         }

@@ -11,8 +11,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.example.compose.model.data.MainViewModel
+import com.example.compose.model.nav_model.Screen
 import com.example.compose.repository.changeOrientation
-import com.example.compose.repository.transferData
 import com.example.compose.ui.theme.Violet
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -29,10 +29,11 @@ fun WatchHandler(viewModel: MainViewModel) {
         val link = remember {
             mutableStateOf("")
         }
-        //viewModel.updateAll("Minecraft") ???
+
         if (link.value.isEmpty()) {
             if (viewModel.videoLink.isNotBlank()){
-                transferData(viewModel, link)
+                link.value = viewModel.videoLink
+                viewModel.navController.navigate("${Screen.Watch.route}?link=${viewModel.videoLink}")
             }
         }
 
