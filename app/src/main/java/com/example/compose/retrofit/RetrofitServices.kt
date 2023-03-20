@@ -40,6 +40,7 @@ interface RetrofitServices {
         @Query("game_id") game_id1: String,
         @Query("game_id") game_id2: String,
         @Query("game_id") game_id3: String,
+
     ): Call<Any>
 
     @GET("/i/{id}")

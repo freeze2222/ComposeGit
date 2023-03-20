@@ -35,29 +35,33 @@ class MainViewModel : ViewModel() {
 
     init {
         Log.e("Debug", "Init")
-        updateAll("Minecraft")
     }
 
-    fun updateAll(query: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+    fun updateAll(query: String): Job {
+        return viewModelScope.launch(Dispatchers.IO) {
             tokenScope.join()
-            updateCategories(query)
+            updateCategories(query).join()
             updateVideos()
         }
     }
 
-    private fun updateCategories(search: String) {
-        val raw =
-            RetrofitClient.getClient("https://api.twitch.tv")
-                .getCategoriesList(auth = accessToken, query = search)
-                .execute()
-        val gson = Gson()
-        val json = gson.toJson(raw.body())
-        categoriesList = gson.fromJson(json, CategoriesList::class.java).data
-        var i = 0
-        while (i <= 2) {
-            query.add(categoriesList[i].id)
-            i++
+    private fun updateCategories(search: String): Job {
+        return viewModelScope.launch(Dispatchers.IO) {
+            query.clear()
+            val raw =
+                RetrofitClient.getClient("https://api.twitch.tv")
+                    .getCategoriesList(auth = accessToken, query = search)
+                    .execute()
+            val gson = Gson()
+            val json = gson.toJson(raw.body())
+            Log.e("JSON", json)
+            categoriesList = gson.fromJson(json, CategoriesList::class.java).data
+            for (category in categoriesList) {
+                query.add(category.id)
+                Log.e("DEBUG", category.id)
+            }
+
+
         }
     }
 
