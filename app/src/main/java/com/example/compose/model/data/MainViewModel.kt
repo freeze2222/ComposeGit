@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
-import com.example.compose.model.api_model.CategoriesList
-import com.example.compose.model.api_model.Category
-import com.example.compose.model.api_model.Video
-import com.example.compose.model.api_model.VideoList
+import com.example.compose.model.api_model.*
 import com.example.compose.retrofit.RetrofitClient
 import com.google.firebase.auth.FirebaseUser
 import com.google.gson.Gson
@@ -29,7 +26,7 @@ class MainViewModel : ViewModel() {
         val raw =
             RetrofitClient.getClient("https://id.twitch.tv").getToken().execute()
         accessToken = "Bearer ${raw.body()!!.access_token}"
-        //Log.e("Debug", "$accessToken + clientId:$client_id")
+        Log.e("Debug", "$accessToken + clientId:$client_id")
     }
     private var query = mutableListOf<String>()
 
@@ -42,6 +39,7 @@ class MainViewModel : ViewModel() {
             tokenScope.join()
             updateCategories(query).join()
             updateVideos()
+            getNews("Minecraft")
         }
     }
 
@@ -70,9 +68,7 @@ class MainViewModel : ViewModel() {
             RetrofitClient.getClient("https://api.twitch.tv")
                 .getVideos(
                     accessToken,
-                    game_id1 = query[0],
-                    game_id2 = query[1],
-                    game_id3 = query[2]
+                    game_id1 = query[0]
                 )
                 .execute()
         val gson = Gson()
@@ -90,6 +86,19 @@ class MainViewModel : ViewModel() {
                     .getM3U8(id)
                     .execute()
             videoLink = raw.body().toString()
+        }
+        videoScope.start()
+    }
+
+    fun getNews(query: String) {
+        videoScope = viewModelScope.launch(Dispatchers.IO) {/*
+                val raw =
+                    RetrofitClient.getClient("https://newsapi.org/v2/everything/")
+                        .getNews()
+                        .execute()
+                Log.e("Debug", raw.code().toString())
+
+                */
         }
         videoScope.start()
     }

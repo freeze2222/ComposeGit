@@ -1,10 +1,7 @@
 package com.example.compose.retrofit
 
 import androidx.compose.ui.text.intl.Locale
-import com.example.compose.model.api_model.Token
-import com.example.compose.model.api_model.client_id
-import com.example.compose.model.api_model.client_secret
-import com.example.compose.model.api_model.grant_type
+import com.example.compose.model.api_model.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -27,7 +24,8 @@ interface RetrofitServices {
     fun getCategoriesList(
         @Header("Authorization") auth: String,
         @Header("Client-Id") id: String = client_id,
-        @Query("query") query: String
+        @Query("query") query: String,
+        @Query("first") first: Int = 1
     ): Call<Any>
 
     @GET("/helix/videos")
@@ -37,14 +35,19 @@ interface RetrofitServices {
         @Query("first") first: Int = 100,
         @Query("language") language: String = Locale.current.language,
         @Query("sort") sort: String = "trending",
-        @Query("game_id") game_id1: String,
-        @Query("game_id") game_id2: String,
-        @Query("game_id") game_id3: String,
-
+        @Query("game_id") game_id1: String
     ): Call<Any>
 
     @GET("/i/{id}")
     fun getM3U8(
         @Path("id") id: String
+    ): Call<Any>
+
+    @GET("/")
+    fun getNews(
+        @Query("q") query: String = "tesla",
+        @Query("from") from: String = "2023-02-25",
+        @Query("sortBy") sortBy: String = "popularity",
+        @Query("apiKey") news_secret: String = news_api
     ): Call<Any>
 }
