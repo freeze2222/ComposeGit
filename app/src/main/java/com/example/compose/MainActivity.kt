@@ -64,6 +64,9 @@ class MainActivity : ComponentActivity() {
                         Screen.Watch.route -> {
                             bottomBarState.value = false
                         }
+                        Screen.Search.route -> {
+                            bottomBarState.value = true
+                        }
                     }
                     Scaffold(
                         topBar = {},

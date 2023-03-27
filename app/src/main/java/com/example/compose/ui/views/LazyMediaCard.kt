@@ -25,7 +25,7 @@ import com.example.compose.repository.watch
 import com.example.compose.ui.theme.LightGrey
 
 @Composable
-fun LazyVideoCard(data: Video, viewModel: MainViewModel) {
+fun LazyMediaCard(data: Video, viewModel: MainViewModel, isStream: Boolean = false) {
     Surface(
         modifier = Modifier
             .padding(top = 10.dp)
@@ -59,7 +59,9 @@ fun LazyVideoCard(data: Video, viewModel: MainViewModel) {
                         .padding(start = 7.dp, top = 7.dp, end = 7.dp, bottom = 7.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    TextZone(text = descriptionData[22], size = 14.sp)
+                    if (isStream) {
+                        TextZone(text = descriptionData[21], size = 14.sp)
+                    }
                 }
                 Spacer(modifier = Modifier.width(10.dp))
                 Row(

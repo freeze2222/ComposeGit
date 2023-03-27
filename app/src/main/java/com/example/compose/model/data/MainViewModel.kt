@@ -13,7 +13,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
-    var currentVideo: Video = Video()
     lateinit var user: FirebaseUser
     var videoLink: String = ""
     lateinit var navController: NavHostController
@@ -21,7 +20,8 @@ class MainViewModel : ViewModel() {
     lateinit var categoriesList: MutableList<Category>
     lateinit var videoScope: Job
     var videoList = mutableListOf<Video>()
-
+    var popularStreamList = mutableListOf<Stream>()
+    var streamsList = mutableListOf<Stream>()
     private var tokenScope = viewModelScope.launch(Dispatchers.IO) {
         val raw =
             RetrofitClient.getClient("https://id.twitch.tv").getToken().execute()
@@ -31,6 +31,7 @@ class MainViewModel : ViewModel() {
     private var query = mutableListOf<String>()
 
     init {
+        getPopularStreams()
         Log.e("Debug", "Init")
     }
 
@@ -39,7 +40,6 @@ class MainViewModel : ViewModel() {
             tokenScope.join()
             updateCategories(query).join()
             updateVideos()
-            getNews("Minecraft")
         }
     }
 
@@ -90,16 +90,19 @@ class MainViewModel : ViewModel() {
         videoScope.start()
     }
 
-    fun getNews(query: String) {
-        videoScope = viewModelScope.launch(Dispatchers.IO) {/*
-                val raw =
-                    RetrofitClient.getClient("https://newsapi.org/v2/everything/")
-                        .getNews()
-                        .execute()
-                Log.e("Debug", raw.code().toString())
-
-                */
+    private fun getPopularStreams() {
+        viewModelScope.launch(Dispatchers.IO) {
+            tokenScope.join()
+            val raw =
+                RetrofitClient.getClient("https://api.twitch.tv")
+                    .getPopularStreams(accessToken)
+                    .execute()
+            val gson = Gson()
+            val json = gson.toJson(raw.body())
+            popularStreamList = gson.fromJson(json, StreamList::class.java).data
+            popularStreamList.forEach {
+                it.thumbnail_url = it.thumbnail_url.replace("{width}x{height}", "1920x1080")
+            }
         }
-        videoScope.start()
     }
 }

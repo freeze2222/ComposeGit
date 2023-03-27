@@ -1,7 +1,10 @@
 package com.example.compose.retrofit
 
 import androidx.compose.ui.text.intl.Locale
-import com.example.compose.model.api_model.*
+import com.example.compose.model.api_model.Token
+import com.example.compose.model.api_model.client_id
+import com.example.compose.model.api_model.client_secret
+import com.example.compose.model.api_model.grant_type
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -43,11 +46,11 @@ interface RetrofitServices {
         @Path("id") id: String
     ): Call<Any>
 
-    @GET("/")
-    fun getNews(
-        @Query("q") query: String = "tesla",
-        @Query("from") from: String = "2023-02-25",
-        @Query("sortBy") sortBy: String = "popularity",
-        @Query("apiKey") news_secret: String = news_api
+    @GET("/helix/streams")
+    fun getPopularStreams(
+        @Header("Authorization") auth: String,
+        @Header("Client-Id") id: String = client_id,
+        @Query("first") first: Int = 10,
+        @Query("language") language: String = Locale.current.language
     ): Call<Any>
 }

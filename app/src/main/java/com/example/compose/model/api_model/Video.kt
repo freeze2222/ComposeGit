@@ -3,7 +3,7 @@ package com.example.compose.model.api_model
 import java.io.Serializable
 
 data class Video(
-    val id:String = "",
+    override val id:String = "",
     val stream_id:String = "",
     val user_login:String = "",
     val user_name:String = "",
@@ -18,5 +18,5 @@ data class Video(
     val language:String = "", //The ISO 639-1 two-letter language code
     val type:String = "",
     val duration:String = "", //ISO 8601 duration format
-):Serializable
+):Serializable, Media()
 

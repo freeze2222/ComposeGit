@@ -1,5 +1,6 @@
 package com.example.compose.ui.screens.appScreens
 
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -7,7 +8,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
@@ -16,24 +16,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.compose.model.cards_model.EventModel
-import com.example.compose.model.data.*
+import com.example.compose.model.data.MainViewModel
+import com.example.compose.model.data.descriptionData
+import com.example.compose.model.data.imageData
+import com.example.compose.model.data.titleData
 import com.example.compose.ui.theme.Grey
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
-import com.example.compose.ui.theme.Yellow
 import com.example.compose.ui.views.GameCategoryItem
-import com.example.compose.ui.views.LazyEventCard
+import com.example.compose.ui.views.LazyMediaCardMin
 import com.example.compose.ui.views.TextZone
 import com.example.compose.ui.views.VideoPlayer
 
+@RequiresApi(33)
 @Composable
 fun MainScreen(viewModel: MainViewModel) {
     Surface(modifier = Modifier.fillMaxSize(), color = Violet) {
@@ -130,16 +129,6 @@ fun MainScreen(viewModel: MainViewModel) {
                     .height(20.dp)
             ) {
                 TextZone(text = descriptionData[20], size = 16.sp)
-                Spacer(modifier = Modifier.width(170.dp))
-                ClickableText(
-                    text = AnnotatedString(descriptionData[21]),
-                    onClick = {/*TODO*/ },
-                    style = TextStyle(
-                        color = Yellow,
-                        fontFamily = regularFont,
-                        fontSize = 10.sp
-                    )
-                )
             }
             Spacer(modifier = Modifier.height(20.dp))
             val data = EventModel(
@@ -154,8 +143,8 @@ fun MainScreen(viewModel: MainViewModel) {
             }
 
             LazyRow {
-                items(items = list) { item ->
-                    LazyEventCard(data = item)
+                items(items = viewModel.popularStreamList) { item ->
+                    LazyMediaCardMin(data = item, viewModel)
                 }
             }
         }

@@ -1,8 +1,6 @@
 package com.example.compose.model.api_model
 
-@Deprecated("Currently hasn't got any functions")
 data class Stream(
-    val id: String,
     val user_id:String,
     val user_login:String,
     val user_name:String,
@@ -16,5 +14,7 @@ data class Stream(
     var thumbnail_url:String,
     val tag_ids:Array<String>,
     val tags:Array<String>,
-    val is_mature:Boolean
-)
+    val is_mature:Boolean,
+    override val id: String,
+    override val Mediatype: String = "Stream"
+) : Media()

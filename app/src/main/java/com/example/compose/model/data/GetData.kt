@@ -33,8 +33,7 @@ val descriptionData = listOf(
     "Morning",
     "Streamed",
     "Popularity",
-    "Popular Event", // 20
-    "Show all",
+    "Popular Streams", // 20
     "Live Now"
 )
 val imageData = listOf(

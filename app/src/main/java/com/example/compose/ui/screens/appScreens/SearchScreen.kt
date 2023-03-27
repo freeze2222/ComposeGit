@@ -25,7 +25,7 @@ import com.example.compose.repository.changeOrientation
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.EditText
-import com.example.compose.ui.views.LazyVideoCard
+import com.example.compose.ui.views.LazyMediaCard
 import com.example.compose.ui.views.TextZone
 
 @Composable
@@ -99,7 +99,7 @@ fun SearchScreen(viewModel: MainViewModel) {
                     )
                     LazyColumn(modifier = Modifier.fillMaxSize()) {
                         items(items = viewModel.videoList) { item ->
-                            LazyVideoCard(data = item, viewModel)
+                            LazyMediaCard(data = item, viewModel)
                         }
                     }
                 }
