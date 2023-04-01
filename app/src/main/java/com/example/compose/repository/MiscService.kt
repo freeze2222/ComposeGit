@@ -28,7 +28,7 @@ fun watch(data: Media, viewModel: MainViewModel) {
         CoroutineScope(Dispatchers.Main).launch {
             viewModel.isClicked = false
             viewModel.navController.navigate(route = Screen.Watch.route) {
-                popUpTo(Screen.Search.route)
+                popUpTo(Screen.SearchVideos.route)
             }
         }
     }

@@ -64,7 +64,10 @@ class MainActivity : ComponentActivity() {
                         Screen.Watch.route -> {
                             bottomBarState.value = false
                         }
-                        Screen.Search.route -> {
+                        Screen.SearchVideos.route -> {
+                            bottomBarState.value = true
+                        }
+                        Screen.SearchStreams.route -> {
                             bottomBarState.value = true
                         }
                     }

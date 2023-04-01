@@ -19,13 +19,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.example.compose.model.api_model.Video
+import com.example.compose.model.api_model.Media
 import com.example.compose.model.data.*
 import com.example.compose.repository.watch
 import com.example.compose.ui.theme.LightGrey
 
 @Composable
-fun LazyMediaCard(data: Video, viewModel: MainViewModel, isStream: Boolean = false) {
+fun LazyMediaCard(data: Media, viewModel: MainViewModel, isStream: Boolean = false) {
     Surface(
         modifier = Modifier
             .padding(top = 10.dp)

@@ -9,12 +9,6 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface RetrofitServices {
-    @Deprecated("Currently hasn't got any functions")
-    @GET("/helix/streams") //api.twitch.tv
-    fun getStreamList(
-        @Header("Authorization") auth: String,
-        @Header("Client-Id") id: String = client_id
-    ): Call<Any>
 
     @POST("/oauth2/token") //id.twitch.tv
     fun getToken(
@@ -33,6 +27,16 @@ interface RetrofitServices {
 
     @GET("/helix/videos")
     fun getVideos(
+        @Header("Authorization") auth: String,
+        @Header("Client-Id") id: String = client_id,
+        @Query("first") first: Int = 100,
+        @Query("language") language: String = Locale.current.language,
+        @Query("sort") sort: String = "trending",
+        @Query("game_id") game_id1: String
+    ): Call<Any>
+
+    @GET("/helix/streams") //api.twitch.tv
+    fun getStreams(
         @Header("Authorization") auth: String,
         @Header("Client-Id") id: String = client_id,
         @Query("first") first: Int = 100,

@@ -42,6 +42,7 @@ class MainViewModel : ViewModel() {
             tokenScope.join()
             updateCategories(query).join()
             updateVideos()
+            updateStreams()
         }
     }
 
@@ -58,10 +59,7 @@ class MainViewModel : ViewModel() {
             categoriesList = gson.fromJson(json, CategoriesList::class.java).data
             for (category in categoriesList) {
                 query.add(category.id)
-                Log.e("DEBUG", category.id)
             }
-
-
         }
     }
 
@@ -78,6 +76,23 @@ class MainViewModel : ViewModel() {
         videoList = gson.fromJson(json, VideoList::class.java).data
         videoList.forEach {
             it.thumbnail_url = it.thumbnail_url.replace("%{width}x%{height}", "1920x1080")
+        }
+    }
+
+    private fun updateStreams() {
+        val raw =
+            RetrofitClient.getClient("https://api.twitch.tv")
+                .getStreams(
+                    accessToken,
+                    game_id1 = query[0]
+                )
+                .execute()
+        val gson = Gson()
+        val json = gson.toJson(raw.body())
+        streamsList = gson.fromJson(json, StreamList::class.java).data
+        streamsList.forEach {
+            it.thumbnail_url = it.thumbnail_url.replace("{width}x{height}", "1920x1080")
+            it.mediaType = "Stream"
         }
     }
 

@@ -9,14 +9,17 @@ data class Stream(
     val game_id: Int,
     val game_name: String,
     val type: String,
-    val title: String,
+    override val title: String,
     val viewerCount: Int,
     val startedAt: String,
     val language: String,
-    var thumbnail_url: String,
+    override var thumbnail_url: String,
     val tag_ids: Array<String>,
     val tags: Array<String>,
     val is_mature: Boolean,
     override val id: String,
     override var mediaType: String = "Stream"
-) : Serializable, Media()
+) : Serializable, Media() {
+    override val view_count: Int
+        get() = viewerCount
+}

@@ -29,7 +29,7 @@ import com.example.compose.ui.views.LazyMediaCard
 import com.example.compose.ui.views.TextZone
 
 @Composable
-fun SearchScreen(viewModel: MainViewModel) {
+fun SearchVideosScreen(viewModel: MainViewModel) {
     changeOrientation(LocalContext.current, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
     var isReady by remember { mutableStateOf(false) }
     val query by remember {
@@ -61,8 +61,8 @@ fun SearchScreen(viewModel: MainViewModel) {
                         onClick = {
                             viewModel.updateAll(query.value)
                             isReady = false
-                            viewModel.navController.navigate(Screen.Search.route) {
-                                popUpTo(Screen.Search.route) {
+                            viewModel.navController.navigate(Screen.SearchVideos.route) {
+                                popUpTo(Screen.SearchVideos.route) {
                                     inclusive = true
                                 }
                             }
