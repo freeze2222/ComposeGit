@@ -30,7 +30,9 @@ fun LazyMediaCardMin(data: Stream, viewModel: MainViewModel) {
             .width(215.dp)
             .clip(RoundedCornerShape(15.dp))
             .clickable {
-                watch(data, viewModel)
+                if (!viewModel.isClicked) {
+                    watch(data, viewModel)
+                }
             }
     ) {
         Column(

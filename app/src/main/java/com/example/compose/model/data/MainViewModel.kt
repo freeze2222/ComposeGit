@@ -13,6 +13,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
+    var isClicked: Boolean = false
+    lateinit var popularStreamsScope: Job
     lateinit var user: FirebaseUser
     var videoLink: String = ""
     lateinit var navController: NavHostController
@@ -79,19 +81,21 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun getM3U8Link(id: String) {
+    fun getM3U8Link(id: String, mediaType: String) {
         videoScope = viewModelScope.launch(Dispatchers.IO) {
-            val raw =
-                RetrofitClient.getClient(APIServerAddress)
-                    .getM3U8(id)
-                    .execute()
-            videoLink = raw.body().toString()
+            Log.e("Debug",mediaType)
+                val raw =
+                    RetrofitClient.getClient(APIServerAddress)
+                        .getM3U8(id, if (mediaType == "Video") "i" else "v")
+                        .execute()
+                videoLink = raw.body().toString()
+            Log.e("Debug", raw.code().toString())
         }
         videoScope.start()
     }
 
     private fun getPopularStreams() {
-        viewModelScope.launch(Dispatchers.IO) {
+       popularStreamsScope = viewModelScope.launch(Dispatchers.IO) {
             tokenScope.join()
             val raw =
                 RetrofitClient.getClient("https://api.twitch.tv")
@@ -102,6 +106,7 @@ class MainViewModel : ViewModel() {
             popularStreamList = gson.fromJson(json, StreamList::class.java).data
             popularStreamList.forEach {
                 it.thumbnail_url = it.thumbnail_url.replace("{width}x{height}", "1920x1080")
+                it.mediaType = "Stream"
             }
         }
     }

@@ -33,7 +33,7 @@ fun WatchScreen(viewModel: MainViewModel) {
             link.value = viewModel.videoLink
         }
         if (link.value.isNotEmpty()){
-            VideoPlayer(videoUrl = link.value)
+            VideoPlayer(videoUrl = link.value.strip())
         }
 
     }

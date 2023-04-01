@@ -41,9 +41,10 @@ interface RetrofitServices {
         @Query("game_id") game_id1: String
     ): Call<Any>
 
-    @GET("/i/{id}")
+    @GET("/{tag}/{id}")
     fun getM3U8(
-        @Path("id") id: String
+        @Path("id") id: String,
+        @Path("tag") tag: String
     ): Call<Any>
 
     @GET("/helix/streams")

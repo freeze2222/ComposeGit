@@ -2,6 +2,7 @@ package com.example.compose.repository
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import com.example.compose.model.api_model.Media
 import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.nav_model.Screen
@@ -16,16 +17,23 @@ fun getStartDestination(isFrame: Boolean): String {
 }
 
 fun watch(data: Media, viewModel: MainViewModel) {
-    viewModel.getM3U8Link(data.id)
+    Log.e("Debug",data.toString())
+    viewModel.isClicked = true
+    viewModel.getM3U8Link(
+        if (data.mediaType == "Video") data.id else data.user_name,
+        data.mediaType
+    )
 
     viewModel.videoScope.invokeOnCompletion {
         CoroutineScope(Dispatchers.Main).launch {
+            viewModel.isClicked = false
             viewModel.navController.navigate(route = Screen.Watch.route) {
                 popUpTo(Screen.Search.route)
             }
         }
     }
 }
+
 fun changeOrientation(
     context: Context,
     value: Int

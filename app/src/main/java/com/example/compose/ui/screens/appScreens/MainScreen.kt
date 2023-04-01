@@ -1,5 +1,6 @@
 package com.example.compose.ui.screens.appScreens
 
+import android.content.pm.ActivityInfo
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -10,20 +11,21 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.compose.model.cards_model.EventModel
 import com.example.compose.model.data.MainViewModel
 import com.example.compose.model.data.descriptionData
 import com.example.compose.model.data.imageData
 import com.example.compose.model.data.titleData
+import com.example.compose.repository.changeOrientation
 import com.example.compose.ui.theme.Grey
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
@@ -31,11 +33,19 @@ import com.example.compose.ui.views.GameCategoryItem
 import com.example.compose.ui.views.LazyMediaCardMin
 import com.example.compose.ui.views.TextZone
 import com.example.compose.ui.views.VideoPlayer
+import kotlinx.coroutines.runBlocking
 
 @RequiresApi(33)
 @Composable
 fun MainScreen(viewModel: MainViewModel) {
+    runBlocking {
+        viewModel.popularStreamsScope.join()
+    }
     Surface(modifier = Modifier.fillMaxSize(), color = Violet) {
+        changeOrientation(
+            context = LocalContext.current,
+            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        )
         Column(
             modifier = Modifier
                 .padding(start = 24.dp, end = 24.dp)
@@ -131,16 +141,6 @@ fun MainScreen(viewModel: MainViewModel) {
                 TextZone(text = descriptionData[20], size = 16.sp)
             }
             Spacer(modifier = Modifier.height(20.dp))
-            val data = EventModel(
-                "test",
-                "test",
-                "test",
-                painterResource(id = imageData[3]),
-                painterResource(id = imageData[4])
-            )
-            var list by remember {
-                mutableStateOf(mutableListOf(data,data))
-            }
 
             LazyRow {
                 items(items = viewModel.popularStreamList) { item ->

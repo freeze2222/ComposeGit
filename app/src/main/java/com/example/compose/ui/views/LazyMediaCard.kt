@@ -33,7 +33,9 @@ fun LazyMediaCard(data: Video, viewModel: MainViewModel, isStream: Boolean = fal
             .width(327.dp)
             .clip(RoundedCornerShape(15.dp))
             .clickable {
-                watch(data, viewModel)
+                if (!viewModel.isClicked) {
+                    watch(data, viewModel)
+                }
             }
     )
     {
