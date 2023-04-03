@@ -2,6 +2,8 @@ package com.example.compose.model.api_model
 
 import java.io.Serializable
 
+
+
 data class Stream(
     val user_id: String,
     val user_login: String,
@@ -10,7 +12,7 @@ data class Stream(
     val game_name: String,
     val type: String,
     override val title: String,
-    val viewerCount: Int,
+    override var viewer_count: Int,
     val startedAt: String,
     val language: String,
     override var thumbnail_url: String,
@@ -18,8 +20,6 @@ data class Stream(
     val tags: Array<String>,
     val is_mature: Boolean,
     override val id: String,
-    override var mediaType: String = "Stream"
-) : Serializable, Media() {
-    override val view_count: Int
-        get() = viewerCount
-}
+    override var mediaType: String = "Stream",
+    override var view_count: Int = 0,
+) : Serializable, Media()

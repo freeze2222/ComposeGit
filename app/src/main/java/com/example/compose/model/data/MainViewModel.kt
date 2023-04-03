@@ -28,7 +28,7 @@ class MainViewModel : ViewModel() {
         val raw =
             RetrofitClient.getClient("https://id.twitch.tv").getToken().execute()
         accessToken = "Bearer ${raw.body()!!.access_token}"
-        Log.e("Debug", "$accessToken + clientId:$client_id")
+        //Log.e("Debug", "$accessToken + clientId:$client_id")
     }
     private var query = mutableListOf<String>()
 
@@ -91,6 +91,7 @@ class MainViewModel : ViewModel() {
         val json = gson.toJson(raw.body())
         streamsList = gson.fromJson(json, StreamList::class.java).data
         streamsList.forEach {
+            it.view_count = it.viewer_count
             it.thumbnail_url = it.thumbnail_url.replace("{width}x{height}", "1920x1080")
             it.mediaType = "Stream"
         }
@@ -98,13 +99,11 @@ class MainViewModel : ViewModel() {
 
     fun getM3U8Link(id: String, mediaType: String) {
         videoScope = viewModelScope.launch(Dispatchers.IO) {
-            Log.e("Debug",mediaType)
                 val raw =
                     RetrofitClient.getClient(APIServerAddress)
                         .getM3U8(id, if (mediaType == "Video") "i" else "v")
                         .execute()
                 videoLink = raw.body().toString()
-            Log.e("Debug", raw.code().toString())
         }
         videoScope.start()
     }

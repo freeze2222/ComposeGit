@@ -18,6 +18,6 @@ data class Video(
     val language:String = "", //The ISO 639-1 two-letter language code
     val type:String = "",
     val duration:String = "", //ISO 8601 duration format
-    override val mediaType: String = "Video"
+    override val mediaType: String = "Video", override val viewer_count: Int = 0
 ):Serializable, Media()
 

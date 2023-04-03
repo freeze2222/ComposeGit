@@ -57,29 +57,22 @@ fun LazyMediaCard(data: Media, viewModel: MainViewModel, isStream: Boolean = fal
                     modifier = Modifier
                         .clip(RoundedCornerShape(6.dp))
                         .alpha(0.8f)
-                        .background(Color.Red)
-                        .padding(start = 7.dp, top = 7.dp, end = 7.dp, bottom = 7.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    if (isStream) {
-                        TextZone(text = descriptionData[21], size = 14.sp)
-                    }
-                }
-                Spacer(modifier = Modifier.width(10.dp))
-                Row(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(6.dp))
-                        .alpha(0.8f)
                         .background(LightGrey)
                         .padding(start = 7.dp, top = 7.dp, end = 7.dp, bottom = 7.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                    if (isStream) {
+                        TextZone(text = descriptionData[21], size = 28.sp, color = Color.Red)
+                    }
                     Image(
                         painter = painterResource(id = imageData[22]),
                         contentDescription = null,
                         modifier = Modifier.size(12.dp)
                     )
-                    TextZone(text = data.view_count.toString(), size = 14.sp)
+                    TextZone(
+                        text = (if (isStream) data.viewer_count.toString() else data.view_count.toString()),
+                        size = 14.sp
+                    )
                 }
             }
             Row(
@@ -89,7 +82,7 @@ fun LazyMediaCard(data: Media, viewModel: MainViewModel, isStream: Boolean = fal
                     .fillMaxWidth(), verticalAlignment = Alignment.Bottom
             ) {
                 Image(
-                    painter = painterResource(id = imageData[23]),
+                    painter = rememberAsyncImagePainter(data.user_image),
                     contentDescription = null,
                     modifier = Modifier
                         .size(32.dp)

@@ -49,9 +49,6 @@ fun SetupNavGraph(
         composable(route = Screen.SearchStreams.route){
             SearchStreamsScreen(viewModel = viewModel)
         }
-        composable(route = Screen.Video.route) {
-            LiveListScreen(viewModel)
-        }
         composable(route = Screen.Watch.route) {
             WatchScreen(viewModel)
         }
