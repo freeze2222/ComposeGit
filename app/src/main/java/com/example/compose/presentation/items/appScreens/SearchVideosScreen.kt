@@ -17,7 +17,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.compose.presentation.screen.main.MainViewModel
+import com.example.compose.presentation.screen.main.MainViewModelOld
 import com.example.compose.presentation.screen.value.ValueModel
 import com.example.compose.domain.model.data.regularFont
 import com.example.compose.domain.model.nav_model.Screen
@@ -26,10 +26,10 @@ import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.EditText
 import com.example.compose.ui.views.LazyMediaCard
-import com.example.compose.ui.views.TextZone
+import com.example.compose.presentation.items.views.TextZone
 
 @Composable
-fun SearchVideosScreen(viewModel: MainViewModel) {
+fun SearchVideosScreen(viewModel: MainViewModelOld) {
     changeOrientation(LocalContext.current, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
     var isReady by remember { mutableStateOf(false) }
     val query by remember {

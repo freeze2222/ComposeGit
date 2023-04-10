@@ -17,17 +17,17 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.compose.domain.model.data.*
 import com.example.compose.domain.model.nav_model.Screen
-import com.example.compose.presentation.screen.main.MainViewModel
+import com.example.compose.presentation.screen.main.MainViewModelOld
 import com.example.compose.presentation.screen.value.ValueModel
 import com.example.compose.repository.login
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.CustomButton
 import com.example.compose.ui.views.EditText
-import com.example.compose.ui.views.TextZone
+import com.example.compose.presentation.items.views.TextZone
 
 @Composable
-fun LoginScreen(navController: NavController, viewModel: MainViewModel) {
+fun LoginScreen(navController: NavController) {
     val emailModel = ValueModel()
     val passwordModel = ValueModel()
     val context = LocalContext.current

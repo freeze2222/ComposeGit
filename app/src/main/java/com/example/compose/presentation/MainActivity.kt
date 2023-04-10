@@ -16,16 +16,17 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.compose.controller.SetupNavGraph
-import com.example.compose.presentation.screen.main.MainViewModel
+import com.example.compose.presentation.navigation.SetupNavGraph
 import com.example.compose.domain.model.nav_model.Screen
+import com.example.compose.presentation.screen.main.MainViewModel
 import com.example.compose.ui.theme.ComposeTheme
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.BottomNavigationBar
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.firebase.database.FirebaseDatabase
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 @ExperimentalPagerApi
 class MainActivity : ComponentActivity() {
     private val viewModel : MainViewModel by viewModels()
@@ -85,7 +86,6 @@ class MainActivity : ComponentActivity() {
                                     navController = navController,
                                     viewModel = viewModel
                                 )
-                                viewModel.navController = navController
                             }
                         }
                     )

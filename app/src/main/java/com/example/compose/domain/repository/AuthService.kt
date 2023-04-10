@@ -29,7 +29,7 @@ fun login(
 }
 
 fun createAccount(
-    viewModel: MainViewModel,
+    viewModel: MainViewModelOld,
     username: String,
     email: String,
     password: String,

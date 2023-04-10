@@ -22,8 +22,8 @@ import com.example.compose.domain.model.data.regularFont
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.theme.Yellow
 import com.example.compose.ui.views.CustomButton
-import com.example.compose.ui.views.NumberField
-import com.example.compose.ui.views.TextZone
+import com.example.compose.presentation.items.views.NumberField
+import com.example.compose.presentation.items.views.TextZone
 
 lateinit var focusManager: FocusManager
 fun moveFocus() {

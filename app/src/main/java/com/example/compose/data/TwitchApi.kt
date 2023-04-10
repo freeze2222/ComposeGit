@@ -1,4 +1,4 @@
-package com.example.compose.domain.repository
+package com.example.compose.data
 
 import androidx.compose.ui.text.intl.Locale
 import com.example.compose.domain.model.api_model.Token
@@ -8,7 +8,7 @@ import com.example.compose.domain.model.api_model.grant_type
 import retrofit2.Call
 import retrofit2.http.*
 
-interface RetrofitServices {
+interface TwitchApi {
 
     @POST("/oauth2/token") //id.twitch.tv
     fun getToken(

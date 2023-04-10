@@ -16,12 +16,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.example.compose.domain.model.api_model.Stream
-import com.example.compose.presentation.screen.main.MainViewModel
+import com.example.compose.presentation.screen.main.MainViewModelOld
 import com.example.compose.domain.model.data.imageData
+import com.example.compose.presentation.items.views.TextZone
 import com.example.compose.repository.watch
 
 @Composable
-fun LazyMediaCardMin(data: Stream, viewModel: MainViewModel) {
+fun LazyMediaCardMin(data: Stream, viewModel: MainViewModelOld) {
     Surface(
         modifier =
         Modifier

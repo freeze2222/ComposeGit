@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.compose.presentation.screen.main.MainViewModel
+import com.example.compose.presentation.screen.main.MainViewModelOld
 import com.example.compose.presentation.screen.value.ValueModel
 import com.example.compose.domain.model.data.titleData
 import com.example.compose.repository.createAccount
@@ -20,10 +20,10 @@ import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.theme.Yellow
 import com.example.compose.ui.views.CustomButton
 import com.example.compose.ui.views.EditText
-import com.example.compose.ui.views.TextZone
+import com.example.compose.presentation.items.views.TextZone
 
 @Composable
-fun RegisterScreen(viewModel: MainViewModel, navController: NavHostController) {
+fun RegisterScreen(navController: NavHostController) {
     val usernameModel = ValueModel()
     val emailModel = ValueModel()
     val passwordModel = ValueModel()

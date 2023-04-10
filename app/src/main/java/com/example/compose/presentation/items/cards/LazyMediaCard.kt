@@ -20,12 +20,13 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.example.compose.domain.model.api_model.Media
 import com.example.compose.domain.model.data.*
-import com.example.compose.presentation.screen.main.MainViewModel
+import com.example.compose.presentation.items.views.TextZone
+import com.example.compose.presentation.screen.main.MainViewModelOld
 import com.example.compose.repository.watch
 import com.example.compose.ui.theme.LightGrey
 
 @Composable
-fun LazyMediaCard(data: Media, viewModel: MainViewModel, isStream: Boolean = false) {
+fun LazyMediaCard(data: Media, viewModel: MainViewModelOld, isStream: Boolean = false) {
     Surface(
         modifier = Modifier
             .padding(top = 10.dp)
