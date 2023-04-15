@@ -16,8 +16,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.compose.presentation.navigation.SetupNavGraph
 import com.example.compose.domain.model.nav_model.Screen
+import com.example.compose.presentation.navigation.SetupNavGraph
 import com.example.compose.presentation.screen.main.MainViewModel
 import com.example.compose.ui.theme.ComposeTheme
 import com.example.compose.ui.theme.Violet
@@ -83,8 +83,7 @@ class MainActivity : ComponentActivity() {
                         content = { padding ->
                             Box(modifier = Modifier.padding(padding)) {
                                 SetupNavGraph(
-                                    navController = navController,
-                                    viewModel = viewModel
+                                    navController = navController
                                 )
                             }
                         }

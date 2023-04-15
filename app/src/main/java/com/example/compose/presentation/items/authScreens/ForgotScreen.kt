@@ -8,19 +8,18 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.compose.presentation.screen.value.ValueModel
 import com.example.compose.domain.model.data.descriptionData
 import com.example.compose.domain.model.data.regularFont
 import com.example.compose.domain.model.data.titleData
+import com.example.compose.presentation.items.views.TextZone
+import com.example.compose.presentation.screen.value.ValueModel
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.CustomButton
 import com.example.compose.ui.views.EditText
-import com.example.compose.presentation.items.views.TextZone
 
 @Composable
 fun ForgotScreen(navController: NavHostController) {
@@ -43,10 +42,4 @@ fun ForgotScreen(navController: NavHostController) {
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun ForgotScreenPreview() {
-    ForgotScreen(navController)
 }

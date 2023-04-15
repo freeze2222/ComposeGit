@@ -15,16 +15,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.compose.domain.model.data.*
+import com.example.compose.domain.model.data.descriptionData
+import com.example.compose.domain.model.data.regularFont
+import com.example.compose.domain.model.data.titleData
 import com.example.compose.domain.model.nav_model.Screen
-import com.example.compose.presentation.screen.main.MainViewModelOld
+import com.example.compose.presentation.items.views.TextZone
 import com.example.compose.presentation.screen.value.ValueModel
 import com.example.compose.repository.login
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.CustomButton
 import com.example.compose.ui.views.EditText
-import com.example.compose.presentation.items.views.TextZone
 
 @Composable
 fun LoginScreen(navController: NavController) {
@@ -71,7 +72,7 @@ fun LoginScreen(navController: NavController) {
                 text = "Login Now",
                 onClick = {
                     login(
-                        viewModel,
+                        navController,
                         emailModel.value,
                         passwordModel.value,
                         context

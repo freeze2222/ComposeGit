@@ -14,15 +14,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.compose.domain.model.api_model.Stream
-import com.example.compose.presentation.screen.main.MainViewModelOld
 import com.example.compose.domain.model.data.imageData
 import com.example.compose.presentation.items.views.TextZone
 import com.example.compose.repository.watch
 
 @Composable
-fun LazyMediaCardMin(data: Stream, viewModel: MainViewModelOld) {
+fun LazyMediaCardMin(data: Stream, navController: NavController) {
     Surface(
         modifier =
         Modifier
@@ -31,9 +31,7 @@ fun LazyMediaCardMin(data: Stream, viewModel: MainViewModelOld) {
             .width(215.dp)
             .clip(RoundedCornerShape(15.dp))
             .clickable {
-                if (!viewModel.isClicked) {
-                    watch(data, viewModel)
-                }
+                watch(data, navController)
             }
     ) {
         Column(

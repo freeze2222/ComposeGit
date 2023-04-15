@@ -33,6 +33,7 @@ import com.example.compose.domain.model.data.imageData
 import com.example.compose.domain.model.data.titleData
 import com.example.compose.presentation.items.ErrorItem
 import com.example.compose.presentation.items.LoadItem
+import com.example.compose.presentation.items.views.TextZone
 import com.example.compose.presentation.items.views.VideoPlayer
 import com.example.compose.presentation.screen.main.MainScreenEvent
 import com.example.compose.presentation.screen.main.MainViewModel
@@ -42,7 +43,6 @@ import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.GameCategoryItem
 import com.example.compose.ui.views.LazyMediaCardMin
-import com.example.compose.presentation.items.views.TextZone
 
 @RequiresApi(33)
 @Composable
@@ -59,7 +59,7 @@ fun MainScreen(navHostController: NavController) {
         }
         state.data.isNotEmpty() -> {
             Log.d("checkData", "data size: ${state.data.size}")
-            MainScreenContent(navHostController,state.data)
+            MainScreenContent(navHostController, state.data)
         }
         state.error != null -> {
             Log.d("checkData", "Error ${state.error}")

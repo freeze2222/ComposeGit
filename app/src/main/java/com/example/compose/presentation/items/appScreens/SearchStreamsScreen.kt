@@ -1,6 +1,7 @@
 package com.example.compose.presentation.items.appScreens
 
 import android.content.pm.ActivityInfo
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -17,19 +18,48 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.compose.presentation.screen.main.MainViewModelOld
-import com.example.compose.presentation.screen.value.ValueModel
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.compose.domain.model.api_model.Media
 import com.example.compose.domain.model.data.regularFont
-import com.example.compose.domain.model.nav_model.Screen
+import com.example.compose.presentation.items.ErrorItem
+import com.example.compose.presentation.items.LoadItem
+import com.example.compose.presentation.items.views.TextZone
+import com.example.compose.presentation.screen.main.MainScreenEvent
+import com.example.compose.presentation.screen.main.MainViewModel
+import com.example.compose.presentation.screen.value.ValueModel
 import com.example.compose.repository.changeOrientation
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.EditText
 import com.example.compose.ui.views.LazyMediaCard
-import com.example.compose.presentation.items.views.TextZone
 
 @Composable
-fun SearchStreamsScreen(viewModel: MainViewModelOld) {
+fun SearchStreamsScreen(navHostController: NavController) {
+
+    val viewModel = hiltViewModel<MainViewModel>()
+
+    val state by viewModel.state.collectAsState()
+
+    when {
+        state.isLoading -> {
+            Log.d("checkData", "Loading...")
+            LoadItem()
+        }
+        state.data.isNotEmpty() -> {
+            Log.d("checkData", "data size: ${state.data.size}")
+            SearchStreamsScreenContent(navHostController, state.data)
+        }
+        state.error != null -> {
+            Log.d("checkData", "Error ${state.error}")
+            ErrorItem(state.error) {
+                viewModel.sendEvent(MainScreenEvent.LoadingData)
+            }
+        }
+    }
+}
+@Composable
+fun SearchStreamsScreenContent(navController: NavController, data: List<Media>) {
     changeOrientation(LocalContext.current, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
     var isReady by remember { mutableStateOf(false) }
     val query by remember {
@@ -59,13 +89,7 @@ fun SearchStreamsScreen(viewModel: MainViewModelOld) {
                     ClickableText(
                         text = AnnotatedString("Search"),
                         onClick = {
-                            viewModel.updateAll(query.value)
-                            isReady = false
-                            viewModel.navController.navigate(Screen.SearchStreams.route) {
-                                popUpTo(Screen.SearchStreams.route) {
-                                    inclusive = true
-                                }
-                            }
+                            //TODO
                         },
                         style = TextStyle.Default.copy(
                             color = LightGrey,
@@ -98,8 +122,8 @@ fun SearchStreamsScreen(viewModel: MainViewModelOld) {
                         modifier = Modifier.weight(1f),
                     )
                     LazyColumn(modifier = Modifier.fillMaxSize()) {
-                        items(items = viewModel.streamsList) { item ->
-                            LazyMediaCard(data = item, viewModel)
+                        items(items = data) { item ->
+                            LazyMediaCard(data = item, navController)
                         }
                     }
                 }
@@ -107,10 +131,8 @@ fun SearchStreamsScreen(viewModel: MainViewModelOld) {
         } else {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 CircularProgressIndicator()
-                LaunchedEffect(Unit){
-                    viewModel.updateAll(query.value).invokeOnCompletion {
-                        isReady = true
-                    }
+                LaunchedEffect(Unit) {
+                    //TODO
                 }
             }
         }

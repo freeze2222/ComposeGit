@@ -14,12 +14,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.compose.domain.model.data.*
+import com.example.compose.presentation.items.views.TextZone
 import com.example.compose.presentation.screen.value.ValueModel
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.CustomButton
 import com.example.compose.ui.views.EditText
-import com.example.compose.presentation.items.views.TextZone
 
 
 @Composable
@@ -95,7 +95,7 @@ fun ProfileScreen() {
                 textAlign = TextAlign.Start
             )
             Spacer(modifier = Modifier.height(16.dp))
-            EditText(hint = "Name", isPassword = false,nameModel)
+            EditText(hint = "Name", isPassword = false, nameModel)
             Spacer(modifier = Modifier.height(24.dp))
             TextZone(
                 text = descriptionData[6],
@@ -105,7 +105,7 @@ fun ProfileScreen() {
                 textAlign = TextAlign.Start
             )
             Spacer(modifier = Modifier.height(16.dp))
-            EditText(hint = "Email", isPassword = false,emailModel)
+            EditText(hint = "Email", isPassword = false, emailModel)
             Spacer(modifier = Modifier.height(24.dp))
             TextZone(
                 text = descriptionData[7],
@@ -115,7 +115,7 @@ fun ProfileScreen() {
                 textAlign = TextAlign.Start
             )
             Spacer(modifier = Modifier.height(16.dp))
-            EditText(hint = "Password", isPassword = true,passwordModel)
+            EditText(hint = "Password", isPassword = true, passwordModel)
             Spacer(modifier = Modifier.height(87.dp))
             CustomButton(
                 text = "Save Changes",

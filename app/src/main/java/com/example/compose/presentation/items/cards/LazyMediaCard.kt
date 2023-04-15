@@ -17,16 +17,19 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.compose.domain.model.api_model.Media
-import com.example.compose.domain.model.data.*
+import com.example.compose.domain.model.data.boldFont
+import com.example.compose.domain.model.data.descriptionData
+import com.example.compose.domain.model.data.imageData
+import com.example.compose.domain.model.data.monoFont
 import com.example.compose.presentation.items.views.TextZone
-import com.example.compose.presentation.screen.main.MainViewModelOld
 import com.example.compose.repository.watch
 import com.example.compose.ui.theme.LightGrey
 
 @Composable
-fun LazyMediaCard(data: Media, viewModel: MainViewModelOld, isStream: Boolean = false) {
+fun LazyMediaCard(data: Media, navController: NavController, isStream: Boolean = false) {
     Surface(
         modifier = Modifier
             .padding(top = 10.dp)
@@ -34,9 +37,7 @@ fun LazyMediaCard(data: Media, viewModel: MainViewModelOld, isStream: Boolean = 
             .width(327.dp)
             .clip(RoundedCornerShape(15.dp))
             .clickable {
-                if (!viewModel.isClicked) {
-                    watch(data, viewModel)
-                }
+                watch(data,navController)
             }
     )
     {

@@ -10,14 +10,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.example.compose.presentation.screen.main.MainViewModelOld
+import com.example.compose.presentation.items.views.VideoPlayer
 import com.example.compose.repository.changeOrientation
 import com.example.compose.ui.theme.Violet
-import com.example.compose.presentation.items.views.VideoPlayer
 
 @RequiresApi(33)
 @Composable
-fun WatchScreen(viewModel: MainViewModelOld) {
+fun WatchScreen(videoLink:String) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = Violet
@@ -30,7 +29,7 @@ fun WatchScreen(viewModel: MainViewModelOld) {
             mutableStateOf("")
         }
         LaunchedEffect(Unit) {
-            link.value = viewModel.videoLink
+            link.value = videoLink
         }
         if (link.value.isNotEmpty()){
             VideoPlayer(videoUrl = link.value.strip())
