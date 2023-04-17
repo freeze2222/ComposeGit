@@ -51,7 +51,6 @@ fun MainScreen(navHostController: NavController) {
     val viewModel = hiltViewModel<MainViewModel>()
 
     val state by viewModel.state.collectAsState()
-
     when {
         state.isLoading -> {
             Log.d("checkData", "Loading...")

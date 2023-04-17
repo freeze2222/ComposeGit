@@ -13,6 +13,8 @@ class DomainRepositoryImpl @Inject constructor() : DomainRepository {
     companion object {
         lateinit var accessToken: String
         lateinit var query: MutableList<String>
+        lateinit var id: String
+        lateinit var mediaType:String
     }
 
     override suspend fun updateStreams(): MutableList<Stream> {
@@ -74,7 +76,7 @@ class DomainRepositoryImpl @Inject constructor() : DomainRepository {
         }
     }
 
-    override suspend fun getM3U8Link(id:String,mediaType:String): String {
+    override suspend fun getM3U8Link(): String {
         return withContext(Dispatchers.IO) {
             val raw =
                 RetrofitModule.provideIPAPI()
@@ -100,5 +102,12 @@ class DomainRepositoryImpl @Inject constructor() : DomainRepository {
             return@withContext popularStreamList
         }
 
+    }
+    override suspend fun getAccessToken(): String{
+        return withContext(Dispatchers.IO) {
+            val raw = RetrofitModule.provideID().getToken().execute()
+            accessToken = "Bearer ${raw.body()!!.access_token}"
+            return@withContext accessToken
+        }
     }
 }

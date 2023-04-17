@@ -33,4 +33,14 @@ object RetrofitModule {
             .create(TwitchApi::class.java)
     }
 
+    @Provides
+    @Singleton
+    fun provideID(): TwitchApi{
+        return Retrofit.Builder()
+            .baseUrl("https://id.twitch.tv")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(TwitchApi::class.java)
+    }
+
 }

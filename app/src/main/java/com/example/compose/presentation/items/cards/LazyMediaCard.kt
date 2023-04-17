@@ -24,8 +24,8 @@ import com.example.compose.domain.model.data.boldFont
 import com.example.compose.domain.model.data.descriptionData
 import com.example.compose.domain.model.data.imageData
 import com.example.compose.domain.model.data.monoFont
+import com.example.compose.domain.model.nav_model.Screen
 import com.example.compose.presentation.items.views.TextZone
-import com.example.compose.repository.watch
 import com.example.compose.ui.theme.LightGrey
 
 @Composable
@@ -37,7 +37,7 @@ fun LazyMediaCard(data: Media, navController: NavController, isStream: Boolean =
             .width(327.dp)
             .clip(RoundedCornerShape(15.dp))
             .clickable {
-                watch(data,navController)
+                navController.navigate(Screen.Watch.route)
             }
     )
     {

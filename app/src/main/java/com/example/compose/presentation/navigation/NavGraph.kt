@@ -48,7 +48,7 @@ fun SetupNavGraph(
             SearchStreamsScreen(navController)
         }
         composable(route = Screen.Watch.route) {
-            WatchScreen()
+            WatchScreen(navController)
         }
 
         composable(route = Screen.Settings.route) {

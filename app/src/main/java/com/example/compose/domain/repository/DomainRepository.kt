@@ -9,5 +9,6 @@ interface DomainRepository {
    suspend fun updateVideos(): MutableList<Video>
    suspend fun updateCategories(search:String): MutableList<Category>
    suspend fun getPopularStreams():MutableList<Stream>
-   suspend fun getM3U8Link(id: String, mediaType: String): String
+   suspend fun getM3U8Link(): String
+   suspend fun getAccessToken(): String
 }

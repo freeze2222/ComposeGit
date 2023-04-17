@@ -18,8 +18,8 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.compose.domain.model.api_model.Stream
 import com.example.compose.domain.model.data.imageData
+import com.example.compose.domain.model.nav_model.Screen
 import com.example.compose.presentation.items.views.TextZone
-import com.example.compose.repository.watch
 
 @Composable
 fun LazyMediaCardMin(data: Stream, navController: NavController) {
@@ -31,7 +31,7 @@ fun LazyMediaCardMin(data: Stream, navController: NavController) {
             .width(215.dp)
             .clip(RoundedCornerShape(15.dp))
             .clickable {
-                watch(data, navController)
+                navController.navigate(Screen.Watch.route)
             }
     ) {
         Column(
