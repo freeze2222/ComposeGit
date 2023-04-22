@@ -8,5 +8,4 @@ class LoadVideosUseCase @Inject constructor(
     private val domainRepository: DomainRepositoryImpl
 ) : BaseUseCase<List<Media>>() {
     override suspend fun invoke(): List<Media> = domainRepository.updateVideos()
-
 }

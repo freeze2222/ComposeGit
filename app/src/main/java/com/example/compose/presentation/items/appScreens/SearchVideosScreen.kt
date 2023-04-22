@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -20,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.compose.data.DomainRepositoryImpl
 import com.example.compose.domain.model.api_model.Media
 import com.example.compose.domain.model.data.regularFont
 import com.example.compose.presentation.items.ErrorItem
@@ -36,6 +36,7 @@ import com.example.compose.ui.views.LazyMediaCard
 
 @Composable
 fun SearchVideosScreen(navHostController: NavController) {
+    DomainRepositoryImpl.page = "Videos"
 
     val viewModel = hiltViewModel<MainViewModel>()
 
@@ -48,6 +49,7 @@ fun SearchVideosScreen(navHostController: NavController) {
         }
         state.data.isNotEmpty() -> {
             Log.d("checkData", "data size: ${state.data.size}")
+            Log.d("checkData", "data value: ${state.data}")
             SearchVideosScreenContent(navHostController, state.data)
         }
         state.error != null -> {
@@ -62,7 +64,6 @@ fun SearchVideosScreen(navHostController: NavController) {
 @Composable
 fun SearchVideosScreenContent(navHostController: NavController, data: List<Media>) {
     changeOrientation(LocalContext.current, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-    var isReady by remember { mutableStateOf(false) }
     val query by remember {
         mutableStateOf(ValueModel())
     }
@@ -71,7 +72,6 @@ fun SearchVideosScreenContent(navHostController: NavController, data: List<Media
         color = Violet,
         modifier = Modifier.fillMaxSize()
     ) {
-        if (isReady) {
             Column(
                 Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -129,14 +129,5 @@ fun SearchVideosScreenContent(navHostController: NavController, data: List<Media
                     }
                 }
             }
-        } else {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
-                LaunchedEffect(Unit){
-                    //TODO
-                }
-            }
         }
     }
-
-}

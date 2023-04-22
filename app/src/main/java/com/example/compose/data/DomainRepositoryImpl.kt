@@ -12,9 +12,29 @@ import javax.inject.Inject
 class DomainRepositoryImpl @Inject constructor() : DomainRepository {
     companion object {
         lateinit var accessToken: String
-        lateinit var query: MutableList<String>
+        lateinit var categories: MutableList<String>
         lateinit var id: String
         lateinit var mediaType:String
+        var query: String = "Minecraft"
+        var page = "Streams"
+    }
+
+    override suspend fun updateCategories(search:String): MutableList<String> {
+        return withContext(Dispatchers.IO) {
+            categories.clear()
+            val raw =
+                RetrofitModule.provideRetrofit()
+                    .getCategoriesList(auth = accessToken, query = search)
+                    .execute()
+            val gson = Gson()
+            val json = gson.toJson(raw.body())
+            Log.e("JSON", json)
+            val categoriesList = gson.fromJson(json, CategoriesList::class.java).data
+            for (category in categoriesList) {
+                categories.add(category.id)
+            }
+            return@withContext categories
+        }
     }
 
     override suspend fun updateStreams(): MutableList<Stream> {
@@ -24,7 +44,7 @@ class DomainRepositoryImpl @Inject constructor() : DomainRepository {
                 RetrofitModule.provideRetrofit()
                     .getStreams(
                         accessToken,
-                        game_id1 = query[0]
+                        game_id1 = categories[0]
                     )
                     .execute()
             val gson = Gson()
@@ -45,7 +65,7 @@ class DomainRepositoryImpl @Inject constructor() : DomainRepository {
                 RetrofitModule.provideRetrofit()
                     .getVideos(
                         accessToken,
-                        game_id1 = query[0]
+                        game_id1 = categories[0]
                     )
                     .execute()
             val gson = Gson()
@@ -54,25 +74,8 @@ class DomainRepositoryImpl @Inject constructor() : DomainRepository {
             videoList.forEach {
                 it.thumbnail_url = it.thumbnail_url.replace("%{width}x%{height}", "1920x1080")
             }
+            Log.e("VideoDeb",videoList.toString())
             return@withContext videoList
-        }
-    }
-
-    override suspend fun updateCategories(search:String): MutableList<Category> {
-        return withContext(Dispatchers.IO) {
-            query.clear()
-            val raw =
-                RetrofitModule.provideRetrofit()
-                    .getCategoriesList(auth = accessToken, query = search)
-                    .execute()
-            val gson = Gson()
-            val json = gson.toJson(raw.body())
-            Log.e("JSON", json)
-            val categoriesList = gson.fromJson(json, CategoriesList::class.java).data
-            for (category in categoriesList) {
-                query.add(category.id)
-            }
-            return@withContext categoriesList
         }
     }
 
@@ -82,6 +85,7 @@ class DomainRepositoryImpl @Inject constructor() : DomainRepository {
                 RetrofitModule.provideIPAPI()
                     .getM3U8(id, if (mediaType == "Video") "i" else "v")
                     .execute()
+            Log.e("DebugM3U8",raw.body().toString())
             return@withContext raw.body().toString()
         }
     }

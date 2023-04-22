@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.compose.data.DomainRepositoryImpl
 import com.example.compose.domain.model.api_model.Media
 import com.example.compose.domain.model.api_model.Stream
 import com.example.compose.domain.model.data.descriptionData
@@ -47,6 +48,7 @@ import com.example.compose.ui.views.LazyMediaCardMin
 @RequiresApi(33)
 @Composable
 fun MainScreen(navHostController: NavController) {
+    DomainRepositoryImpl.page = "Streams"
 
     val viewModel = hiltViewModel<MainViewModel>()
 

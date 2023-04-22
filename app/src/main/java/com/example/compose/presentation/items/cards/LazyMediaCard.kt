@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.example.compose.data.DomainRepositoryImpl
 import com.example.compose.domain.model.api_model.Media
 import com.example.compose.domain.model.data.boldFont
 import com.example.compose.domain.model.data.descriptionData
@@ -37,6 +38,12 @@ fun LazyMediaCard(data: Media, navController: NavController, isStream: Boolean =
             .width(327.dp)
             .clip(RoundedCornerShape(15.dp))
             .clickable {
+                DomainRepositoryImpl.id =
+                    if (data.mediaType == "Stream")
+                        data.user_name
+                    else
+                        data.id
+                DomainRepositoryImpl.mediaType = data.mediaType
                 navController.navigate(Screen.Watch.route)
             }
     )

@@ -1,6 +1,7 @@
 package com.example.compose.presentation.screen.main
 
 import androidx.lifecycle.viewModelScope
+import com.example.compose.data.DomainRepositoryImpl
 import com.example.compose.domain.usecase.LoadStreamsUseCase
 import com.example.compose.domain.usecase.LoadVideosUseCase
 import com.example.compose.presentation.screen.base.BaseViewModel
@@ -16,7 +17,11 @@ class MainViewModel @Inject constructor(
 
     private val reducer = MainReducer(
         initial = MainScreenState.initial(),
-        useCase = loadStreamsUseCase,
+        useCase =
+        if (DomainRepositoryImpl.page == "Streams")
+            loadStreamsUseCase
+        else
+            loadVideosUseCase,
         viewModelScope = viewModelScope
     )
 

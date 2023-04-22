@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -20,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.compose.data.DomainRepositoryImpl
 import com.example.compose.domain.model.api_model.Media
 import com.example.compose.domain.model.data.regularFont
 import com.example.compose.presentation.items.ErrorItem
@@ -36,6 +36,7 @@ import com.example.compose.ui.views.LazyMediaCard
 
 @Composable
 fun SearchStreamsScreen(navHostController: NavController) {
+    DomainRepositoryImpl.page = "Streams"
 
     val viewModel = hiltViewModel<MainViewModel>()
 
@@ -58,10 +59,11 @@ fun SearchStreamsScreen(navHostController: NavController) {
         }
     }
 }
+
 @Composable
 fun SearchStreamsScreenContent(navController: NavController, data: List<Media>) {
+    val viewModel = hiltViewModel<MainViewModel>()
     changeOrientation(LocalContext.current, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-    var isReady by remember { mutableStateOf(false) }
     val query by remember {
         mutableStateOf(ValueModel())
     }
@@ -70,72 +72,63 @@ fun SearchStreamsScreenContent(navController: NavController, data: List<Media>) 
         color = Violet,
         modifier = Modifier.fillMaxSize()
     ) {
-        if (isReady) {
-            Column(
-                Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
+        Column(
+            Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                modifier = Modifier.padding(start = 5.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Spacer(modifier = Modifier.height(16.dp))
-                Row(
-                    modifier = Modifier.padding(start = 5.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    EditText(
-                        hint = "Search Streams",
-                        isPassword = false,
-                        valueModel = query,
-                        250.dp
-                    )
-                    ClickableText(
-                        text = AnnotatedString("Search"),
-                        onClick = {
-                            //TODO
-                        },
-                        style = TextStyle.Default.copy(
-                            color = LightGrey,
-                            fontSize = 24.sp,
-                            fontFamily = regularFont
-                        ),
-                        modifier = Modifier.padding(start = 10.dp, end = 10.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.height(15.dp))
-                Row(
-                    modifier = Modifier.padding(start = 15.dp, end = 15.dp)
-                ) {
-                    TextZone(
-                        text = "Recent Keywords",
-                        size = 12.sp,
-                        modifier = Modifier.weight(2f),
+                EditText(
+                    hint = "Search Streams",
+                    isPassword = false,
+                    valueModel = query,
+                    250.dp
+                )
+                ClickableText(
+                    text = AnnotatedString("Search"),
+                    onClick = {
+                        DomainRepositoryImpl.query = query.value
+
+                    },
+                    style = TextStyle.Default.copy(
                         color = LightGrey,
-                        textAlign = TextAlign.Start,
-                    )
-                    ClickableText(
-                        text = AnnotatedString("Clear All"),
-                        onClick = {},
-                        style = TextStyle.Default.copy(
-                            color = Color.White,
-                            fontSize = 10.sp,
-                            fontFamily = regularFont,
-                            textAlign = TextAlign.End
-                        ),
-                        modifier = Modifier.weight(1f),
-                    )
-                    LazyColumn(modifier = Modifier.fillMaxSize()) {
-                        items(items = data) { item ->
-                            LazyMediaCard(data = item, navController)
-                        }
-                    }
-                }
+                        fontSize = 24.sp,
+                        fontFamily = regularFont
+                    ),
+                    modifier = Modifier.padding(start = 10.dp, end = 10.dp)
+                )
             }
-        } else {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
-                LaunchedEffect(Unit) {
-                    //TODO
+            Spacer(modifier = Modifier.height(15.dp))
+            Row(
+                modifier = Modifier.padding(start = 15.dp, end = 15.dp)
+            ) {
+                TextZone(
+                    text = "Recent Keywords",
+                    size = 12.sp,
+                    modifier = Modifier.weight(2f),
+                    color = LightGrey,
+                    textAlign = TextAlign.Start,
+                )
+                ClickableText(
+                    text = AnnotatedString("Clear All"),
+                    onClick = {},
+                    style = TextStyle.Default.copy(
+                        color = Color.White,
+                        fontSize = 10.sp,
+                        fontFamily = regularFont,
+                        textAlign = TextAlign.End
+                    ),
+                    modifier = Modifier.weight(1f),
+                )
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    items(items = data) { item ->
+                        LazyMediaCard(data = item, navController)
+                    }
                 }
             }
         }
     }
-
 }
