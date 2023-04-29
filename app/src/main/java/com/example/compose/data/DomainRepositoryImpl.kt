@@ -22,6 +22,7 @@ class DomainRepositoryImpl @Inject constructor() : DomainRepository {
     override suspend fun updateCategories(search:String): MutableList<String> {
         return withContext(Dispatchers.IO) {
             categories.clear()
+            Log.e("Query", query)
             val raw =
                 RetrofitModule.provideRetrofit()
                     .getCategoriesList(auth = accessToken, query = search)

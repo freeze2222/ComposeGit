@@ -46,8 +46,7 @@ fun SearchStreamsScreen(navHostController: NavController) {
         state.isLoading -> {
             Log.d("checkData", "Loading...")
             LoadItem()
-        }
-        state.data.isNotEmpty() -> {
+        }state.data.isNotEmpty() -> {
             Log.d("checkData", "data size: ${state.data.size}")
             SearchStreamsScreenContent(navHostController, state.data)
         }
@@ -90,8 +89,7 @@ fun SearchStreamsScreenContent(navController: NavController, data: List<Media>) 
                 ClickableText(
                     text = AnnotatedString("Search"),
                     onClick = {
-                        DomainRepositoryImpl.query = query.value
-
+                        viewModel.updateData(query.value)
                     },
                     style = TextStyle.Default.copy(
                         color = LightGrey,

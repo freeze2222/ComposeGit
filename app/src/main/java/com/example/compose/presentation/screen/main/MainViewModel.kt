@@ -1,5 +1,6 @@
 package com.example.compose.presentation.screen.main
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.compose.data.DomainRepositoryImpl
 import com.example.compose.domain.usecase.LoadStreamsUseCase
@@ -31,7 +32,13 @@ class MainViewModel @Inject constructor(
     init {
         sendEvent(MainScreenEvent.LoadingData)
     }
+    fun updateData(query:String){
+        sendEvent(MainScreenEvent.LoadingData)
+        Log.e("DEBUG","Query: $query")
+        DomainRepositoryImpl.query = query
+        //reducer.sendEvent(MainScreenEvent.UpdateData)
 
+    }
     fun sendEvent(event: MainScreenEvent) {
         reducer.sendEvent(event)
     }

@@ -9,4 +9,5 @@ sealed class MainScreenEvent: UiEvent {
     object LoadingData: MainScreenEvent()
     data class ShowData(val data: List<Media>): MainScreenEvent()
     data class ShowError(val errorMessage: String?) : MainScreenEvent()
+    object UpdateData: MainScreenEvent()
 }
