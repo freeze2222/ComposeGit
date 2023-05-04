@@ -7,7 +7,10 @@ import com.example.compose.domain.usecase.LoadStreamsUseCase
 import com.example.compose.domain.usecase.LoadVideosUseCase
 import com.example.compose.presentation.screen.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -36,6 +39,10 @@ class MainViewModel @Inject constructor(
         sendEvent(MainScreenEvent.LoadingData)
         Log.e("DEBUG","Query: $query")
         DomainRepositoryImpl.query = query
+        reducer.viewModelScope.launch {
+            reducer.useCase.invoke()
+        }
+
         //reducer.sendEvent(MainScreenEvent.UpdateData)
 
     }
