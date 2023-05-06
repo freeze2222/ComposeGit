@@ -22,10 +22,8 @@ import androidx.navigation.NavController
 import com.example.compose.data.DomainRepositoryImpl
 import com.example.compose.domain.model.api_model.Media
 import com.example.compose.domain.model.data.regularFont
-import com.example.compose.presentation.items.ErrorItem
 import com.example.compose.presentation.items.LoadItem
 import com.example.compose.presentation.items.views.TextZone
-import com.example.compose.presentation.screen.main.MainScreenEvent
 import com.example.compose.presentation.screen.main.MainViewModel
 import com.example.compose.presentation.screen.value.ValueModel
 import com.example.compose.repository.changeOrientation
@@ -46,15 +44,10 @@ fun SearchStreamsScreen(navHostController: NavController) {
         state.isLoading -> {
             Log.d("checkData", "Loading...")
             LoadItem()
-        }state.data.isNotEmpty() -> {
+        }
+        else -> {
             Log.d("checkData", "data size: ${state.data.size}")
             SearchStreamsScreenContent(navHostController, state.data)
-        }
-        state.error != null -> {
-            Log.d("checkData", "Error ${state.error}")
-            ErrorItem(state.error) {
-                viewModel.sendEvent(MainScreenEvent.LoadingData)
-            }
         }
     }
 }
@@ -89,6 +82,7 @@ fun SearchStreamsScreenContent(navController: NavController, data: List<Media>) 
                 ClickableText(
                     text = AnnotatedString("Search"),
                     onClick = {
+                        DomainRepositoryImpl.mediaType = "Stream"
                         viewModel.updateData(query.value)
                     },
                     style = TextStyle.Default.copy(

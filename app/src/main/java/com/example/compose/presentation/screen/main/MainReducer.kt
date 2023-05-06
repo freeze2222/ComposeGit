@@ -22,27 +22,11 @@ class MainReducer(
                     setState(oldState.copy(isLoading = true, data = emptyList()))
                     try {
                         useCase.invoke().let { data ->
-                            if (data.isNotEmpty()) {
+                            //if (data.isNotEmpty()) {
                                 sendEvent(MainScreenEvent.ShowData(data = data))
-                            } else {
-                                sendEvent(MainScreenEvent.ShowError(errorMessage = "data is empty"))
-                            }
-                        }
-                    } catch (e: Exception) {
-                        sendEvent(MainScreenEvent.ShowError(errorMessage = e.message ?: "Exception"))
-                    }
-                }
-            }
-            is MainScreenEvent.UpdateData -> {
-                viewModelScope.launch {
-                    setState(oldState.copy(isLoading = true, data = emptyList()))
-                    try {
-                        useCase.invoke().let { data ->
-                            if (data.isNotEmpty()) {
-                                sendEvent(MainScreenEvent.ShowData(data = data))
-                            } else {
-                                sendEvent(MainScreenEvent.ShowError(errorMessage = "data is empty"))
-                            }
+                            //} else {
+                            //    sendEvent(MainScreenEvent.ShowError(errorMessage = "data is empty"))
+                            //}
                         }
                     } catch (e: Exception) {
                         sendEvent(MainScreenEvent.ShowError(errorMessage = e.message ?: "Exception"))

@@ -6,5 +6,5 @@ import javax.inject.Inject
 class CategoriesUseCase @Inject constructor(
     private val domainRepository: DomainRepositoryImpl,
     ) : BaseUseCase<MutableList<String>>() {
-    override suspend fun invoke(): MutableList<String> = domainRepository.updateCategories(DomainRepositoryImpl.query)
+    override suspend fun invoke(): MutableList<String> = domainRepository.updateCategories()
 }

@@ -12,20 +12,20 @@ import javax.inject.Inject
 class DomainRepositoryImpl @Inject constructor() : DomainRepository {
     companion object {
         lateinit var accessToken: String
-        lateinit var categories: MutableList<String>
+        var categories: MutableList<String> = emptyList<String>().toMutableList()
         lateinit var id: String
         lateinit var mediaType:String
         var query: String = "Minecraft"
         var page = "Streams"
     }
 
-    override suspend fun updateCategories(search:String): MutableList<String> {
+    override suspend fun updateCategories(): MutableList<String> {
         return withContext(Dispatchers.IO) {
             categories.clear()
             Log.e("Query", query)
             val raw =
                 RetrofitModule.provideRetrofit()
-                    .getCategoriesList(auth = accessToken, query = search)
+                    .getCategoriesList(auth = accessToken, query = query)
                     .execute()
             val gson = Gson()
             val json = gson.toJson(raw.body())
@@ -39,6 +39,7 @@ class DomainRepositoryImpl @Inject constructor() : DomainRepository {
     }
 
     override suspend fun updateStreams(): MutableList<Stream> {
+        Log.e("DEBUG","UpdateStreamsStart")
         lateinit var streamsList: MutableList<Stream>
         return withContext(Dispatchers.IO) {
             val raw =
@@ -56,6 +57,7 @@ class DomainRepositoryImpl @Inject constructor() : DomainRepository {
                 it.thumbnail_url = it.thumbnail_url.replace("{width}x{height}", "1920x1080")
                 it.mediaType = "Stream"
             }
+            Log.e("DEBUG","UpdateStreamsEnd, returned:${streamsList}")
             return@withContext streamsList
         }
     }

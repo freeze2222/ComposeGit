@@ -22,10 +22,8 @@ import androidx.navigation.NavController
 import com.example.compose.data.DomainRepositoryImpl
 import com.example.compose.domain.model.api_model.Media
 import com.example.compose.domain.model.data.regularFont
-import com.example.compose.presentation.items.ErrorItem
 import com.example.compose.presentation.items.LoadItem
 import com.example.compose.presentation.items.views.TextZone
-import com.example.compose.presentation.screen.main.MainScreenEvent
 import com.example.compose.presentation.screen.main.MainViewModel
 import com.example.compose.presentation.screen.value.ValueModel
 import com.example.compose.repository.changeOrientation
@@ -47,16 +45,9 @@ fun SearchVideosScreen(navHostController: NavController) {
             Log.d("checkData", "Loading...")
             LoadItem()
         }
-        state.data.isNotEmpty() -> {
+        else -> {
             Log.d("checkData", "data size: ${state.data.size}")
-            Log.d("checkData", "data value: ${state.data}")
             SearchVideosScreenContent(navHostController, state.data)
-        }
-        state.error != null -> {
-            Log.d("checkData", "Error ${state.error}")
-            ErrorItem(state.error) {
-                viewModel.sendEvent(MainScreenEvent.LoadingData)
-            }
         }
     }
 }
@@ -64,6 +55,7 @@ fun SearchVideosScreen(navHostController: NavController) {
 @Composable
 fun SearchVideosScreenContent(navHostController: NavController, data: List<Media>) {
     changeOrientation(LocalContext.current, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+    val viewModel = hiltViewModel<MainViewModel>()
     val query by remember {
         mutableStateOf(ValueModel())
     }
@@ -72,62 +64,63 @@ fun SearchVideosScreenContent(navHostController: NavController, data: List<Media
         color = Violet,
         modifier = Modifier.fillMaxSize()
     ) {
-            Column(
-                Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
+        Column(
+            Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                modifier = Modifier.padding(start = 5.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Spacer(modifier = Modifier.height(16.dp))
-                Row(
-                    modifier = Modifier.padding(start = 5.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    EditText(
-                        hint = "Search Streams",
-                        isPassword = false,
-                        valueModel = query,
-                        250.dp
-                    )
-                    ClickableText(
-                        text = AnnotatedString("Search"),
-                        onClick = {
-                            //TODO
-                        },
-                        style = TextStyle.Default.copy(
-                            color = LightGrey,
-                            fontSize = 24.sp,
-                            fontFamily = regularFont
-                        ),
-                        modifier = Modifier.padding(start = 10.dp, end = 10.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.height(15.dp))
-                Row(
-                    modifier = Modifier.padding(start = 15.dp, end = 15.dp)
-                ) {
-                    TextZone(
-                        text = "Recent Keywords",
-                        size = 12.sp,
-                        modifier = Modifier.weight(2f),
+                EditText(
+                    hint = "Search Streams",
+                    isPassword = false,
+                    valueModel = query,
+                    250.dp
+                )
+                ClickableText(
+                    text = AnnotatedString("Search"),
+                    onClick = {
+                        DomainRepositoryImpl.mediaType = "Video"
+                        viewModel.updateData(query.value)
+                    },
+                    style = TextStyle.Default.copy(
                         color = LightGrey,
-                        textAlign = TextAlign.Start,
-                    )
-                    ClickableText(
-                        text = AnnotatedString("Clear All"),
-                        onClick = {},
-                        style = TextStyle.Default.copy(
-                            color = Color.White,
-                            fontSize = 10.sp,
-                            fontFamily = regularFont,
-                            textAlign = TextAlign.End
-                        ),
-                        modifier = Modifier.weight(1f),
-                    )
-                    LazyColumn(modifier = Modifier.fillMaxSize()) {
-                        items(items = data) { item ->
-                            LazyMediaCard(data = item, navHostController)
-                        }
+                        fontSize = 24.sp,
+                        fontFamily = regularFont
+                    ),
+                    modifier = Modifier.padding(start = 10.dp, end = 10.dp)
+                )
+            }
+            Spacer(modifier = Modifier.height(15.dp))
+            Row(
+                modifier = Modifier.padding(start = 15.dp, end = 15.dp)
+            ) {
+                TextZone(
+                    text = "Recent Keywords",
+                    size = 12.sp,
+                    modifier = Modifier.weight(2f),
+                    color = LightGrey,
+                    textAlign = TextAlign.Start,
+                )
+                ClickableText(
+                    text = AnnotatedString("Clear All"),
+                    onClick = {},
+                    style = TextStyle.Default.copy(
+                        color = Color.White,
+                        fontSize = 10.sp,
+                        fontFamily = regularFont,
+                        textAlign = TextAlign.End
+                    ),
+                    modifier = Modifier.weight(1f),
+                )
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    items(items = data) { item ->
+                        LazyMediaCard(data = item, navHostController)
                     }
                 }
             }
         }
     }
+}

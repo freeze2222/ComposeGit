@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -31,7 +30,6 @@ import com.example.compose.domain.model.api_model.Media
 import com.example.compose.domain.model.api_model.Stream
 import com.example.compose.domain.model.data.descriptionData
 import com.example.compose.domain.model.data.imageData
-import com.example.compose.domain.model.data.titleData
 import com.example.compose.presentation.items.ErrorItem
 import com.example.compose.presentation.items.LoadItem
 import com.example.compose.presentation.items.views.TextZone
@@ -44,6 +42,7 @@ import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.GameCategoryItem
 import com.example.compose.ui.views.LazyMediaCardMin
+import com.google.firebase.auth.FirebaseAuth
 
 @RequiresApi(33)
 @Composable
@@ -104,9 +103,10 @@ fun MainScreenContent(navController: NavController, data: List<Media>) {
                 Column(modifier = Modifier.height(56.dp)) {
                     TextZone(text = descriptionData[17], color = LightGrey, size = 12.sp)
                     Spacer(modifier = Modifier.height(2.dp))
-                    TextZone(text = titleData[4], size = 22.sp)
+                    TextZone(text = FirebaseAuth.getInstance().currentUser!!.displayName.toString(), size = 22.sp)
                 }
                 Spacer(modifier = Modifier.weight(1f))
+                /*
                 IconButton(onClick = { /*TODO*/ }) {
                     Image(
                         painter = painterResource(id = imageData[20]),
@@ -116,6 +116,7 @@ fun MainScreenContent(navController: NavController, data: List<Media>) {
                             .width(56.dp)
                     )
                 }
+                 */
             }
             Spacer(modifier = Modifier.height(40.dp))
             Row(
@@ -140,13 +141,13 @@ fun MainScreenContent(navController: NavController, data: List<Media>) {
 
                 ) {
                     Spacer(modifier = Modifier.height(20.dp))
-                    TextZone(text = descriptionData[18], color = Grey, size = 12.sp)
+                    TextZone(text = descriptionData[18], color = LightGrey, size = 12.sp)
                     Spacer(modifier = Modifier.height(6.dp))
-                    TextZone(text = "TODO", size = 12.sp)
+                    TextZone(text = "Many", size = 12.sp)
                     Spacer(modifier = Modifier.height(40.dp))
-                    TextZone(text = descriptionData[19], color = Grey, size = 12.sp)
+                    TextZone(text = descriptionData[19], color = LightGrey, size = 12.sp)
                     Spacer(modifier = Modifier.height(6.dp))
-                    TextZone(text = "TODO", size = 12.sp)
+                    TextZone(text = "Good", size = 12.sp)
                 }
                 Spacer(modifier = Modifier.width(16.dp))
                 VideoPlayer("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
