@@ -14,14 +14,16 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.example.compose.data.DomainRepositoryImpl
 import com.example.compose.domain.model.api_model.Stream
-import com.example.compose.presentation.screen.main.MainViewModel
 import com.example.compose.domain.model.data.imageData
-import com.example.compose.repository.watch
+import com.example.compose.domain.model.nav_model.Screen
+import com.example.compose.presentation.items.views.TextZone
 
 @Composable
-fun LazyMediaCardMin(data: Stream, viewModel: MainViewModel) {
+fun LazyMediaCardMin(data: Stream, navController: NavController) {
     Surface(
         modifier =
         Modifier
@@ -30,9 +32,13 @@ fun LazyMediaCardMin(data: Stream, viewModel: MainViewModel) {
             .width(215.dp)
             .clip(RoundedCornerShape(15.dp))
             .clickable {
-                if (!viewModel.isClicked) {
-                    watch(data, viewModel)
-                }
+                DomainRepositoryImpl.id =
+                    if (data.mediaType == "Stream")
+                        data.user_name
+                    else
+                        data.id
+                DomainRepositoryImpl.mediaType = data.mediaType
+                navController.navigate(Screen.Watch.route)
             }
     ) {
         Column(

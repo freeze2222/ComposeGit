@@ -1,11 +1,14 @@
 package com.example.compose.presentation.screen.main
 
+import com.example.compose.domain.model.api_model.Media
+import com.example.compose.domain.usecase.BaseUseCase
 import com.example.compose.presentation.screen.base.Reducer
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 class MainReducer(
     initial: MainScreenState,
-    val useCase: BaseUseCase<List<NoteModel>>,
+    val useCase: BaseUseCase<List<Media>>,
     val viewModelScope: CoroutineScope
 ) : Reducer<MainScreenState, MainScreenEvent>(initial) {
     override fun reduce(oldState: MainScreenState, event: MainScreenEvent) {
@@ -19,11 +22,11 @@ class MainReducer(
                     setState(oldState.copy(isLoading = true, data = emptyList()))
                     try {
                         useCase.invoke().let { data ->
-                            if (data.isNotEmpty()) {
+                            //if (data.isNotEmpty()) {
                                 sendEvent(MainScreenEvent.ShowData(data = data))
-                            } else {
-                                sendEvent(MainScreenEvent.ShowError(errorMessage = "data is empty"))
-                            }
+                            //} else {
+                            //    sendEvent(MainScreenEvent.ShowError(errorMessage = "data is empty"))
+                            //}
                         }
                     } catch (e: Exception) {
                         sendEvent(MainScreenEvent.ShowError(errorMessage = e.message ?: "Exception"))

@@ -16,6 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.compose.domain.model.data.imageData
+import com.example.compose.presentation.items.views.TextZone
 import com.example.compose.ui.theme.Grey
 
 @Composable

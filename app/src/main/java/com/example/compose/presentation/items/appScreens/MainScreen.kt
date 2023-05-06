@@ -1,6 +1,7 @@
 package com.example.compose.presentation.items.appScreens
 
 import android.content.pm.ActivityInfo
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -9,9 +10,10 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,26 +23,56 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.compose.presentation.screen.main.MainViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.compose.data.DomainRepositoryImpl
+import com.example.compose.domain.model.api_model.Media
+import com.example.compose.domain.model.api_model.Stream
 import com.example.compose.domain.model.data.descriptionData
 import com.example.compose.domain.model.data.imageData
-import com.example.compose.domain.model.data.titleData
+import com.example.compose.presentation.items.ErrorItem
+import com.example.compose.presentation.items.LoadItem
+import com.example.compose.presentation.items.views.TextZone
+import com.example.compose.presentation.items.views.VideoPlayer
+import com.example.compose.presentation.screen.main.MainScreenEvent
+import com.example.compose.presentation.screen.main.MainViewModel
 import com.example.compose.repository.changeOrientation
 import com.example.compose.ui.theme.Grey
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.GameCategoryItem
 import com.example.compose.ui.views.LazyMediaCardMin
-import com.example.compose.ui.views.TextZone
-import com.example.compose.presentation.items.views.VideoPlayer
-import kotlinx.coroutines.runBlocking
+import com.google.firebase.auth.FirebaseAuth
 
 @RequiresApi(33)
 @Composable
-fun MainScreen(viewModel: MainViewModel) {
-    runBlocking {
-        viewModel.popularStreamsScope.join()
+fun MainScreen(navHostController: NavController) {
+    DomainRepositoryImpl.page = "Streams"
+
+    val viewModel = hiltViewModel<MainViewModel>()
+
+    val state by viewModel.state.collectAsState()
+    when {
+        state.isLoading -> {
+            Log.d("checkData", "Loading...")
+            LoadItem()
+        }
+        state.data.isNotEmpty() -> {
+            Log.d("checkData", "data size: ${state.data.size}")
+            MainScreenContent(navHostController, state.data)
+        }
+        state.error != null -> {
+            Log.d("checkData", "Error ${state.error}")
+            ErrorItem(state.error) {
+                viewModel.sendEvent(MainScreenEvent.LoadingData)
+            }
+        }
     }
+}
+
+@RequiresApi(33)
+@Composable
+fun MainScreenContent(navController: NavController, data: List<Media>) {
     Surface(modifier = Modifier.fillMaxSize(), color = Violet) {
         changeOrientation(
             context = LocalContext.current,
@@ -71,9 +103,10 @@ fun MainScreen(viewModel: MainViewModel) {
                 Column(modifier = Modifier.height(56.dp)) {
                     TextZone(text = descriptionData[17], color = LightGrey, size = 12.sp)
                     Spacer(modifier = Modifier.height(2.dp))
-                    TextZone(text = titleData[4], size = 22.sp)
+                    TextZone(text = FirebaseAuth.getInstance().currentUser!!.displayName.toString(), size = 22.sp)
                 }
                 Spacer(modifier = Modifier.weight(1f))
+                /*
                 IconButton(onClick = { /*TODO*/ }) {
                     Image(
                         painter = painterResource(id = imageData[20]),
@@ -83,6 +116,7 @@ fun MainScreen(viewModel: MainViewModel) {
                             .width(56.dp)
                     )
                 }
+                 */
             }
             Spacer(modifier = Modifier.height(40.dp))
             Row(
@@ -107,13 +141,13 @@ fun MainScreen(viewModel: MainViewModel) {
 
                 ) {
                     Spacer(modifier = Modifier.height(20.dp))
-                    TextZone(text = descriptionData[18], color = Grey, size = 12.sp)
+                    TextZone(text = descriptionData[18], color = LightGrey, size = 12.sp)
                     Spacer(modifier = Modifier.height(6.dp))
-                    TextZone(text = "TODO", size = 12.sp)
+                    TextZone(text = "Many", size = 12.sp)
                     Spacer(modifier = Modifier.height(40.dp))
-                    TextZone(text = descriptionData[19], color = Grey, size = 12.sp)
+                    TextZone(text = descriptionData[19], color = LightGrey, size = 12.sp)
                     Spacer(modifier = Modifier.height(6.dp))
-                    TextZone(text = "TODO", size = 12.sp)
+                    TextZone(text = "Good", size = 12.sp)
                 }
                 Spacer(modifier = Modifier.width(16.dp))
                 VideoPlayer("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
@@ -143,8 +177,8 @@ fun MainScreen(viewModel: MainViewModel) {
             Spacer(modifier = Modifier.height(20.dp))
 
             LazyRow {
-                items(items = viewModel.popularStreamList) { item ->
-                    LazyMediaCardMin(data = item, viewModel)
+                items(items = data) { item ->
+                    LazyMediaCardMin(data = item as Stream, navController)
                 }
             }
         }

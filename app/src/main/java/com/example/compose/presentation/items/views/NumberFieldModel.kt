@@ -1,4 +1,4 @@
-package com.example.compose.ui.views
+package com.example.compose.presentation.items.views
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding

@@ -1,11 +1,11 @@
 package com.example.compose.presentation.items.appScreens
 
 import android.content.pm.ActivityInfo
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -17,21 +17,45 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.compose.data.DomainRepositoryImpl
+import com.example.compose.domain.model.api_model.Media
+import com.example.compose.domain.model.data.regularFont
+import com.example.compose.presentation.items.LoadItem
+import com.example.compose.presentation.items.views.TextZone
 import com.example.compose.presentation.screen.main.MainViewModel
 import com.example.compose.presentation.screen.value.ValueModel
-import com.example.compose.domain.model.data.regularFont
-import com.example.compose.domain.model.nav_model.Screen
 import com.example.compose.repository.changeOrientation
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.EditText
 import com.example.compose.ui.views.LazyMediaCard
-import com.example.compose.ui.views.TextZone
 
 @Composable
-fun SearchStreamsScreen(viewModel: MainViewModel) {
+fun SearchStreamsScreen(navHostController: NavController) {
+    DomainRepositoryImpl.page = "Streams"
+
+    val viewModel = hiltViewModel<MainViewModel>()
+
+    val state by viewModel.state.collectAsState()
+
+    when {
+        state.isLoading -> {
+            Log.d("checkData", "Loading...")
+            LoadItem()
+        }
+        else -> {
+            Log.d("checkData", "data size: ${state.data.size}")
+            SearchStreamsScreenContent(navHostController, state.data)
+        }
+    }
+}
+
+@Composable
+fun SearchStreamsScreenContent(navController: NavController, data: List<Media>) {
+    val viewModel = hiltViewModel<MainViewModel>()
     changeOrientation(LocalContext.current, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-    var isReady by remember { mutableStateOf(false) }
     val query by remember {
         mutableStateOf(ValueModel())
     }
@@ -40,80 +64,63 @@ fun SearchStreamsScreen(viewModel: MainViewModel) {
         color = Violet,
         modifier = Modifier.fillMaxSize()
     ) {
-        if (isReady) {
-            Column(
-                Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
+        Column(
+            Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                modifier = Modifier.padding(start = 5.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Spacer(modifier = Modifier.height(16.dp))
-                Row(
-                    modifier = Modifier.padding(start = 5.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    EditText(
-                        hint = "Search Streams",
-                        isPassword = false,
-                        valueModel = query,
-                        250.dp
-                    )
-                    ClickableText(
-                        text = AnnotatedString("Search"),
-                        onClick = {
-                            viewModel.updateAll(query.value)
-                            isReady = false
-                            viewModel.navController.navigate(Screen.SearchStreams.route) {
-                                popUpTo(Screen.SearchStreams.route) {
-                                    inclusive = true
-                                }
-                            }
-                        },
-                        style = TextStyle.Default.copy(
-                            color = LightGrey,
-                            fontSize = 24.sp,
-                            fontFamily = regularFont
-                        ),
-                        modifier = Modifier.padding(start = 10.dp, end = 10.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.height(15.dp))
-                Row(
-                    modifier = Modifier.padding(start = 15.dp, end = 15.dp)
-                ) {
-                    TextZone(
-                        text = "Recent Keywords",
-                        size = 12.sp,
-                        modifier = Modifier.weight(2f),
+                EditText(
+                    hint = "Search Streams",
+                    isPassword = false,
+                    valueModel = query,
+                    250.dp
+                )
+                ClickableText(
+                    text = AnnotatedString("Search"),
+                    onClick = {
+                        DomainRepositoryImpl.mediaType = "Stream"
+                        viewModel.updateData(query.value)
+                    },
+                    style = TextStyle.Default.copy(
                         color = LightGrey,
-                        textAlign = TextAlign.Start,
-                    )
-                    ClickableText(
-                        text = AnnotatedString("Clear All"),
-                        onClick = {},
-                        style = TextStyle.Default.copy(
-                            color = Color.White,
-                            fontSize = 10.sp,
-                            fontFamily = regularFont,
-                            textAlign = TextAlign.End
-                        ),
-                        modifier = Modifier.weight(1f),
-                    )
-                    LazyColumn(modifier = Modifier.fillMaxSize()) {
-                        items(items = viewModel.streamsList) { item ->
-                            LazyMediaCard(data = item, viewModel)
-                        }
-                    }
-                }
+                        fontSize = 24.sp,
+                        fontFamily = regularFont
+                    ),
+                    modifier = Modifier.padding(start = 10.dp, end = 10.dp)
+                )
             }
-        } else {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
-                LaunchedEffect(Unit){
-                    viewModel.updateAll(query.value).invokeOnCompletion {
-                        isReady = true
+            Spacer(modifier = Modifier.height(15.dp))
+            Row(
+                modifier = Modifier.padding(start = 15.dp, end = 15.dp)
+            ) {
+                TextZone(
+                    text = "Recent Keywords",
+                    size = 12.sp,
+                    modifier = Modifier.weight(2f),
+                    color = LightGrey,
+                    textAlign = TextAlign.Start,
+                )
+                ClickableText(
+                    text = AnnotatedString("Clear All"),
+                    onClick = {},
+                    style = TextStyle.Default.copy(
+                        color = Color.White,
+                        fontSize = 10.sp,
+                        fontFamily = regularFont,
+                        textAlign = TextAlign.End
+                    ),
+                    modifier = Modifier.weight(1f),
+                )
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    items(items = data) { item ->
+                        LazyMediaCard(data = item, navController)
                     }
                 }
             }
         }
     }
-
 }

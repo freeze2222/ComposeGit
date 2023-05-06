@@ -12,7 +12,7 @@ import com.example.compose.domain.model.data.titleData
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.CustomButton
 import com.example.compose.ui.views.EditText
-import com.example.compose.ui.views.TextZone
+import com.example.compose.presentation.items.views.TextZone
 
 @Composable
 fun CreatePasswordScreen() {

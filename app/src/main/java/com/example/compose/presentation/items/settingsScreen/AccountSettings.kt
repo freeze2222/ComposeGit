@@ -13,7 +13,7 @@ import com.example.compose.presentation.items.oneTimeScreens.Img
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.SettingsItem
-import com.example.compose.ui.views.TextZone
+import com.example.compose.presentation.items.views.TextZone
 
 @Composable
 fun AccountSettings() {

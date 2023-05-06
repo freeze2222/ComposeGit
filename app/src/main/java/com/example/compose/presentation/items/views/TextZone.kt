@@ -1,4 +1,4 @@
-package com.example.compose.ui.views
+package com.example.compose.presentation.items.views
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable

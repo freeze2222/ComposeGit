@@ -31,7 +31,7 @@ val descriptionData = listOf(
     "Privacy", //15
     "Health",
     "Morning",
-    "Streamed",
+    "Streaming",
     "Popularity",
     "Popular Streams", // 20
     "Live Now"
