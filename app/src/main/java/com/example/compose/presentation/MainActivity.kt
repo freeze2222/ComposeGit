@@ -22,6 +22,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.compose.data.DomainRepositoryImpl
+import com.example.compose.data.DomainRepositoryImpl.Companion.navController
 import com.example.compose.domain.model.nav_model.Screen
 import com.example.compose.presentation.items.ErrorItem
 import com.example.compose.presentation.items.LoadItem
@@ -38,12 +39,11 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.firebase.database.FirebaseDatabase
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @RequiresApi(33)
 @Composable
 fun MainActivityContent() {
     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
-    val navController = rememberNavController()
+    navController  = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
 
     Surface(

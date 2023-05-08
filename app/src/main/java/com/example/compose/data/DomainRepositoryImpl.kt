@@ -1,6 +1,7 @@
 package com.example.compose.data
 
 import android.util.Log
+import androidx.navigation.NavHostController
 import com.example.compose.di.RetrofitModule
 import com.example.compose.domain.model.api_model.*
 import com.example.compose.domain.repository.DomainRepository
@@ -11,6 +12,7 @@ import javax.inject.Inject
 
 class DomainRepositoryImpl @Inject constructor() : DomainRepository {
     companion object {
+        lateinit var navController: NavHostController
         lateinit var accessToken: String
         var categories: MutableList<String> = emptyList<String>().toMutableList()
         lateinit var id: String
@@ -114,6 +116,7 @@ class DomainRepositoryImpl @Inject constructor() : DomainRepository {
         return withContext(Dispatchers.IO) {
             val raw = RetrofitModule.provideID().getToken().execute()
             accessToken = "Bearer ${raw.body()!!.access_token}"
+            Log.e("DEBUG","Token:$accessToken, ClientId:$client_id")
             return@withContext accessToken
         }
     }

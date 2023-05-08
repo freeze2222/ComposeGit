@@ -50,9 +50,9 @@ fun SetupNavGraph(
         composable(route = Screen.Watch.route) {
             WatchScreen(navController)
         }
-
         composable(route = Screen.Settings.route) {
             SettingsScreen()
         }
+
     }
 }

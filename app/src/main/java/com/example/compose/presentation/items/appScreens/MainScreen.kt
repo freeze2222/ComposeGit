@@ -28,8 +28,8 @@ import androidx.navigation.NavController
 import com.example.compose.data.DomainRepositoryImpl
 import com.example.compose.domain.model.api_model.Media
 import com.example.compose.domain.model.api_model.Stream
-import com.example.compose.domain.model.data.descriptionData
-import com.example.compose.domain.model.data.imageData
+import com.example.compose.domain.model.data.*
+import com.example.compose.domain.model.nav_model.Screen
 import com.example.compose.presentation.items.ErrorItem
 import com.example.compose.presentation.items.LoadItem
 import com.example.compose.presentation.items.views.TextZone
@@ -103,7 +103,10 @@ fun MainScreenContent(navController: NavController, data: List<Media>) {
                 Column(modifier = Modifier.height(56.dp)) {
                     TextZone(text = descriptionData[17], color = LightGrey, size = 12.sp)
                     Spacer(modifier = Modifier.height(2.dp))
-                    TextZone(text = FirebaseAuth.getInstance().currentUser!!.displayName.toString(), size = 22.sp)
+                    TextZone(
+                        text = FirebaseAuth.getInstance().currentUser!!.displayName.toString(),
+                        size = 22.sp
+                    )
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 /*
@@ -158,13 +161,33 @@ fun MainScreenContent(navController: NavController, data: List<Media>) {
                     .fillMaxWidth()
                     .height(86.dp)
             ) {
-                GameCategoryItem(itemId = 5)
+                GameCategoryItem(itemId = 5) {
+                    DomainRepositoryImpl.categories.clear()
+                    DomainRepositoryImpl.categories.add(puzzlesCategory)
+                    DomainRepositoryImpl.query = "Thinking"
+                    DomainRepositoryImpl.navController.navigate(Screen.SearchStreams.route)
+                }
                 Spacer(modifier = Modifier.width(18.dp))
-                GameCategoryItem(itemId = 6)
+                GameCategoryItem(itemId = 6) {
+                    DomainRepositoryImpl.categories.clear()
+                    DomainRepositoryImpl.categories.add(strategyCategory)
+                    DomainRepositoryImpl.query = "XCOM"
+                    navController.navigate(Screen.SearchStreams.route)
+                }
                 Spacer(modifier = Modifier.width(18.dp))
-                GameCategoryItem(itemId = 7)
+                GameCategoryItem(itemId = 7) {
+                    DomainRepositoryImpl.categories.clear()
+                    DomainRepositoryImpl.categories.add(sportsCategory)
+                    DomainRepositoryImpl.query = "football"
+                    DomainRepositoryImpl.navController.navigate(Screen.SearchStreams.route)
+                }
                 Spacer(modifier = Modifier.width(18.dp))
-                GameCategoryItem(itemId = 8)
+                GameCategoryItem(itemId = 8) {
+                    DomainRepositoryImpl.categories.clear()
+                    DomainRepositoryImpl.categories.add(logicCategory)
+                    DomainRepositoryImpl.query = "The Legend of Zelda"
+                    DomainRepositoryImpl.navController.navigate(Screen.SearchStreams.route)
+                }
             }
             Spacer(modifier = Modifier.height(28.dp))
             Row(
