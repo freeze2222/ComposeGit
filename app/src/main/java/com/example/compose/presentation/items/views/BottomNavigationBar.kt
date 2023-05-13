@@ -1,5 +1,6 @@
 package com.example.compose.ui.views
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
@@ -21,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.compose.data.DomainRepositoryImpl
 import com.example.compose.domain.model.nav_model.Screen
 import com.example.compose.ui.theme.Grey
 
@@ -68,10 +70,11 @@ fun BottomNavigationBar(navController: NavController, bottomBarState: MutableSta
                         alwaysShowLabel = true,
                         selected = currentRoute == item.route,
                         onClick = {
+                            Log.e("Navigating","route:${item.route}")
                             navController.navigate(item.route) {
                                 navController.graph.startDestinationRoute?.let { route ->
                                     popUpTo(route) {
-                                        saveState = true
+                                        saveState = !DomainRepositoryImpl.isReferenced
                                     }
                                 }
                                 launchSingleTop = true

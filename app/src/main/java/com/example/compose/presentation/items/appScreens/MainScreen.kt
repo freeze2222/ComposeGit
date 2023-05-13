@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -46,7 +47,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 @RequiresApi(33)
 @Composable
-fun MainScreen(navHostController: NavController) {
+fun MainScreen(navController: NavController) {
     DomainRepositoryImpl.page = "Streams"
 
     val viewModel = hiltViewModel<MainViewModel>()
@@ -59,7 +60,7 @@ fun MainScreen(navHostController: NavController) {
         }
         state.data.isNotEmpty() -> {
             Log.d("checkData", "data size: ${state.data.size}")
-            MainScreenContent(navHostController, state.data)
+            MainScreenContent(navController, state.data)
         }
         state.error != null -> {
             Log.d("checkData", "Error ${state.error}")
@@ -109,17 +110,18 @@ fun MainScreenContent(navController: NavController, data: List<Media>) {
                     )
                 }
                 Spacer(modifier = Modifier.weight(1f))
-                /*
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = {
+                    navController.navigate(Screen.Settings.route)
+                }) {
                     Image(
-                        painter = painterResource(id = imageData[20]),
+                        painter = painterResource(id = imageData[9]),
                         contentDescription = null,
                         modifier = Modifier
                             .height(56.dp)
                             .width(56.dp)
                     )
                 }
-                 */
+
             }
             Spacer(modifier = Modifier.height(40.dp))
             Row(
@@ -164,7 +166,8 @@ fun MainScreenContent(navController: NavController, data: List<Media>) {
                 GameCategoryItem(itemId = 5) {
                     DomainRepositoryImpl.categories.clear()
                     DomainRepositoryImpl.categories.add(puzzlesCategory)
-                    DomainRepositoryImpl.query = "Thinking"
+                    DomainRepositoryImpl.query = "Portal"
+                    DomainRepositoryImpl.isReferenced = true
                     DomainRepositoryImpl.navController.navigate(Screen.SearchStreams.route)
                 }
                 Spacer(modifier = Modifier.width(18.dp))
@@ -172,20 +175,23 @@ fun MainScreenContent(navController: NavController, data: List<Media>) {
                     DomainRepositoryImpl.categories.clear()
                     DomainRepositoryImpl.categories.add(strategyCategory)
                     DomainRepositoryImpl.query = "XCOM"
+                    DomainRepositoryImpl.isReferenced = true
                     navController.navigate(Screen.SearchStreams.route)
                 }
                 Spacer(modifier = Modifier.width(18.dp))
                 GameCategoryItem(itemId = 7) {
                     DomainRepositoryImpl.categories.clear()
                     DomainRepositoryImpl.categories.add(sportsCategory)
-                    DomainRepositoryImpl.query = "football"
+                    DomainRepositoryImpl.query = "FIFA"
+                    DomainRepositoryImpl.isReferenced = true
                     DomainRepositoryImpl.navController.navigate(Screen.SearchStreams.route)
                 }
                 Spacer(modifier = Modifier.width(18.dp))
                 GameCategoryItem(itemId = 8) {
                     DomainRepositoryImpl.categories.clear()
                     DomainRepositoryImpl.categories.add(logicCategory)
-                    DomainRepositoryImpl.query = "The Legend of Zelda"
+                    DomainRepositoryImpl.query = "Minecraft"
+                    DomainRepositoryImpl.isReferenced = true
                     DomainRepositoryImpl.navController.navigate(Screen.SearchStreams.route)
                 }
             }

@@ -12,6 +12,7 @@ import javax.inject.Inject
 
 class DomainRepositoryImpl @Inject constructor() : DomainRepository {
     companion object {
+        var isReferenced: Boolean = false
         lateinit var navController: NavHostController
         lateinit var accessToken: String
         var categories: MutableList<String> = emptyList<String>().toMutableList()
@@ -66,6 +67,7 @@ class DomainRepositoryImpl @Inject constructor() : DomainRepository {
 
     override suspend fun updateVideos(): MutableList<Video> {
         return withContext(Dispatchers.IO){
+            Log.e("Categories", categories[0])
             val raw =
                 RetrofitModule.provideRetrofit()
                     .getVideos(
@@ -76,6 +78,7 @@ class DomainRepositoryImpl @Inject constructor() : DomainRepository {
             val gson = Gson()
             val json = gson.toJson(raw.body())
             val videoList = gson.fromJson(json, VideoList::class.java).data
+            Log.e("VideoCode",raw.code().toString())
             videoList.forEach {
                 it.thumbnail_url = it.thumbnail_url.replace("%{width}x%{height}", "1920x1080")
             }

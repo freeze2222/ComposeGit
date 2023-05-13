@@ -3,10 +3,10 @@ package com.example.compose.domain.model.data
 import com.example.compose.R
 
 const val APIServerAddress = "http://31.134.130.211:8484"
-const val sportsCategory = "12232"
-const val puzzlesCategory = "24302"
+const val sportsCategory = "1745202732"
+const val puzzlesCategory = "6187"
 const val strategyCategory = "489767"
-const val logicCategory = "649570972"
+const val logicCategory = "27471"
 val titleData = listOf(
     "Create an Account",
     "Login Now",

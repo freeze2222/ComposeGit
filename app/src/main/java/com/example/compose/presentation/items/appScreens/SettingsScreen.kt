@@ -7,18 +7,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.compose.domain.model.data.*
 import com.example.compose.presentation.items.oneTimeScreens.Img
+import com.example.compose.presentation.items.views.TextZone
 import com.example.compose.ui.theme.LightGrey
 import com.example.compose.ui.theme.Violet
 import com.example.compose.ui.views.SettingsItem
-import com.example.compose.presentation.items.views.TextZone
 
 @Composable
-fun SettingsScreen() {
+fun SettingsScreen(navController: NavController) {
     Surface(modifier = Modifier.fillMaxSize(), color = Violet) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -32,7 +32,9 @@ fun SettingsScreen() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Spacer(modifier = Modifier.width(24.dp))
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = {
+                    navController.navigateUp()
+                }) {
                     Img(id = imageData[12], height = 60.dp, width = 60.dp)
                 }
                 Spacer(modifier = Modifier.width(70.dp))
@@ -58,10 +60,4 @@ fun SettingsScreen() {
             SettingsItem(text = descriptionData[16], painter = painterResource(id = imageData[17]), isBordered = false)
         }
     }
-}
-
-@Preview
-@Composable
-fun SettingsScreenPreview() {
-    SettingsScreen()
 }
